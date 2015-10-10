@@ -33,3 +33,13 @@ def about():
         message='Your application description page.',
         year=datetime.now().year
     )
+    
+@route('/Gamepad')
+@view('Gamepad')
+def Gamepad():
+    """Renders the Gamepad page."""
+    return dict(
+        title='Gamepad',
+        message='Gamepad page',
+        year=datetime.now().year
+    )
