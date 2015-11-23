@@ -1,3 +1,4 @@
+from RoverWebUI import bottle
 from RoverWebUI.bottle import run, ServerAdapter
 from RoverWebUI.routes import WebserverRoutes
 
@@ -6,7 +7,7 @@ import time
 import sys
 
 class RoverWSGIServer(ServerAdapter):
-		
+
 	def run(self, app):  # pragma: no cover
 		from wsgiref.simple_server import make_server
 		from wsgiref.simple_server import WSGIRequestHandler, WSGIServer
@@ -34,12 +35,15 @@ class RoverWSGIServer(ServerAdapter):
 		self.port = self.srv.server_port
 		self.srv.serve_forever()
 
-		
+
 def startBottleServer():
 	run(server=testServer)
-		
+
 testServer = RoverWSGIServer(host='localhost', port=8080)
 testRoutes = WebserverRoutes()
+print bottle.TEMPLATE_PATH
+bottle.TEMPLATE_PATH += ['./RoverWebUI/pages/views']
+print bottle.TEMPLATE_PATH
 serverThread = Thread(target = startBottleServer)
 
 try:

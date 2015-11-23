@@ -1,5 +1,7 @@
+% rebase('layout.tpl', title='Home Page', year=year)
 <html>
-<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title></title>
         <meta name="description" content="">
@@ -9,20 +11,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
- <head>
- </head> 
- <body onload="GamePad();">>
- <div class="container">
-        <center>
+    </head>
+    <body>
+    <center>
+    <div class="container">
         <div class="jumbotron">
             <h1>USST Rover GUI</h1>
-            <script = "GamePad()">
-            </script>
-            <button class = "btn btn-primary" onclick ="location.href='Index.html'">Back</button>
-        <div id="gamepadPrompt" class = "row"></div>
-        <div id="gamepadDisplay" class = "row"></div>
+            <p>Click the button below to run Gamepad and Interact with the Rover!</p>
+            <button class = "btn btn-primary" onclick ="location.href='/gamepad'">Run Gamepad </button>
+            <p></p>
+            <div class = "row text-center">
+                <img src = "USST Logo.png" class="img-rounded" alt="Cinque Terre" width="757" height="477">
+            </div>
   </div>
-    </center> 
-
+    </center>
 </body>
-</html>
+</html> 
