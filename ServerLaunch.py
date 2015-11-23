@@ -3,8 +3,7 @@ from RoverWebUI.bottle import run, ServerAdapter
 from RoverWebUI.routes import WebserverRoutes
 
 from threading import Thread
-import time
-import sys
+import sys, threading, time, Queue
 
 class RoverWSGIServer(ServerAdapter):
 
@@ -34,21 +33,34 @@ class RoverWSGIServer(ServerAdapter):
 							   handler_cls)
 		self.port = self.srv.server_port
 		self.srv.serve_forever()
+		print "Serving Pages Now"
 
 
+testServer = RoverWSGIServer(host='localhost', port=8080)
 def startBottleServer():
 	run(server=testServer)
 
-testServer = RoverWSGIServer(host='localhost', port=8080)
-testRoutes = WebserverRoutes()
-print bottle.TEMPLATE_PATH
-bottle.TEMPLATE_PATH += ['./RoverWebUI/pages/views']
-print bottle.TEMPLATE_PATH
-serverThread = Thread(target = startBottleServer)
+def main(args):
+	# Configure server
+	testRoutes = WebserverRoutes()
+	bottle.TEMPLATE_PATH += ['./RoverWebUI/pages/views']
+	print "Templates Loaded From:"
+	print bottle.TEMPLATE_PATH
 
-try:
+	# Start server
+	threads = []
+	serverThread = Thread(target = startBottleServer)
+	threads.append(serverThread)
+	serverThread.daemon = True
 	serverThread.start()
-except KeyboardInterrupt:
-	sys.exit()
-except:
-	raise
+
+	# KILL!
+	while serverThread.isAlive():
+		try:
+			time.sleep(0.1)
+		except KeyboardInterrupt:
+			print "Kill Recv'd"
+			sys.exit()
+
+if __name__ == '__main__':
+	main(sys.argv)
