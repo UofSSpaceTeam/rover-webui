@@ -6,53 +6,45 @@ import datetime
 
 class WebserverRoutes():
 
-	@route('/<name>')
-	def index(name):
-		return template('<b>Hello {{name}}!</b>', name=name)
+	"""
+	Routes and views for the bottle application.
+	"""
 
-	###########
-	###########
-	####
-	####	Had to comment everything as it will not work unless I get more source files
-	####		until then some demo routes are set up!
-	###########
-	############
-	# def __init__(self):
-		# @route('/')
-		# @route('/home')
-		# @view('layout')
-		# def home():
-			# """Renders the home page."""
-			# return dict(
-				# year=datetime.time
-			# )
+	from bottle import route, view
+	from datetime import datetime
 
-		# @route('/contact')
-		# @view('contact')
-		# def contact():
-			# """Renders the contact page."""
-			# return dict(
-				# title='Contact',
-				# message='Your contact page.',
-				# year=datetime.now().year
-			# )
+	@route('/')
+	@route('/home')
+	@view('index')
+	def home():
+		"""Renders the home page."""
+		return dict(year=2015)
 
-		# @route('/about')
-		# @view('about')
-		# def about():
-			# """Renders the about page."""
-			# return dict(
-				# title='About',
-				# message='Your application description page.',
-				# year=datetime.now().year
-			# )
-			
-		# @route('/Gamepad')
-		# @view('Gamepad')
-		# def Gamepad():
-			# """Renders the Gamepad page."""
-			# return dict(
-				# title='Gamepad',
-				# message='Gamepad page',
-				# year=datetime.now().year
-			# )
+	@route('/contact')
+	@view('contact')
+	def contact():
+		"""Renders the contact page."""
+		return dict(
+			title='Contact',
+			message='Your contact page.',
+			year=2015
+		)
+
+	@route('/about')
+	@view('about')
+	def about():
+		"""Renders the about page."""
+		return dict(
+			title='About',
+			message='Your application description page.',
+			year=2015
+		)
+	@route('/gamepad')
+	@view('gamepad')
+	def about():
+		"""Renders the Gamepad page."""
+		return dict(
+			title='Gamepad',
+			message='Runs Gamepad',
+			year=2015
+		)
