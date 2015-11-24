@@ -1,6 +1,6 @@
 from RoverWebUI import bottle
 from RoverWebUI.bottle import run, ServerAdapter
-from RoverWebUI.routes import WebserverRoutes
+from RoverWebUI.Routes import WebserverRoutes
 
 from threading import Thread
 import sys, threading, time, Queue
@@ -44,7 +44,7 @@ def main(args):
 	# Configure server
 	testRoutes = WebserverRoutes()
 	bottle.TEMPLATE_PATH += ['./RoverWebUI/pages/views']
-	print "Templates Loaded From:"
+	print "Web Templates Loaded From:"
 	print bottle.TEMPLATE_PATH
 
 	# Start server
