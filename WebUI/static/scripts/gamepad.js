@@ -24,6 +24,14 @@ function GamePad(){
     }
 
     $("#gamepadDisplay").html(html);
+	
+	$.ajax({
+		url: "/gamepadAxes",
+		type: "POST",
+		data: JSON.stringify({"axes" : gp.axes}),
+		contentType: "application/json"
+	});
+	
 
   }
 
@@ -59,3 +67,4 @@ function GamePad(){
 
   });
 }
+

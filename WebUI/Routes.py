@@ -1,4 +1,5 @@
-from bottle import route, view, get, template, static_file
+from bottle import route, view, get, template, static_file, post, request
+import json
 import os
 
 class WebserverRoutes():
@@ -30,3 +31,9 @@ class WebserverRoutes():
 	@route('/favicon.ico')
 	def send_favicon():
 	    return static_file('favicon.ico', root='./WebUI/static/images/')
+		
+	# Getting data from the GUI (buttons, text and controls)
+	@post('/gamepadAxes')
+	def showPostDbg():
+		message = request.json
+		print message
