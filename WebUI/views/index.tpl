@@ -18,6 +18,9 @@
             <div class = "row text-center">
                 <img src = "/static/images/usstlogo.svg" class="img-rounded" alt="Cinque Terre" width="757" height="477">
             </div>
+			<p></p>
+			<p>Click the button below to access the camera feed!</p>
+			<button class = "btn btn-primary" onclick = "location.href='/camera'">Camera Data </button>
   </div>
     </center>
 </body>

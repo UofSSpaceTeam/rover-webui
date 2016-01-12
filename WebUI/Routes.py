@@ -23,6 +23,15 @@ class WebserverRoutes():
 			year=2015
 		)
 
+	@route('/camera')
+	@view('camera')
+	def about():
+		return dict(
+			title='Cameras',
+			message='Views Camera Feed',
+			year=2016 #?
+		)
+			
 	# Static Routes for CSS/Images etc
 	@route('/static/:filename#.*#')
 	def send_static(filename):
