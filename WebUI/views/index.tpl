@@ -6,19 +6,19 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel ="stylesheet" href="/static/css/NoGutter.css"
     </head>
     <body>
-    <center>
     <div class="container">
-        <div class="jumbotron">
-            <h1>USST Rover GUI</h1>
-            <p>Click the button below to run Gamepad and Interact with the Rover!</p>
-            <button class = "btn btn-primary" onclick ="location.href='/gamepad'">Run Gamepad </button>
-            <p></p>
-            <div class = "row text-center">
-                <img src = "/static/images/usstlogo.svg" class="img-rounded" alt="Cinque Terre" width="757" height="477">
-            </div>
-  </div>
-    </center>
+        <div class="row no-gutter">
+            <div class="col-xs-12 col-md-8" style="width:750px;height:500px;border:1px solid #000;"><img src ="http://cdn.makeagif.com/media/5-07-2014/cRZAPi.gif" class="img-responsive" width="750" height = "500"></img></div>
+            <div class="col-xs-6 col-md-4" style="width:400px;height:500px;border:1px solid #000;"><img src ="http://replygif.net/i/163.gif" width="400" height = "500"></img></div>
+        </div>
+
+<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+        <div class="row no-gutter">
+            <div class = "col-xs-6" style = "width:1150px;height:200px;border:1px solid #000;"><img src ="https://media.giphy.com/media/11BVidLzhKLgly/giphy.gif" width="1150" height = "200"></div>
+        </div>
+    </div>
 </body>
 </html>
