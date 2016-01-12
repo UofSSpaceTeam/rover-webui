@@ -14,12 +14,13 @@
 <body> <!--onload="GamePad();"-->
 <div class="container-fluid">
        <center>
-       <div class="row"> <!-- <div class="col-xs-12"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Ice-and-Fire-showdown_1600x900.jpg"> </img> </div> -->
-			<div class="col-xs-12">
+       <div class="row"> <div class="col-xs-12"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Ice-and-Fire-showdown_1600x900.jpg"> </img> </div>
+		<!--
+		div class="col-xs-12">
 				<video id="videoElement" height="500" width="500">
 		
 				</video>
-			</div>
+			</div> -->
 		</div>
 		<div class="row">
 			<div class="col-xs-3"> <img src="https://i.ytimg.com/vi/rb8Y38eilRM/maxresdefault.jpg" height="400" width="400"> </img> </div>
