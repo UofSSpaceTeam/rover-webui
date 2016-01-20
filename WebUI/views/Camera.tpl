@@ -7,14 +7,34 @@
         <script src="/static/scripts/jquery.min.js"></script>
         <script src="/static/scripts/bootstrap.min.js"></script>
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel ="stylesheet" href="/static/css/NoGutter.css">
+        <script src="static/scripts/jquery.min.js"></script>
+        <script src="static/scripts/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 
 <head>
 </head>
 <body> <!--onload="GamePad();"-->
 <div class="container-fluid">
-       <center>
-       <div class="row"> <div class="col-xs-12"> <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Ice-and-Fire-showdown_1600x900.jpg"> </img> </div>
+       <div class="row no-gutter"> 
+
+       	<div class="col-xs-12" style="width:1170pxpx;height:500px;border:1px solid #000;"> 
+       		 <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+                <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="/camera">Camera</a></li>
+                        <li><a href="/gamepad">Gamepad</a></li>
+                        <li><a href ="/">Navigation</a></li>
+                    </ul>
+            </div>
+
+
+
+
+       </div>
 		<!--
 		div class="col-xs-12">
 				<video id="videoElement" height="500" width="500">
@@ -23,14 +43,13 @@
 			</div> -->
 		</div>
 		<div class="row">
-			<div class="col-xs-3"> <img src="https://i.ytimg.com/vi/rb8Y38eilRM/maxresdefault.jpg" height="400" width="400"> </img> </div>
-			<div class="col-xs-3"> <img src="https://i.ytimg.com/vi/rb8Y38eilRM/maxresdefault.jpg" height="400" width="400"> </img> </div>
-			<div class="col-xs-3"> <img src="https://i.ytimg.com/vi/rb8Y38eilRM/maxresdefault.jpg" height="400" width="400"> </img> </div>
-			<div class="col-xs-3"> <img src="https://i.ytimg.com/vi/rb8Y38eilRM/maxresdefault.jpg" height="400" width="400"> </img> </div>
+			<div class="col-xs-3" style="width:335px;height:350px;border:1px solid #000;"></div>
+			<div class="col-xs-3" style="width:335px;height:350px;border:1px solid #000;"></div>
+			<div class="col-xs-3" style="width:335px;height:350px;border:1px solid #000;"></div>
+			<div class="col-xs-3" style="width:343px;height:350px;border:1px solid #000;"></div>
 		</div>
 		   		
  </div>
- </center>
 <script> 
 </script>
 </body>
