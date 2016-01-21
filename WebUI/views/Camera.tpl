@@ -27,14 +27,10 @@
                     <ul class="dropdown-menu">
                         <li><a href="/camera">Camera</a></li>
                         <li><a href="/gamepad">Gamepad</a></li>
-                        <li><a href ="/">Navigation</a></li>
+                        <li><a href ="/home">Navigation</a></li>
                     </ul>
             </div>
-
-
-
-
-       </div>
+		</div>
 		<!--
 		div class="col-xs-12">
 				<video id="videoElement" height="500" width="500">
