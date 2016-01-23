@@ -15,6 +15,20 @@
 
 
 <head>
+    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#1">Navigation Info 1</a></li>
+                        <li><a href="#2">Navigation Info 2</a></li>
+                        <li><a href="#3">Navigation Info 3</a></li>
+                        <li><a href="#4">Navigation Info 4</a></li>
+                        <li class = "dropdown">
+                        <a class ="dropdown-toggle" data-toggle="dropdown" href="#5">Dropdown Menu
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/camera">Camera</a></li>
+                                <li><a href="/gamepad">Gamepad</a></li>
+                                <li><a href="/home">Navigation</a></li>
+                            </ul>
+                    </ul>
 </head>
 <body> <!--onload="GamePad();"-->
 <div class="container-fluid">
@@ -22,8 +36,6 @@
 
        	<div class="col-xs-12" style="width:1170pxpx;height:500px;border:1px solid #000;"> 
        		 <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-                <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="/camera">Camera</a></li>
                         <li><a href="/gamepad">Gamepad</a></li>
