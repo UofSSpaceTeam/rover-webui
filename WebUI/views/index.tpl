@@ -9,35 +9,37 @@
         <link rel ="stylesheet" href="/static/css/NoGutter.css">
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
-    </head>
-    <body>
-    <div class="container-fluid">
-        <div class="row no-gutter">
-            <div class="col-xs-12 col-md-8" style="width:750px;height:500px;border:1px solid #000;">
-                <div class="dropdown">
-					<ul class="nav nav-tabs">
-						<li class="active"><a href="#1">Navigation Info 1</a></li>
-						<li><a href="#2">Navigation Info 2</a></li>
-						<li><a href="#3">Navigation Info 3</a></li>
-						<li><a href="#4">Navigation Info 4</a></li>
-						<li class = "dropdown">
-						<a class ="dropdown-toggle" data-toggle="dropdown" href="#5">Page Dropdown Menu
-							<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="/camera">Camera</a></li>
-								<li><a href="/gamepad">Gamepad</a></li>
-								<li><a href="/home">Navigation</a></li>
-							</ul>
-					</ul>
-				</div>	
-			</div>
-            <div class="col-xs-6 col-md-4" style="width:400px;height:500px;border:1px solid #000;"></div>
-        </div>
 
-<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
-        <div class="row no-gutter">
-            <div class = "col-xs-6" style = "width:1150px;height:200px;border:1px solid #000;"></div>
-        </div>
+        <div class="dropdown">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#1">Navigation Info 1</a></li>
+                        <li><a href="#2">Navigation Info 2</a></li>
+                        <li><a href="#3">Navigation Info 3</a></li>
+                        <li><a href="#4">Navigation Info 4</a></li>
+                        <li class = "dropdown">
+                        <a class ="dropdown-toggle" data-toggle="dropdown" href="#5">Page Dropdown Menu
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/camera">Camera</a></li>
+                                <li><a href="/gamepad">Gamepad</a></li>
+                                <li><a href="/home">Navigation</a></li>
+                            </ul>
+                    </ul>
+                </div>  
+    </head>
+    
+
+<body>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+    <!-- Optional: clear the XS cols if their content doesn't match in height -->
+    <div class="clearfix visible-xs-block"></div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
     </div>
 </body>
 </html>
