@@ -9,6 +9,8 @@
         <link rel ="stylesheet" href="/static/css/NoGutter.css">
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
+        <!--liveplayer script reference-->
+        <script type="text/javascript" src="_main.js">;</script>
 
         <div class="dropdown">
                     <ul class="nav nav-tabs">
@@ -66,6 +68,10 @@
             <h1 font size = "20">Detailed Info</h1>
             <img src = "https://media.giphy.com/media/Fsn4WJcqwlbtS/giphy.gif"></img>
         </div>
+        <!--Buttons that run live player script -->
+        <button type="button" onclick="wsavc.playStream()">Start Video</button>
+        <button type="button" onclick="wsavc.stopStream()">Stop Video</button>
+        <button type="button" onclick="wsavc.disconnect()">Disconnect</button>
     </div>
 </body>
 </html>
