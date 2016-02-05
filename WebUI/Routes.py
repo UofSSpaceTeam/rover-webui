@@ -31,6 +31,15 @@ class WebserverRoutes():
 			message='Views Camera Feed',
 			year=2016 #?
 		)
+
+	@route('/gamepadoptions')
+	@view('gamepadoptions')
+	def about():
+		return dict(
+			title='Gamepad Options Page',
+			message='Views Gamepad Options',
+			year=2016 #?
+		)
 			
 	# Static Routes for CSS/Images etc
 	@route('/static/:filename#.*#')
