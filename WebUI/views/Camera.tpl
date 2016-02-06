@@ -17,18 +17,10 @@
 
 <head>
     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#1">Navigation Info 1</a></li>
-                        <li><a href="#2">Navigation Info 2</a></li>
-                        <li><a href="#3">Navigation Info 3</a></li>
-                        <li><a href="#4">Navigation Info 4</a></li>
-                        <li class = "dropdown">
-                        <a class ="dropdown-toggle" data-toggle="dropdown" href="#5">Dropdown Menu
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/camera">Camera</a></li>
-                                <li><a href="/gamepad">Gamepad</a></li>
-                                <li><a href="/home">Navigation</a></li>
-                            </ul>
+                        <li><a href="/home">Navigation</a></li>
+                        <li class="active"><a href="/camera">Camera</a></li>
+                        <li><a href="/gamepad">Gamepad</a></li>
+                        <li><a href="/gamepadoptions">Gamepad Options</a></li>
                     </ul>
 </head>
 <body>
@@ -37,9 +29,7 @@
 
     <div class="row no-gutter">
         <div class="container-fluid">
-            <button type ="button" class="btn btn-default" onclick="wsavc.playStream()" class="ui-btn" data-role="button">Start Video</button>
-            <button type ="button" class="btn btn-default" onclick="wsavc.stopStream()" class="ui-btn" data-role="button">Stop Video</button>
-            <button type ="button" class="btn btn-default" onclick="wsavc.disconnect()" class="ui-btn" data-role="button">Disconnect</button>
+
         </div>	   		
     </div>
 </div>

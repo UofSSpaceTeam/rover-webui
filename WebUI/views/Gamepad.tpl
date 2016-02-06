@@ -12,18 +12,12 @@
 <head>
    <div class="dropdown">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#1">Navigation Info 1</a></li>
-                        <li><a href="#2">Navigation Info 2</a></li>
-                        <li><a href="#3">Navigation Info 3</a></li>
-                        <li><a href="#4">Navigation Info 4</a></li>
-                        <li class = "dropdown">
-                        <a class ="dropdown-toggle" data-toggle="dropdown" href="#5">Dropdown Menu
-                            <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/camera">Camera</a></li>
-                                <li><a href="/gamepad">Gamepad</a></li>
-                                <li><a href="/home">Navigation</a></li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                          <li><a href="/home">Navigation</a></li>
+                          <li><a href="/camera">Camera</a></li>
+                          <li class="active"><a href="/gamepad">Gamepad</a></li>
+                          <li><a href="/gamepadoptions">Gamepad Options</a></li>
+                      </ul>
                     </ul>
                 </div>  
 </head>

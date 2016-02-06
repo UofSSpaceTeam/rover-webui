@@ -1,5 +1,7 @@
 function GamePad(){
-
+  //Added by Liam//
+  var buttonInfo ='{"button": "0"}'
+  var obj = JSON.parse(buttonInfo);
   var hasGP = false;
   var repGP;
 
@@ -12,12 +14,17 @@ function GamePad(){
     var html = "";
       html += "id: "+gp.id+"<br/>";
 
+
     for(var i=0;i<gp.buttons.length;i++) {
+      gp.buttons[1].value = document.getElementById('GamepadValueChange').value;
       html+= "Button "+(i+1)+": ";
       if(gp.buttons[i].pressed) html+= " pressed";
-      html+= "<br/>";
-
+        html+= "<br/>";
+        console.log(gp.buttons[1].value);
     }
+
+
+
 
     for(var i=0;i<gp.axes.length; i+=2) {
       html+= "Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]+"<br/>";
@@ -31,8 +38,9 @@ function GamePad(){
 		data: JSON.stringify({"axes" : gp.axes}),
 		contentType: "application/json"
 	});
-	
 
+
+   
   }
 
   $(document).ready(function() {
