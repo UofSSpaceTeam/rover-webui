@@ -18,10 +18,50 @@
                         <li><a href="/gamepadoptions">Gamepad Options</a></li>
                     </ul>
                 </div>  
+
+        <!---Leaflet Scripts, all the aids. -->
+
+    <link rel="stylesheet" href="/static/css/libs/leaflet.css" />
+    <link rel="stylesheet" href="/static/css/leaflet.draw/dist/leaflet.draw.css" />
+    
+    <script type="text/javascript" src ="static/scripts/leaflet.js"></script>
+
+    <script src="static/scripts/libs/leaflet-src.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/Leaflet.draw.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/ext/LatLngUtil.js"></script>
+    <script src="static/scripts/leaflet.draw/src/ext/GeometryUtil.js"></script>
+    <script src="static/scripts/leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="static/scripts/leaflet.draw/src/ext/Polyline.Intersect.js"></script>
+    <script src="static/scripts/leaflet.draw/src/ext/Polygon.Intersect.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/Control.Draw.js"></script>
+    <script src="static/scripts/leaflet.draw/src/Tooltip.js"></script>
+    <script src="static/scripts/leaflet.draw/src/Toolbar.js"></script>
+
+    <script src="static/scripts/leaflet.draw/src/draw/DrawToolbar.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/EditToolbar.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="static/scripts/leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
+    
     </head>
     
 
-<body onload="GamePad();">
+<body onload="main()">
     <script src="/static/scripts/gamepad.js"></script>
     <!---Main Div Container-->
     <div class="row">
@@ -29,9 +69,7 @@
         <div class="col-xs-12 col-sm-6 col-md-8" div align = "Center">
             <h1 font size ="20">Navigation</h1>
             <!---Navigation Image and Script Div-->
-            <div div align = "center"> 
-                <img src = "http://www.advancedcustomfields.com/wp-content/uploads/2013/11/acf-google-maps-field-2.png"></img>
-            </div>
+            <div id="map" style="width: auto; height:100%; border: 1px solid #ccc"></div>
         </div>
         <!---Core Data Main Div-->
         <div class="col-xs-6 col-md-4" div align = "Center">
@@ -49,14 +87,14 @@
                 <label>*BWAP BWAP*</label></p>
 
                 <p><label>Kung Fury:</label> 
-                <label><img src ="http://i2.kym-cdn.com/photos/images/newsfeed/001/059/850/546.gif" height = "100" width = "200"></img></label></p>
+                <label><img src ="http://i2.kym-cdn.com/photos/images/newsfeed/001/059/850/546.gif" height = auto; width = auto;</img></label></p>
             </font>
             </div>
         </div>
          <!---Detailed Data Main Div-->
         <div class="col-md-6 col-md-offset-3" div align = "Center">
             <h1 font size = "20">Detailed Info</h1>
-            <img src = "https://media.giphy.com/media/Fsn4WJcqwlbtS/giphy.gif"></img>
+            <img src = "https://media.giphy.com/media/Fsn4WJcqwlbtS/giphy.gif" height = auto; width = auto;></img>
         </div>
     </div>
 </body>
