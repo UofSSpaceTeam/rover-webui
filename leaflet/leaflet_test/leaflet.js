@@ -1,39 +1,35 @@
+function printMarkers(array) {
+			var i;
+			var marker = ""; 
+			//var array = [1,2,3];
+			for (i = 0; i < array.length; i++) {
+				//printing for testing purposes
+				//change to send elements
+				marker += "<p>" + array[i] + "</p>";				
+			}
+			//outputs array
+			document.getElementById("marker_array").innerHTML = marker;	
+		}
+		
 function main(){
 		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib}),
-			map = new L.Map('map', {layers: [osm], center: new L.LatLng(-37.7772, 175.2756), zoom: 15 });
+			map = new L.Map('map', {layers: [osm], center: new L.LatLng(52.13100, -106.63400), zoom: 15 });
 
 		var drawnItems = new L.FeatureGroup();
 		map.addLayer(drawnItems);
-
+		
+		var num = 0;
+		var marker_array = [];
+		
 		// Set the title to show on the polygon button
 		L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a sexy polygon!';
 
 		var drawControl = new L.Control.Draw({
 			position: 'topright',
 			draw: {
-				polyline: {
-					metric: true
-				},
-				/*
-				polygon: {
-					allowIntersection: false,
-					showArea: true,
-					drawError: {
-						color: '#b00b00',
-						timeout: 1000
-					},
-					shapeOptions: {
-						color: '#bada55'
-					}
-				},
-				circle: {
-					shapeOptions: {
-						color: '#662d91'
-					}
-				},
-				*/
+				polyline: false,
 				polygon: false,
 				circle: false,
 				rectangle: false, 
@@ -50,7 +46,12 @@ function main(){
 				layer = e.layer;
 
 			if (type === 'marker') {
-				layer.bindPopup(layer.latlng.toString());
+				num++; 
+				var latlng = layer.getLatLng();
+					message = num.toString().concat(",",latlng.lat, ",",latlng.lng ); 
+				layer.bindPopup(message);
+				marker_array.push(message); 
+				printMarkers(marker_array);
 			}
 
 			drawnItems.addLayer(layer);
@@ -64,19 +65,7 @@ function main(){
 			});
 			console.log("Edited " + countOfEditedLayers + " layers");
 		});
-
-		L.DomUtil.get('changeColor').onclick = function () {
-			drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
-		};
 		
 		
-		function onMapClick(e) {
-			popup
-				.setLatLng(e.latlng)
-				.setContent("click event")
-				//.setContent("You clicked the map at " + e.latlng.toString())
-				.openOn(map);
-		}
 
-		map.on('click', onMapClick);
 	}
