@@ -66,36 +66,29 @@
     <!---Main Div Container-->
     <div class="row">
         <!---Navigation Main Div-->
-        <div class="col-xs-12 col-sm-6 col-md-8" div align = "Center">
-            <h1 font size ="20">Navigation</h1>
+        <div class="col-md-8">
+            <h1 font size ="20" align = "center">Navigation</h1>
             <!---Navigation Image and Script Div-->
             <div id="map" style="width: auto; height:100%; border: 1px solid #ccc"></div>
         </div>
         <!---Core Data Main Div-->
-        <div class="col-xs-6 col-md-4" div align = "Center">
-            <h1 font size = "20">Core Data</h1>
-            <!---Core data Info Div-->
-            <div div align = "left">
-                <font size = "5">
-                <p><label>Dat Info:</label> 
-                <label>Swag 9000</label></p>
-                
-                <p><label>Massive Info:</label> 
-                <label>*BUFF*</label></p>
-
-                <p><label>Hype Info:</label> 
-                <label>*BWAP BWAP*</label></p>
-
-                <p><label>Kung Fury:</label> 
-                <label><img src ="http://i2.kym-cdn.com/photos/images/newsfeed/001/059/850/546.gif" height = auto; width = auto;</img></label></p>
-            </font>
+            <h1 font size ="20" align = "center">Core Data</h1>
+            <div class = "col-md-1" align = "left">
+                <font size = "3">
+                <p><label>X Position:</label><input type="text" name="XPos"></p>
+                <p><label>Y Position:</label><input type="text" name="YPos"></p>
+                <p><label>RPM's:</label><input type="text" name="RPM"></p>
+                <p><label>Speed:</label><input type="text" name="Speed"></p>
+                <p><label>Elevation:</label><input type="text" name="Elevation"></p>
+                <p><label>Wind Speed</label><input type="text" name="WindSpeed"></p>
+                <p><label>Wind Direction:</label><input type="text" name="WindDirection">
+                </p>
+                <p><label>Arm Position X:</label><input type="text" name="ArmPosX">
+                </p>
+                <p><label>Arm Position Y:</label><input type="text" name="ArmPosY">
+                </p>
             </div>
-        </div>
-         <!---Detailed Data Main Div-->
-        <div class="col-md-6 col-md-offset-3" div align = "Center">
-            <h1 font size = "20">Detailed Info</h1>
-            <img src = "https://media.giphy.com/media/Fsn4WJcqwlbtS/giphy.gif" height = auto; width = auto;></img>
-        </div>
+
     </div>
 </body>
 </html>
