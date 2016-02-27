@@ -9,6 +9,24 @@ function sendMarkers(array) {
 	}
 }
 */
+
+/*	
+Prints out all maker coordinates in the system
+*/
+function PrintMarkers(array) {
+	var i;
+	var marker = ""; 
+	for (i = 0; i < array.length; i++) {
+		//printing for testing purposes
+		//change to send elements
+		marker += "<p>" + array[i] + "</p>";				
+	}
+	//outputs array
+	//document.getElementById("marker_array").innerHTML = marker;	
+}
+
+
+
 function main(){
 		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -50,6 +68,7 @@ function main(){
 			layer.bindPopup(message);
 			marker_array.push(message); 
 			//sendMarkers(marker_array);
+			//PrintMarkers(marker_array); 
 		}
 
 		drawnItems.addLayer(layer);
