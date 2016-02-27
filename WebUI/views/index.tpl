@@ -21,42 +21,42 @@
 
         <!---Leaflet Scripts, all the aids. -->
 
-    <link rel="stylesheet" href="/static/css/libs/leaflet.css" />
-    <link rel="stylesheet" href="/static/css/leaflet.draw/dist/leaflet.draw.css" />
+    <link rel="stylesheet" href="/static/libs/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/static/libs/leaflet/leaflet.draw/dist/Leaflet.draw.css" />
     
     <script type="text/javascript" src ="static/scripts/leaflet.js"></script>
 
     <script src="static/scripts/libs/leaflet-src.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/Leaflet.draw.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/Leaflet.draw.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
-    <script src="static/scripts/leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/ext/LatLngUtil.js"></script>
-    <script src="static/scripts/leaflet.draw/src/ext/GeometryUtil.js"></script>
-    <script src="static/scripts/leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
-    <script src="static/scripts/leaflet.draw/src/ext/Polyline.Intersect.js"></script>
-    <script src="static/scripts/leaflet.draw/src/ext/Polygon.Intersect.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/ext/LatLngUtil.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/ext/GeometryUtil.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/ext/Polyline.Intersect.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/ext/Polygon.Intersect.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/Control.Draw.js"></script>
-    <script src="static/scripts/leaflet.draw/src/Tooltip.js"></script>
-    <script src="static/scripts/leaflet.draw/src/Toolbar.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/Control.Draw.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/Tooltip.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/Toolbar.js"></script>
 
-    <script src="static/scripts/leaflet.draw/src/draw/DrawToolbar.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/EditToolbar.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
-    <script src="static/scripts/leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/draw/DrawToolbar.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/EditToolbar.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="static/libs/leaflet/leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
     
     </head>
     

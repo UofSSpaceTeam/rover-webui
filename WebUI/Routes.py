@@ -40,12 +40,12 @@ class WebserverRoutes():
 			message='Views Gamepad Options',
 			year=2016 #?
 		)
-			
+				
 	# Static Routes for CSS/Images etc
 	@route('/static/:filename#.*#')
 	def send_static(filename):
 	    return static_file(filename, root='./WebUI/static/')
-
+		
 	@route('/favicon.ico')
 	def send_favicon():
 	    return static_file('favicon.ico', root='./WebUI/static/images/')
