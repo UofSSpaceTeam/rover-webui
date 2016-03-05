@@ -58,13 +58,18 @@ function main(){
 	map.addControl(drawControl);
 
 	map.on('draw:created', function (e) {
+		
 		var type = e.layerType,
 			layer = e.layer;
 
 		if (type === 'marker') {
+			
 			num++; 
 			var latlng = layer.getLatLng();
 				message = num.toString().concat(",",latlng.lat, ",",latlng.lng ); 
+				//Sends Coordinates to inputboxes
+				document.getElementById("XPos").value = latlng.lat;
+				document.getElementById("YPos").value = latlng.lng;
 			layer.bindPopup(message);
 			marker_array.push(message); 
 			//sendMarkers(marker_array);
@@ -82,5 +87,5 @@ function main(){
 		});
 		console.log("Edited " + countOfEditedLayers + " layers");
 	});
+
 	}
-	
