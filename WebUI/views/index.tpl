@@ -75,19 +75,10 @@
             <!---Core Data Main Div-->
                 <h1 font size ="20" align = "center">Core Data</h1>
                 <div class = "col-md-1" align = "left">
-                    <font size = "3">
                     <p><label>X Position:</label><input type="text" id="XPos"></p>
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
                     <p><label>RPM's:</label><input type="text" id="RPM"></p>
                     <p><label>Speed:</label><input type="text" id="Speed"></p>
-                    <p><label>Elevation:</label><input type="text" id="Elevation"></p>
-                    <p><label>Wind Speed</label><input type="text" id="WindSpeed"></p>
-                    <p><label>Wind Direction:</label><input type="text" id="WindDirection">
-                    </p>
-                    <p><label>Arm Position X:</label><input type="text" id="ArmPosX">
-                    </p>
-                    <p><label>Arm Position Y:</label><input type="text" id="ArmPosY">
-                    </p>
                 </div>
         </div>
 
