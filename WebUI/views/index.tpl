@@ -79,6 +79,8 @@
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
                     <p><label>RPM's:</label><input type="text" id="RPM"></p>
                     <p><label>Speed:</label><input type="text" id="Speed"></p>
+					<!---testing for rover change pos-->	
+					<button onclick="updateRoverPos()">Update Rover Position</button>
                 </div>
         </div>
 

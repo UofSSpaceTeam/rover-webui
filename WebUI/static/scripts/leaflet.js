@@ -1,3 +1,7 @@
+//global variables 
+var roverMarker 
+
+
 /*
 //sends all marker coordinates to rover 
 function sendMarkers(array) {
@@ -13,7 +17,7 @@ function sendMarkers(array) {
 /*	
 Prints out all maker coordinates in the system
 */
-function PrintMarkers(array) {
+function printMarkers(array) {
 	var i;
 	var marker = ""; 
 	for (i = 0; i < array.length; i++) {
@@ -27,10 +31,26 @@ function PrintMarkers(array) {
 
 
 
+/*
+updates the rovers current position 
+*/
+function updateRoverPos() {
+	
+	//get Coordinates from input boxes
+	var latlng = L.latLng(document.getElementById("XPos").value, document.getElementById("YPos").value);
+	//alert(latlng);
+	//set new rover position 
+	roverMarker.setLatLng(latlng);
+	//updates the rovers position 
+	roverMarker.update();
+}
+
+
 function main(){
 		var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		osm = L.tileLayer(osmUrl, {maxZoom: 18, attribution: osmAttrib}),
+		//TODO:change initial position 
 		map = new L.Map('map', {layers: [osm], center: new L.LatLng(52.13100, -106.63400), zoom: 15 });
 
 	var drawnItems = new L.FeatureGroup();
@@ -39,9 +59,14 @@ function main(){
 	var num = 0;
 	var marker_array = [];
 	
-	// Set the title to show on the polygon button
-	L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a sexy polygon!';
-
+	//makes roverIcon
+	//TODO: the initial position should be changed
+	roverMarker = L.marker([52.13, -106.63]).addTo(map);
+	roverMarker.bindPopup("I'm the rover!!");
+	//set input boxes to initial value
+	document.getElementById("XPos").value = 52.13;
+	document.getElementById("YPos").value = -106.63;
+	
 	var drawControl = new L.Control.Draw({
 		position: 'topright',
 		draw: {
@@ -67,13 +92,10 @@ function main(){
 			num++; 
 			var latlng = layer.getLatLng();
 				message = num.toString().concat(",",latlng.lat, ",",latlng.lng ); 
-				//Sends Coordinates to inputboxes
-				document.getElementById("XPos").value = latlng.lat;
-				document.getElementById("YPos").value = latlng.lng;
 			layer.bindPopup(message);
 			marker_array.push(message); 
 			//sendMarkers(marker_array);
-			//PrintMarkers(marker_array); 
+			//printMarkers(marker_array); 
 		}
 
 		drawnItems.addLayer(layer);
