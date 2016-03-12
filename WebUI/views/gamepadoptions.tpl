@@ -27,11 +27,10 @@
 	<div align ="center" class="container">
 		<div align ="center" class="jumbotron">
             <h1>Gamepad Options</h1>
-		 </div>
 		  <script src="/static/scripts/gamepad.js"></script>
-          <input id = "GamepadValueChange"></input>
           <div id="gamepadPrompt" class = "row"></div>
           <div id="gamepadDisplay" class = "row"></div>
+          </div>
 	</div>
 
 </div>

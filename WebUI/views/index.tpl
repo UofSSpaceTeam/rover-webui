@@ -61,10 +61,12 @@
     </head>
     
 
-<body onload="main()">
-    <script src="/static/scripts/gamepad.js"></script>
+<body onload="main();GamePad();">
     <!---Main Div Container-->
     <div class="jumbotron">
+        
+        <script src="/static/scripts/gamepad.js"></script>
+        
         <div class="row">
             <!---Navigation Main Div-->
             <div class="col-md-8">

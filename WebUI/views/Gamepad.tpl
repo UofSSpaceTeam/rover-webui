@@ -21,16 +21,16 @@
                     </ul>
                 </div>  
 </head>
-<body onload="GamePad();">>
-<div class="container">
-       <center>
-       <div class="jumbotron">
-           <h1>USST Rover GUI</h1>
-           <script src="/static/scripts/gamepad.js"></script>
-       <div id="gamepadPrompt" class = "row"></div>
-       <div id="gamepadDisplay" class = "row"></div>
- </div>
-   </center>
+<body onload="GamePad();">
+<div align ="center" class="container">
+    <div align ="center" class="jumbotron">
+            <h1>Gamepad</h1>
+      <script src="/static/scripts/gamepad.js"></script>
+          <input id = "GamepadValueChange"></input>
+          <div id="gamepadPrompt" class = "row"></div>
+          <div id="gamepadDisplay" class = "row"></div>
+        </div>
+  </div>
 
 </body>
 </html>

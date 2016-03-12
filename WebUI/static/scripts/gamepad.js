@@ -1,3 +1,5 @@
+var RoverXPos = "";
+var RoverYPos = "";
 function GamePad(){
   //Added by Liam//
   var buttonInfo ='{"button": "0"}'
@@ -16,11 +18,13 @@ function GamePad(){
 
 
     for(var i=0;i<gp.buttons.length;i++) {
-      gp.buttons[1].value = document.getElementById('GamepadValueChange').value;
       html+= "Button "+(i+1)+": ";
       if(gp.buttons[i].pressed) html+= " pressed";
         html+= "<br/>";
-        console.log(gp.buttons[1].value);
+      if(gp.buttons[1].pressed){ 
+        UpdateRoverPos();
+
+      }
     }
 
 
@@ -75,4 +79,10 @@ function GamePad(){
 
   });
 }
+
+function UpdateRoverPos(){
+  document.getElementById("XPos").value = 20;
+
+}
+
 
