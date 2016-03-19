@@ -36,7 +36,7 @@ class RoverWSGIServer(ServerAdapter):
 		print "Serving Pages Now"
 
 
-testServer = RoverWSGIServer(host='localhost', port=8080)
+testServer = RoverWSGIServer(host='localhost', port=8000)
 def startBottleServer():
 	run(server=testServer)
 

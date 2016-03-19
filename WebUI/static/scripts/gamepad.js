@@ -37,12 +37,12 @@ function GamePad(){
 
       }
       else if(gp.buttons[0].pressed){ 
-        RoverYPos+=0.001;
+        RoverYPos-=0.001;
         document.getElementById("YPos").value = RoverYPos;
         updateRoverPos();
       }
       else if(gp.buttons[3].pressed){ 
-        RoverYPos-=0.001;
+        RoverYPos+=0.001;
         document.getElementById("YPos").value = RoverYPos;
         updateRoverPos();
       }

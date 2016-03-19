@@ -29,8 +29,11 @@
 
     <div class="row no-gutter">
         <div class="container-fluid">
+            <center><img src="http://10.64.226.62:8080/?action=stream" /></center>
 
-        </div>	   		
+        </div>
+        <div class = ".col-xs-6"> 
+            <img src="http://10.64.226.62:8080/?action=snapshot" />	   		
     </div>
 </div>
 
