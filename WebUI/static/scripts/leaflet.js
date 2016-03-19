@@ -1,7 +1,6 @@
 //global variables 
 var roverMarker 
 
-
 /*
 //sends all marker coordinates to rover 
 function sendMarkers(array) {
@@ -29,15 +28,13 @@ function printMarkers(array) {
 	//document.getElementById("marker_array").innerHTML = marker;	
 }
 
-
-
 /*
 updates the rovers current position 
 */
 function updateRoverPos() {
 	
 	//get Coordinates from input boxes
-	var latlng = L.latLng(document.getElementById("XPos").value, document.getElementById("YPos").value);
+	var latlng = L.latLng(document.getElementById("YPos").value, document.getElementById("XPos").value);
 	//alert(latlng);
 	//set new rover position 
 	roverMarker.setLatLng(latlng);
@@ -64,8 +61,8 @@ function main(){
 	roverMarker = L.marker([52.13, -106.63]).addTo(map);
 	roverMarker.bindPopup("I'm the rover!!");
 	//set input boxes to initial value
-	document.getElementById("XPos").value = 52.13;
-	document.getElementById("YPos").value = -106.63;
+	document.getElementById("XPos").value = -106.63400;
+	document.getElementById("YPos").value = 52.13100;
 	
 	var drawControl = new L.Control.Draw({
 		position: 'topright',
@@ -78,26 +75,24 @@ function main(){
 		},
 		edit: {
 			featureGroup: drawnItems,
+			edit: false
 		}
 	});
 	map.addControl(drawControl);
 
 	map.on('draw:created', function (e) {
-		
+	
 		var type = e.layerType,
 			layer = e.layer;
-
 		if (type === 'marker') {
-			
 			num++; 
 			var latlng = layer.getLatLng();
-				message = num.toString().concat(",",latlng.lat, ",",latlng.lng ); 
+			message = num.toString().concat(",",latlng.lat, ",",latlng.lng ); 
 			layer.bindPopup(message);
 			marker_array.push(message); 
 			//sendMarkers(marker_array);
 			//printMarkers(marker_array); 
 		}
-
 		drawnItems.addLayer(layer);
 	});
 
