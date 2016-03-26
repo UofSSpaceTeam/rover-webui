@@ -41,6 +41,7 @@ def startBottleServer():
 	run(server=testServer)
 
 def main(args):
+
 	# Configure server
 	testRoutes = WebserverRoutes()
 	bottle.TEMPLATE_PATH = ['./WebUI/views']

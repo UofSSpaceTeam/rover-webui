@@ -29,11 +29,16 @@
 
     <div class="row no-gutter">
         <div class="container-fluid">
-            <center><img src="http://10.64.226.62:8080/?action=stream" /></center>
-
+            <div class = ".col-xs-12 .col-sm-6 .col-md-8"> 
+                <h1> Main Camera</h1>
+                <center><img src="http://10.64.226.103:8080/?action=stream" /></center>
+            </div>
+        
+             <div class = ".col-xs-6 .col-sm-4"> 
+                <h1> Camera 1</h1>
+                <img id = "Snapshot1"/>	   		
+            </div>
         </div>
-        <div class = ".col-xs-6"> 
-            <img src="http://10.64.226.62:8080/?action=snapshot" />	   		
     </div>
 </div>
 
