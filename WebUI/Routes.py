@@ -6,11 +6,7 @@ class WebServerRoutes():
 	def __init__(self, parent=None):
 		self.val = True
 		self.instance = Bottle()
-		self.outData = {}
-		self.lock = Lock()
-		
 		self.parent = parent
-		
 		self.buildRoutes()
 		
 		
@@ -110,7 +106,7 @@ class WebServerRoutes():
 		if self.parent is not None:
 			return json.dumps({item : self.parent.state[item]})
 		else:
-			return json.dumps({item : "test"})
+			return json.dumps({item : "test"}) 
 
 	# Utility to more robustly parse json into a python dict
 	def byteify(self, input):
