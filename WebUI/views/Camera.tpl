@@ -19,8 +19,8 @@
     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li class="active"><a href="/camera">Camera</a></li>
-                        <li><a href="/gamepad">Gamepad</a></li>
-                        <li><a href="/gamepadoptions">Gamepad Options</a></li>
+                        <li><a href=192.168.0.30>Video Config</a></li>
+                        <li><a href=192.168.0.31>Radio Config</a></li>
                     </ul>
 </head>
 <body>
@@ -31,12 +31,15 @@
         <div class="container-fluid">
             <div class = ".col-xs-12 .col-sm-6 .col-md-8"> 
                 <h1> Main Camera</h1>
-                <center><img src="http://10.64.226.103:8080/?action=stream" /></center>
-            </div>
-        
-             <div class = ".col-xs-6 .col-sm-4"> 
-                <h1> Camera 1</h1>
-                <img id = "Snapshot1"/>	   		
+                <embed 
+                    type="application/x-vlc-plugin" 
+                    pluginspage="http://www.videolan.org" 
+                    version="VideoLAN.VLCPlugin.2"
+                    width="640"
+                    height="480"
+                    target="udp://@227.2.2.8:1235";
+                    id="vlc">
+                </embed>
             </div>
         </div>
     </div>

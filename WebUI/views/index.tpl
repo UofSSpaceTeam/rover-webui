@@ -9,13 +9,13 @@
         <link rel ="stylesheet" href="/static/css/NoGutter.css">
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
-
+        <script src="/static/scripts/gamepad.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href="/gamepad">Gamepad</a></li>
-                        <li><a href="/gamepadoptions">Gamepad Options</a></li>
+                        <li><a href=http://192.168.0.30>Video Config</a></li>
+                        <li><a href=http://192.168.0.31>Radio Config</a></li>
                     </ul>
                 </div>  
 
@@ -64,7 +64,6 @@
 <body onload="main();GamePad();">
     <!---Main Div Container-->
     <div class="jumbotron">
-        
         <script src="/static/scripts/gamepad.js"></script>
         
         <div class="row">
@@ -81,6 +80,7 @@
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
                     <p><label>RPM's:</label><input type="text" id="RPM"></p>
                     <p><label>Speed:</label><input type="text" id="Speed"></p>
+                    <button type="button" onclick="Test();">Click Me!</button>
                 </div>
         </div>
 

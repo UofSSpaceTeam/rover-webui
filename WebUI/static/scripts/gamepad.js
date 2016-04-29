@@ -15,6 +15,7 @@ function GamePad(){
     return "getGamepads" in navigator;
   }
 
+
   function reportOnGamepad() {
     var gp = navigator.getGamepads()[0];
     var html = "";
@@ -33,23 +34,19 @@ function GamePad(){
       if(gp.buttons[1].pressed){
         RoverXPos+=0.001;
         document.getElementById("XPos").value = RoverXPos;
-        updateRoverPos();
 
       }
       else if(gp.buttons[0].pressed){ 
         RoverYPos-=0.001;
         document.getElementById("YPos").value = RoverYPos;
-        updateRoverPos();
       }
       else if(gp.buttons[3].pressed){ 
         RoverYPos+=0.001;
         document.getElementById("YPos").value = RoverYPos;
-        updateRoverPos();
       }
       else if(gp.buttons[2].pressed){ 
         RoverXPos-=0.001;
         document.getElementById("XPos").value = RoverXPos;
-        updateRoverPos();
       }
     }
 
@@ -66,7 +63,8 @@ function GamePad(){
 		url: "/testSend",
 		type: "POST",
 		data: JSON.stringify({"axes" : gp.axes}),
-		contentType: "application/json"
+		contentType: "application/json";
+
 	});
 
 
@@ -106,10 +104,9 @@ function GamePad(){
   });
 }
 
-function UpdateRoverPos(){
-  RoverXPos = document.getElementById("XPos").value;
+function Test(){ 
+  alert("Test");
 
-  document.getElementById("XPos").value = 20;
 
 }
 
