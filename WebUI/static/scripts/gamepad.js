@@ -11,6 +11,9 @@ function GamePad(){
   RoverXPos = parseFloat(document.getElementById("XPos").value);
   RoverYPos = parseFloat(document.getElementById("YPos").value);
 
+  var ButtonPressed = false;
+
+
   function canGame() {
     return "getGamepads" in navigator;
   }
@@ -33,23 +36,20 @@ function GamePad(){
       if(gp.buttons[1].pressed){
         RoverXPos+=0.001;
         document.getElementById("XPos").value = RoverXPos;
-        updateRoverPos();
-
       }
       else if(gp.buttons[0].pressed){ 
         RoverYPos-=0.001;
         document.getElementById("YPos").value = RoverYPos;
-        updateRoverPos();
+
       }
       else if(gp.buttons[3].pressed){ 
         RoverYPos+=0.001;
         document.getElementById("YPos").value = RoverYPos;
-        updateRoverPos();
       }
       else if(gp.buttons[2].pressed){ 
         RoverXPos-=0.001;
         document.getElementById("XPos").value = RoverXPos;
-        updateRoverPos();
+
       }
     }
 
@@ -62,12 +62,19 @@ function GamePad(){
 
     $("#gamepadDisplay").html(html);
 	
-	$.ajax({
-		url: "/testSend",
-		type: "POST",
-		data: JSON.stringify({"axes" : gp.axes}),
-		contentType: "application/json"
-	});
+	
+    $.ajax({
+  		url: "/testSend",
+  		type: "POST",
+  		data: JSON.stringify({"button" : ButtonPressed}),
+  		contentType: "application/json",
+      success: function(data){ 
+          console.log("Test")
+
+        }
+  	});
+
+
 
 
    
@@ -106,11 +113,5 @@ function GamePad(){
   });
 }
 
-function UpdateRoverPos(){
-  RoverXPos = document.getElementById("XPos").value;
-
-  document.getElementById("XPos").value = 20;
-
-}
 
 

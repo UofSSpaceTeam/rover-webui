@@ -1,6 +1,6 @@
 from WebUI import bottle
 from WebUI.bottle import run, ServerAdapter
-from WebUI.Routes import WebserverRoutes
+from WebUI.Routes import WebServerRoutes
 
 from threading import Thread
 import sys, threading, time, Queue
@@ -43,7 +43,7 @@ def startBottleServer():
 def main(args):
 
 	# Configure server
-	testRoutes = WebserverRoutes()
+	testRoutes = WebServerRoutes()
 	bottle.TEMPLATE_PATH = ['./WebUI/views']
 	print "Web Templates Loaded From:"
 	print bottle.TEMPLATE_PATH
