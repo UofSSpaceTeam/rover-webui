@@ -81,6 +81,7 @@
                     <p><label>RPM's:</label><input type="text" id="RPM"></p>
                     <p><label>Speed:</label><input type="text" id="Speed"></p>
                     <button type="button" onclick="Test();">Click Me!</button>
+					<button onclick="addMarker()">add maker</button>
                 </div>
         </div>
 
