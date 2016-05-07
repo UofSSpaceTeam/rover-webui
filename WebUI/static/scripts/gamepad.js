@@ -57,15 +57,18 @@ function GamePad(){
       html+= "Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]+"<br/>";
     }
 
-    $("#gamepadDisplay").html(html);
-	
-	$.ajax({
-		url: "/testSend",
-		type: "POST",
-		data: JSON.stringify({"axes" : gp.axes}),
-		contentType: "application/json";
+        $("#gamepadDisplay").html(html);
+        var data = new XMLHttpRequest();
+        
+        $.ajax({
+            url: 'localhost:8000',
+            success: function(){
 
-	});
+            },
+            error: function(){
+              console.log("Failure");
+            }
+          });
 
 
    
