@@ -4,6 +4,8 @@ var roverMarker
 //allows manually added makes to be drawn onto the map
 var drawnItems
 
+var Points = [];
+
 
 //sends all marker coordinates to rover 
 function sendMarkers(list) {

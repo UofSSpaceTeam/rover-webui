@@ -5,11 +5,13 @@ function GamePad(){
   var hasGP = false;
   var repGP;
 
+  var SendData = [];
+
   var Test = 0;
   var RoverYPos = 0;
   var RoverXPos = 0;
-  RoverXPos = parseFloat(document.getElementById("XPos").value);
-  RoverYPos = parseFloat(document.getElementById("YPos").value);
+  SendData[0] = parseFloat(document.getElementById("XPos").value);
+  SendData[1] = parseFloat(document.getElementById("YPos").value);
 
   function canGame() {
     return "getGamepads" in navigator;
@@ -32,21 +34,21 @@ function GamePad(){
       
       //Updates Rover Position//
       if(gp.buttons[1].pressed){
-        RoverXPos+=0.001;
-        document.getElementById("XPos").value = RoverXPos;
+        SendData[0]+=0.001;
+        document.getElementById("XPos").value = SendData[0];
 
       }
       else if(gp.buttons[0].pressed){ 
-        RoverYPos-=0.001;
-        document.getElementById("YPos").value = RoverYPos;
+        SendData[1]-=0.001;
+        document.getElementById("YPos").value = SendData[1];
       }
       else if(gp.buttons[3].pressed){ 
-        RoverYPos+=0.001;
-        document.getElementById("YPos").value = RoverYPos;
+        SendData[1]+=0.001;
+        document.getElementById("YPos").value = SendData[1];
       }
       else if(gp.buttons[2].pressed){ 
-        RoverXPos-=0.001;
-        document.getElementById("XPos").value = RoverXPos;
+        SendData[0]-=0.001;
+        document.getElementById("XPos").value = SendData[0];
       }
     }
 
@@ -56,19 +58,6 @@ function GamePad(){
     for(var i=0;i<gp.axes.length; i+=2) {
       html+= "Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]+"<br/>";
     }
-
-        $("#gamepadDisplay").html(html);
-        var data = new XMLHttpRequest();
-        
-        $.ajax({
-            url: 'localhost:8000',
-            success: function(){
-
-            },
-            error: function(){
-              console.log("Failure");
-            }
-          });
 
 
    
@@ -105,12 +94,6 @@ function GamePad(){
     }
 
   });
-}
-
-function Test(){ 
-  alert("Test");
-
-
 }
 
 

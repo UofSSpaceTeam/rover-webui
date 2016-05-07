@@ -80,8 +80,7 @@
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
                     <p><label>RPM's:</label><input type="text" id="RPM"></p>
                     <p><label>Speed:</label><input type="text" id="Speed"></p>
-                    <button onclick="Update()">Update Test</button>
-
+                    <p><label id = "marker_array"></label></p>
                 </div>
         </div>
 
