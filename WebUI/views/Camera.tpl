@@ -13,6 +13,8 @@
         <script src="static/scripts/bootstrap.min.js"></script>
         <!--Liveplayer Script -->
         <script type="text/javascript" src="_main.js">;</script>
+        <!--VLC SCRIPT -->
+        <script type="text/javascript" src="static/scripts/vlc.js"></script>
 
 
 <head>
@@ -26,12 +28,19 @@
 <body>
 
 <div data-role="content">
+    <div class="row">
+        <div class = ".col-md-4">
+            <select>
+              <option value="1">Camera #1</option>
+              <option value="2">Camera #2</option>
+              <option value="3">Camera #3</option>
+            </select>
 
-    <div class="row no-gutter">
-        <div class="container-fluid">
-            <div class = ".col-xs-12 .col-sm-6 .col-md-8"> 
-                <h1> Main Camera</h1>
-                <embed 
+
+
+        </div>
+        <div class = ".col-md-4">
+            <embed
                     type="application/x-vlc-plugin" 
                     pluginspage="http://www.videolan.org" 
                     version="VideoLAN.VLCPlugin.2"
@@ -39,8 +48,7 @@
                     height="480"
                     target="udp://@227.2.2.8:1235";
                     id="vlc">
-                </embed>
-            </div>
+            </embed>
         </div>
     </div>
 </div>

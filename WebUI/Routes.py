@@ -25,7 +25,7 @@ class WebServerRoutes():
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
 		self.instance.route('/favicon.ico', method="GET", callback=self.sendFavicon)
 		
-		# communication
+		# communication - All Data received from rover
 		self.instance.route('/data/<item>', method="POST", callback=self.recvData)
 		self.instance.route('/req/<item>', method="POST", callback=self.sendData)
 		

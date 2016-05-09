@@ -5,13 +5,14 @@ function GamePad(){
   var hasGP = false;
   var repGP;
 
-  var SendData = [];
+  var SendDataButton = [];
+  var SendDataAxes = [];
 
   var Test = 0;
   var RoverYPos = 0;
   var RoverXPos = 0;
-  SendData[0] = parseFloat(document.getElementById("XPos").value);
-  SendData[1] = parseFloat(document.getElementById("YPos").value);
+  SendDataButton[0] = parseFloat(document.getElementById("XPos").value);
+  SendDataButton[1] = parseFloat(document.getElementById("YPos").value);
 
   function canGame() {
     return "getGamepads" in navigator;
@@ -34,21 +35,21 @@ function GamePad(){
       
       //Updates Rover Position//
       if(gp.buttons[1].pressed){
-        SendData[0]+=0.001;
-        document.getElementById("XPos").value = SendData[0];
+        SendDataButton[0]+=0.001;
+        document.getElementById("XPos").value =SendDataButton[0];
 
       }
       else if(gp.buttons[0].pressed){ 
-        SendData[1]-=0.001;
-        document.getElementById("YPos").value = SendData[1];
+        SendDataButton[1]-=0.001;
+        document.getElementById("YPos").value = SendDataButton[1];
       }
       else if(gp.buttons[3].pressed){ 
-        SendData[1]+=0.001;
-        document.getElementById("YPos").value = SendData[1];
+        SendDataButton[1]+=0.001;
+        document.getElementById("YPos").value = SendDataButton[1];
       }
       else if(gp.buttons[2].pressed){ 
-        SendData[0]-=0.001;
-        document.getElementById("XPos").value = SendData[0];
+        SendDataButton[0]-=0.001;
+        document.getElementById("XPos").value = SendDataButton[0];
       }
     }
 
@@ -58,6 +59,24 @@ function GamePad(){
     for(var i=0;i<gp.axes.length; i+=2) {
       html+= "Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]+"<br/>";
     }
+
+    $.ajax({
+            url: "/data/buttons",
+            method: "POST",
+            data: JSON.stringify({"buttons" : SendDataButton}),
+            contentType: "application/json"
+          });
+
+    $.ajax({
+            url: "/req/axes",
+            method: "POST",
+            data: JSON.stringify({"axes" : SendDataAxes}),
+            contentType: "application/json",
+            complete: function(results) {
+                alert("Something happened!" + JSON.stringify(results));
+              }
+
+          });
 
 
    
