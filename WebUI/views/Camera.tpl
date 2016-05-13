@@ -29,15 +29,12 @@
 
 <div data-role="content">
     <div class="row">
-        <div class = ".col-md-4">
+        <div class = ".col-md-4"> 
             <select>
               <option value="1">Camera #1</option>
               <option value="2">Camera #2</option>
               <option value="3">Camera #3</option>
             </select>
-
-
-
         </div>
         <div class = ".col-md-4">
             <embed
