@@ -1,5 +1,8 @@
 function VLC(){ 
-	document.getElementById("vlc").target = "udp://@227.2.2.7:1234"
+	$('#cameras').on('click', function(){
+	    alert($('#datebox').val());
+	});
+	
 	
 
 }

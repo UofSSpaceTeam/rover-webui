@@ -15,6 +15,7 @@
         <script type="text/javascript" src="_main.js">;</script>
         <!--VLC SCRIPT -->
         <script type="text/javascript" src="static/scripts/vlc.js"></script>
+        <script type ="text/javascript" src ="static/scripts/cameraButton.js"></script>
 
 
 <head>
@@ -54,12 +55,18 @@ $(window).load(function(){
                 <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
                       <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                        <li><a id="camera1" >Camera 1</a></li>
-                        <li><a id="camera2" >Camera 2</a></li>
-                        <li><a id="camera3" >Camera 3</a></li>
+                      <ul id ="cameras" class="dropdown-menu">
+                        <li><a id="camera1" value = "udp://@227.2.2.8:1235">Camera 1</a></li>
+                        <li><a id="camera2" value = "udp://@227.2.2.7:1234">Camera 2</a></li>
+                        <li><a id="camera3" value = "udp://@227.2.2.6:1233">Camera 3</a></li>
                       </ul>
                 </div>
+                <button type="button" class="btn btn-default" id ="btnUp" onclick = "cameraButton(1)">Up</button>
+                <button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)">Down</button>
+                <button type="button" class="btn btn-default" id = "btnLeft" onclick = "cameraButton(3)">Left</button>
+                <button type="button" class="btn btn-default" id = "btnRight" onclick = "cameraButton(4)">Right</button>
+                <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5)">Stop</button>
+                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6)">Start</button>
             </div>
         </div>
 </div>
