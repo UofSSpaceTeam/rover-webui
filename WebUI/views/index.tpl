@@ -61,7 +61,7 @@
     </head>
     
 
-<body onload="main();GamePad();">
+<body onload="GamePad();">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>
