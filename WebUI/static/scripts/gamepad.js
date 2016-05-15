@@ -72,7 +72,7 @@ function GamePad(){
           });
 
     $.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"axes" : SendDataAxes}),
             contentType: "application/json",

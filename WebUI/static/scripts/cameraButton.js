@@ -1,7 +1,8 @@
 function cameraButton(x){
 	if(x == 1){ 
+		alert("1");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnUp" : 1}),
             contentType: "application/json",
@@ -13,8 +14,9 @@ function cameraButton(x){
 
 	}
 	if(x == 2){ 
+		alert("2");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnDown" : 1}),
             contentType: "application/json",
@@ -25,8 +27,9 @@ function cameraButton(x){
           });
 	}
 	if(x==3){ 
+		alert("3");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnLeft" : 1}),
             contentType: "application/json",
@@ -37,8 +40,9 @@ function cameraButton(x){
           });
 	}
 	if(x ==4){ 
+		alert("4");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnRight" : 1}),
             contentType: "application/json",
@@ -51,8 +55,9 @@ function cameraButton(x){
 
 	}
 	if(x ==5){ 
+		alert("5");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnStop" : 1}),
             contentType: "application/json",
@@ -67,8 +72,9 @@ function cameraButton(x){
 
 	}
 	if(x==6){ 
+		alert("6");
 		$.ajax({
-            url: "/req/axes",
+            url: "/data/axes",
             method: "POST",
             data: JSON.stringify({"btnStart" : 1}),
             contentType: "application/json",

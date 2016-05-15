@@ -12,7 +12,7 @@
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
         <!--Liveplayer Script -->
-        <script type="text/javascript" src="_main.js">;</script>
+
         <!--VLC SCRIPT -->
         <script type="text/javascript" src="static/scripts/vlc.js"></script>
         <script type ="text/javascript" src ="static/scripts/cameraButton.js"></script>
