@@ -51,13 +51,17 @@ function GamePad(){
         SendDataButton[0]-=0.001;
         document.getElementById("XPos").value = SendDataButton[0];
       }
+
     }
 
+      SendDataAxes[0] = gp.axes[0];
+      document.getElementById("Stick1X").value = SendDataAxes[0];
+      SendDataAxes[1] = gp.axes[1];
+      document.getElementById("Stick1Y").value = SendDataAxes[1];
 
 
-
+    //Loops through Axis values 
     for(var i=0;i<gp.axes.length; i+=2) {
-      html+= "Stick "+(Math.ceil(i/2)+1)+": "+gp.axes[i]+","+gp.axes[i+1]+"<br/>";
     }
 
     $.ajax({
@@ -73,7 +77,7 @@ function GamePad(){
             data: JSON.stringify({"axes" : SendDataAxes}),
             contentType: "application/json",
             complete: function(results) {
-                alert("Something happened!" + JSON.stringify(results));
+                console.log("Success");
               }
 
           });

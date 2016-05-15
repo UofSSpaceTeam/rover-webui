@@ -78,8 +78,8 @@
                 <div class = "col-md-1" align = "left">
                     <p><label>X Position:</label><input type="text" id="XPos"></p>
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
-                    <p><label>RPM's:</label><input type="text" id="RPM"></p>
-                    <p><label>Speed:</label><input type="text" id="Speed"></p>
+                    <p><label>Stick 1 X Axis:</label><input type="text" id="Stick1X"></p>
+                    <p><label>Stick 2 Y Axis:</label><input type="text" id="Stick1Y"></p>
                     <p><label id = "marker_array"></label></p>
                 </div>
         </div>
