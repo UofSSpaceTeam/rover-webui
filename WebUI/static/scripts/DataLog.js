@@ -1,10 +1,7 @@
 datalogArray = [];
-localStorage.setItem("x",5);
 function DataLog(){
-
-	setInterval(function() {
-		var x = Number(localStorage.getItem("x")) + 1;
-		console.log(x)
+		setInterval(function() {
+		console.log()
 		$.ajax({
 		url: "/req/TestData",
 		method: "POST",
@@ -14,9 +11,12 @@ function DataLog(){
 			console.log("Something happened!" + JSON.stringify(results));
 		}
 	});
-		localStorage.x += localStorage.x
 	}, 1000);
 
+}
+
+function InitializeValues(){
+	
 
 
 

@@ -36,7 +36,7 @@ $(window).load(function(){
 });
 </script>
 </head>
-<body onload ="DataLog()">
+<body onload ="">
 
 <div data-role="content">
         <div class="row">
