@@ -54,15 +54,29 @@ function GamePad(){
 
     }
 
-      SendDataAxes[0] = gp.axes[0];
-      document.getElementById("Stick1X").value = SendDataAxes[0];
-      SendDataAxes[1] = gp.axes[1];
-      document.getElementById("Stick1Y").value = SendDataAxes[1];
+      SendDataAxes[0] = gp.axes[0].toFixed(4);
+      SendDataAxes[1] = gp.axes[1].toFixed(4);
+      SendDataAxes[2] = gp.axes[2].toFixed(4);
+      SendDataAxes[3] = gp.axes[3].toFixed(4);
+
 
 
     //Loops through Axis values 
-    for(var i=0;i<gp.axes.length; i+=2) {
+    for(var i=0;i<=3; i+=1) {
+      var deadzone = 0.10;
+      if (0 < SendDataAxes[i] & SendDataAxes[i] < deadzone){
+        SendDataAxes[i] = 0;
+      }
+      else if(0 > SendDataAxes[i] & SendDataAxes[i] > (-1 * deadzone)){ 
+        SendDataAxes[i] = 0;
+      }
+
     }
+
+      document.getElementById("Stick1X").value = SendDataAxes[0];
+      document.getElementById("Stick1Y").value = SendDataAxes[1];
+      document.getElementById("Stick2X").value = SendDataAxes[2];
+      document.getElementById("Stick2Y").value = SendDataAxes[3];
 
     $.ajax({
             url: "/data/buttons",
