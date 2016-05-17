@@ -10,6 +10,7 @@
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
         <script src="/static/scripts/gamepad.js"></script>
+        <script src="/static/scripts/DataLog.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="/home">Navigation</a></li>
@@ -61,7 +62,7 @@
     </head>
     
 
-<body onload="GamePad();">
+<body onload="GamePad();DataLog();">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>

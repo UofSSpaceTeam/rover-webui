@@ -11,6 +11,7 @@
         <link rel ="stylesheet" href="/static/css/NoGutter.css">
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
+        <script src="/static/scripts/DataLog.js"></script>
         <!--Liveplayer Script -->
 
         <!--VLC SCRIPT -->
@@ -35,7 +36,7 @@ $(window).load(function(){
 });
 </script>
 </head>
-<body>
+<body onload ="DataLog()">
 
 <div data-role="content">
         <div class="row">
