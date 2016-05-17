@@ -45,7 +45,10 @@
                     <p><label>X Position:</label><input type="text" id="XPos"></p>
                     <p><label>Y Position:</label><input type="text" id="YPos"></p>
                     <p><label>Stick 1 X Axis:</label><input type="text" id="Stick1X"></p>
-                    <p><label>Stick 2 Y Axis:</label><input type="text" id="Stick1Y"></p>
+                    <p><label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y"></p>
+                    <p><label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X"></p>
+                    <p><label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y"></p>
+                    <p><label id = "marker_array"></label></p>
                 </div>
         </div>
 
