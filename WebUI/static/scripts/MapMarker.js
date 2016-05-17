@@ -1,9 +1,7 @@
-function MapMarker(name, lat, lng, message) {
+function MapMarker(name, lat, lng) {
 	this.name = name;
 	this.lat = lat; 
 	this.lng = lng; 
-	this.message = message; 
-	//TODO: add marker to navMap
 }
 
 MapMarker.prototype.getDist = function(curLat, curLng) {
