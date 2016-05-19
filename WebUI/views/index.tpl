@@ -33,9 +33,26 @@
 <body onload="GamePad();DataLog();">
     <!---Main Div Container-->
     <div class="jumbotron">
+        <script src="/static/scripts/gamepad.js"></script>
 
         <div class="row">
             <!---Navigation Main Div-->
+            <div class="col-md-8">
+                <h1 font size ="20" align = "center">Navigation</h1>
+                <!---Navigation Image and Script Div-->
+                <div id="map" style="width: auto; height:100%; border: 1px solid #ccc"></div>
+            </div>
+            <!---Core Data Main Div-->
+                <h1 font size ="20" align = "center">Core Data</h1>
+                <div class = "col-md-1" align = "left">
+                    <p><label>X Position:</label><input type="text" id="XPos"></p>
+                    <p><label>Y Position:</label><input type="text" id="YPos"></p>
+                    <p><label>Stick 1 X Axis:</label><input type="text" id="Stick1X"></p>
+                    <p><label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y"></p>
+                    <p><label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X"></p>
+                    <p><label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y"></p>
+                    <p><label id = "marker_array"></label></p>
+                </div>
         </div>
 
     </div>

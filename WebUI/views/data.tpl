@@ -26,7 +26,11 @@
 		<script type="text/javascript" src ="static/scripts/navMap.js"></script>
 		<script src="static/libs/leaflet/leaflet-src.js"></script>
 		<link rel="stylesheet" href="/static/libs/leaflet/leaflet.css" />
+    <script>
+        
 
+
+    </script>
     </head>
 
 
@@ -34,7 +38,19 @@
     <div class="jumbotron">
 
         <div class="row">
+          <div class="dropdown">
+                  <div class="col-md-8">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="">Data Select
+                      <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                            <li><a href="#" id = "dropDown1"></a></li>
+                            <li><a href="#" id = "dropDown2"></a></li>
+                            <li><a href="#" id = "dropDown3"></a></li>
+                      </ul>
+                      <input type = "integer" id ="value"></input>
 
+                  </div>
+            </div>
         </div>
 
     </div>
