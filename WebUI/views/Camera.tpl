@@ -25,6 +25,11 @@
                         <li class="active"><a href="/camera">Camera</a></li>
                         <li><a href=192.168.0.30>Video Config</a></li>
                         <li><a href=192.168.0.31>Radio Config</a></li>
+                        <li><a href= "/datapage">Data</a></li>
+                        <li><a href ="/options">Options</a></li>
+                        <li><a href = "/datapage">Data</a></li>
+                        <li><a href ="/options">Options</a></li>
+
                     </ul>
 <script type='text/javascript'>
 $(window).load(function(){
@@ -36,15 +41,15 @@ $(window).load(function(){
 });
 </script>
 </head>
-<body onload ="">
+<body onload ="DataLog()">
 
 <div data-role="content">
         <div class="row">
             <div class = "col-md-8">
                 <embed
-                        type="application/x-vlc-plugin" 
+                        type="application/x-vlc-plugin"
                         pluginspage="http://www.videolan.org"
-                        windowless = "true" 
+                        windowless = "true"
                         version="VideoLAN.VLCPlugin.2"
                         width="100%"
                         height="100%"
@@ -52,7 +57,7 @@ $(window).load(function(){
                         id="vlc">
                 </embed>
             </div>
-            <div class = "col-md-4"> 
+            <div class = "col-md-4">
                 <div class="dropdown">
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
                       <span class="caret"></span></button>

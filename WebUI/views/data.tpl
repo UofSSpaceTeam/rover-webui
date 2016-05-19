@@ -13,11 +13,11 @@
         <script src="/static/scripts/DataLog.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="/home">Navigation</a></li>
+                        <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
                         <li><a href=http://192.168.0.30>Video Config</a></li>
                         <li><a href=http://192.168.0.31>Radio Config</a></li>
-                        <li><a href = "/datapage">Data</a></li>
+                        <li class = "active"><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                     </ul>
                 </div>
@@ -30,12 +30,11 @@
     </head>
 
 
-<body onload="GamePad();DataLog();">
-    <!---Main Div Container-->
+<body onload="DataLog();">
     <div class="jumbotron">
 
         <div class="row">
-            <!---Navigation Main Div-->
+
         </div>
 
     </div>

@@ -13,26 +13,28 @@
         <script src="/static/scripts/DataLog.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="/home">Navigation</a></li>
+                        <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
                         <li><a href=http://192.168.0.30>Video Config</a></li>
                         <li><a href=http://192.168.0.31>Radio Config</a></li>
+                        <li><a href = "/datapage">Data</a></li>
+                        <li class = "active"><a href ="/options">Options</a></li>
                     </ul>
-                </div>  
+                </div>
 
 		<!---Leaflet Scripts, all the aids. -->
 		<script type="text/javascript" src ="static/scripts/navMap.js"></script>
 		<script src="static/libs/leaflet/leaflet-src.js"></script>
 		<link rel="stylesheet" href="/static/libs/leaflet/leaflet.css" />
-    
+
     </head>
-    
+
 
 <body onload="GamePad();DataLog();">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>
-        
+
         <div class="row">
             <!---Navigation Main Div-->
             <div class="col-md-8">
