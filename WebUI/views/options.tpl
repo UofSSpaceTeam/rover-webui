@@ -30,11 +30,22 @@
     </head>
 
 
-<body onload="DataLog();">
+<body onload="DataLog();GamePadDataUpdate()">
     <!---Main Div Container-->
     <div class="jumbotron">
 
-        <div class="row">
+                  <div class="row">
+                      <!---Navigation Main Div-->
+                      <div class="col-md-8">
+                          <h1 font size ="20" align = "center">Options</h1>
+                          <!---Navigation Image and Script Div-->
+                          <center>
+                            <label> Deadzone data: </label><input type = "integer" id ="deadzoneValue"></input>
+                            <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate()">Update Data</button>
+                          </center>
+                      </div>
+                  </div>
+
         </div>
 
     </div>

@@ -30,7 +30,7 @@
     </head>
 
 
-<body onload="GamePad();DataLog();">
+<body onload="GamePad();DataLog();GamePadDataUpdate()">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>

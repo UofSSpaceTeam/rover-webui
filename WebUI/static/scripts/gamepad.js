@@ -32,22 +32,22 @@ function GamePad(){
       html+= "Button "+(i+1)+": ";
       if(gp.buttons[i].pressed) html+= " pressed";
         html+= "<br/>";
-      
+
       //Updates Rover Position//
       if(gp.buttons[1].pressed){
         SendDataButton[0]+=0.001;
         document.getElementById("XPos").value =SendDataButton[0];
 
       }
-      else if(gp.buttons[0].pressed){ 
+      else if(gp.buttons[0].pressed){
         SendDataButton[1]-=0.001;
         document.getElementById("YPos").value = SendDataButton[1];
       }
-      else if(gp.buttons[3].pressed){ 
+      else if(gp.buttons[3].pressed){
         SendDataButton[1]+=0.001;
         document.getElementById("YPos").value = SendDataButton[1];
       }
-      else if(gp.buttons[2].pressed){ 
+      else if(gp.buttons[2].pressed){
         SendDataButton[0]-=0.001;
         document.getElementById("XPos").value = SendDataButton[0];
       }
@@ -61,13 +61,12 @@ function GamePad(){
 
 
 
-    //Loops through Axis values 
+    //Loops through Axis values
     for(var i=0;i<=3; i+=1) {
-      var deadzone = 0.10;
       if (0 < SendDataAxes[i] & SendDataAxes[i] < deadzone){
         SendDataAxes[i] = 0;
       }
-      else if(0 > SendDataAxes[i] & SendDataAxes[i] > (-1 * deadzone)){ 
+      else if(0 > SendDataAxes[i] & SendDataAxes[i] > (-1 * deadzone)){
         SendDataAxes[i] = 0;
       }
 
@@ -97,7 +96,7 @@ function GamePad(){
           });
 
 
-   
+
   }
 
   $(document).ready(function() {
@@ -134,3 +133,10 @@ function GamePad(){
 }
 
 
+function GamePadDataUpdate(){
+  deadzone = 0.10
+
+
+
+
+}

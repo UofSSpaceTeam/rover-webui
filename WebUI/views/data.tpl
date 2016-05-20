@@ -27,7 +27,7 @@
 		<script src="static/libs/leaflet/leaflet-src.js"></script>
 		<link rel="stylesheet" href="/static/libs/leaflet/leaflet.css" />
     <script>
-        
+
 
 
     </script>
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="dropdown">
                   <div class="col-md-8">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="">Data Select
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Data Select
                       <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                             <li><a href="#" id = "dropDown1"></a></li>
