@@ -11,6 +11,8 @@
         <script src="static/scripts/bootstrap.min.js"></script>
         <script src="/static/scripts/gamepad.js"></script>
         <script src="/static/scripts/DataLog.js"></script>
+        <script src="/static/scripts/Chart.js"></script>
+        <script src = "/static/scripts/graphDraw.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
@@ -34,12 +36,16 @@
     </head>
 
 
-<body onload="DataLog();">
+<body onload="DataLog();DrawGraph();">
     <div class="jumbotron">
 
         <div class="row">
-          <div class="dropdown">
-                  <div class="col-md-8">
+                  <div class = "col-md-8">
+                    <canvas id="mycanvas" width="800" height="400" style="width: 800px; height: 400px;"></canvas>
+                  </div>
+
+
+                  <div class="col-md-4">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Data Select
                       <span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -47,7 +53,7 @@
                             <li><a href="#" id = "dropDown2"></a></li>
                             <li><a href="#" id = "dropDown3"></a></li>
                       </ul>
-                      <input type = "integer" id ="value"></input>
+
 
                   </div>
             </div>
