@@ -5,6 +5,8 @@ function GamePad(){
   var hasGP = false;
   var repGP;
 
+  var deadzone = localStorage.getItem("deadzoneLocalStorage");
+
   var SendDataButton = [];
   var SendDataAxes = [];
 
@@ -134,7 +136,10 @@ function GamePad(){
 
 
 function GamePadDataUpdate(){
-  deadzone = 0.10
+
+  localStorage.setItem("deadzoneLocalStorage", document.getElementById("deadzoneValue").value);
+
+
 
 
 

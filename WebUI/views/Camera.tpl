@@ -15,7 +15,6 @@
         <!--Liveplayer Script -->
 
         <!--VLC SCRIPT -->
-        <script type="text/javascript" src="static/scripts/vlc.js"></script>
         <script type ="text/javascript" src ="static/scripts/cameraButton.js"></script>
 
 
@@ -44,6 +43,7 @@ $(window).load(function(){
 <div data-role="content">
         <div class="row">
             <div class = "col-md-8">
+              <h1 align = "center"> Video Stream </h1>
                 <embed
                         type="application/x-vlc-plugin"
                         pluginspage="http://www.videolan.org"
@@ -56,7 +56,9 @@ $(window).load(function(){
                 </embed>
             </div>
             <div class = "col-md-4">
-                <div class="dropdown">
+                <h1 align = "center"> Camera Controls </h1>
+
+               <div class="dropdown"> Camera Selection:
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
                       <span class="caret"></span></button>
                       <ul id ="cameras" class="dropdown-menu">
@@ -65,15 +67,22 @@ $(window).load(function(){
                         <li><a id="camera3" value = "udp://@227.2.2.6:1233">Camera 3</a></li>
                       </ul>
                 </div>
-                <button type="button" class="btn btn-default" id ="btnUp" onclick = "cameraButton(1)">Up</button>
-                <button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)">Down</button>
-                <button type="button" class="btn btn-default" id = "btnLeft" onclick = "cameraButton(3)">Left</button>
-                <button type="button" class="btn btn-default" id = "btnRight" onclick = "cameraButton(4)">Right</button>
-                <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5)">Stop</button>
-                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6)">Start</button>
+                <p> Camera Movement </p>
+                <p align = "center"><button type="button" class="btn btn-default" id ="btnUp" onclick = "cameraButton(1)"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
+                <p align = "center"><button type="button" class="btn btn-default" id = "btnLeft" onclick = "cameraButton(3)"><span class = "glyphicon glyphicon-arrow-left"></span>Left</button>
+                <button type="button" class="btn btn-default" id = "btnRight" onclick = "cameraButton(4)"><span class = "glyphicon glyphicon-arrow-right"></span>Right</button></p>
+                <p align = "center"><button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)"><span class = "glyphicon glyphicon-arrow-down"></span>Down</button></p>
+                <p> Camera buttons: Start/Stop - <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5)"><span class = "glyphicon glyphicon-ok-sign"></span>Start</button>
+                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6)"><span class = "glyphicon glyphicon-remove-sign"></span>Start</button></p>
             </div>
         </div>
 </div>
 
 </body>
 </html>
+
+<script>
+  $('#cameras').on('click', function(){
+      alert(document.getElementById("vlc").);
+  });
+</script>
