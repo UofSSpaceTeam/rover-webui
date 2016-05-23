@@ -1,6 +1,5 @@
 function cameraButton(x){
-	if(x == 1){ 
-		alert("1");
+	if(x == 1){
 		$.ajax({
             url: "/data/axes",
             method: "POST",
@@ -13,8 +12,7 @@ function cameraButton(x){
           });
 
 	}
-	if(x == 2){ 
-		alert("2");
+	if(x == 2){
 		$.ajax({
             url: "/data/axes",
             method: "POST",
@@ -26,8 +24,7 @@ function cameraButton(x){
 
           });
 	}
-	if(x==3){ 
-		alert("3");
+	if(x==3){
 		$.ajax({
             url: "/data/axes",
             method: "POST",
@@ -39,8 +36,7 @@ function cameraButton(x){
 
           });
 	}
-	if(x ==4){ 
-		alert("4");
+	if(x ==4){
 		$.ajax({
             url: "/data/axes",
             method: "POST",
@@ -54,8 +50,7 @@ function cameraButton(x){
 
 
 	}
-	if(x ==5){ 
-		alert("5");
+	if(x ==5){
 		$.ajax({
             url: "/data/axes",
             method: "POST",
@@ -71,8 +66,7 @@ function cameraButton(x){
 
 
 	}
-	if(x==6){ 
-		alert("6");
+	if(x==6){
 		$.ajax({
             url: "/data/axes",
             method: "POST",

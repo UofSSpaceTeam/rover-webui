@@ -46,7 +46,7 @@
 
 
                   <div class="col-md-4">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Data Select
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dataSelect">Data Select
                       <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                             <li><a href="#" id = "dropDown1"></a></li>
@@ -62,3 +62,11 @@
     </div>
 </body>
 </html>
+
+<script>
+$(document).ready(function(){
+              $("#dataSelect").click(function(){
+								document.getElementById("dropDown1").text  = datalogArray[0];
+								});
+        });
+</script>

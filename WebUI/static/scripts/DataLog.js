@@ -14,7 +14,6 @@ function DataLog(){
 			var Value = JSON.stringify(results).substr(49,4);
 			datalogArray[0] = Key;
 			datalogArray[1] = Value;
-			document.getElementById("dropDown1").text  = datalogArray[0];
 		}
 	});
 	}, 1000);
@@ -25,12 +24,3 @@ function ResetData(){
 	localStorage.setItem("Num",1);
 
 }
-
-
-
-
-$(document).ready(function(){
-              $("#dropDown1").click(function(){
-								
-								});
-        });
