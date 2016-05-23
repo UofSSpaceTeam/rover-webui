@@ -30,7 +30,7 @@
     </head>
 
 
-<body onload="DataLog();GamePadDataUpdate()">
+<body onload="DataLog();OptionPageDataUpdate();">
     <!---Main Div Container-->
     <div class="jumbotron">
 
@@ -51,3 +51,10 @@
     </div>
 </body>
 </html>
+
+<script>
+
+
+
+
+</script>

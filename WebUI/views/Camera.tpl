@@ -32,7 +32,7 @@
 $(window).load(function(){
      $(function(){
          $(".dropdown").on("click", "li", function(event){
-            VLC();
+
          })
      })
 });
@@ -82,7 +82,17 @@ $(window).load(function(){
 </html>
 
 <script>
-  $('#cameras').on('click', function(){
-      alert(document.getElementById("vlc").);
+  $('#camera1').on('click', function(){
+      document.getElementById("vlc").target = document.getElementById("camera1").value;
+      alert(document.getElementById("vlc").getAttribute("target"));
+  });
+  $('#camera2').on('click', function(){
+      alert(document.getElementById("camera2").value);
+      document.getElementById("vlc").target = document.getElementById("camera2").value;
+      alert(document.getElementById("vlc").getAttribute("target"));
+  });
+  $('#camera3').on('click', function(){
+      document.getElementById("vlc").target = document.getElementById("camera3").value;
+      alert(document.getElementById("vlc").getAttribute("target"));
   });
 </script>

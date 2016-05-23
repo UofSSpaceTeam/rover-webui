@@ -139,9 +139,10 @@ function GamePadDataUpdate(){
 
   localStorage.setItem("deadzoneLocalStorage", document.getElementById("deadzoneValue").value);
 
+}
 
+function OptionPageDataUpdate(){
 
-
-
+  document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
 
 }
