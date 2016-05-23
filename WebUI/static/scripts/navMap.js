@@ -1,7 +1,6 @@
 //global variables 
 var roverMarker; 
 var mapGroup;
-var mapMarkers;
 var currentMarker; 
 
 function updateRoverPos() {
@@ -20,9 +19,9 @@ function addMarker(){
 	mapGroup.addLayer(marker);
 	
 	marker.on('click', function(e) {
-		//change marker Icon
+		//change old current marker Icon
 		currentMarker = e.target; 
-		//change marker Icon 
+		//change new current marker Icon 
 		displayMakerData(); 
 	}); 
 }
@@ -46,7 +45,8 @@ function getBearing(curLat, curLng) {
 
 function navMap() {
 
-	var map = L.map('map').setView([38.3730379, -110.7140391], 15);
+	//online map
+	/* var map = L.map('map').setView([38.3730379, -110.7140391], 15);
 	mapLink = 
 		'<a href="http://www.esri.com/">Esri</a>';
 	wholink = 
@@ -55,13 +55,40 @@ function navMap() {
 		'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 		attribution: '&copy; '+mapLink+', '+wholink,
 		maxZoom: 18,
-		}).addTo(map);
+		}).addTo(map); */
 		
-	var mapMarkers = {};
+	//offline maps
+	var map = L.map('map', {
+        maxZoom: 20,
+        minZoom: 10,
+        crs: L.CRS.Simple
+    }).setView([38.406441, -110.791933], 18);
+    map.setMaxBounds(new L.LatLngBounds([38,-111], [39,-110]));	
 	
+	//add images to map
+	//bounds are [south-east corner],[north-west corner]
+	var terrainTraversal = '/static/scripts/maps/terraintraversal.jpg'
+    var terrainBounds = [[38.406381,-110.792367], [38.408876,-110.789755]];
+    L.imageOverlay(terrainTraversal, terrainBounds).addTo(map);
+	
+	var science = "/static/scripts/maps/science.jpg"
+	var scienceBounds = [[38.400047,-110.792099], [38.402733,-110.787334]];
+	L.imageOverlay(science, scienceBounds).addTo(map);
+	
+	var assistance = "/static/scripts/maps/assistance.jpg"
+	var assistanceBounds = [[38.417664,-110.788840], [38.421371,-110.781349]];
+	L.imageOverlay(assistance, assistanceBounds).addTo(map);
+	
+	var hotel = "/static/scripts/maps/hotel.jpg"
+	var hotelBounds = [[38.370145,-110.705247], [38.375459,-110.698541]];
+	L.imageOverlay(hotel, hotelBounds).addTo(map);
+	
+
 	mapGroup = new L.FeatureGroup();
 	map.addLayer(mapGroup);
-		
+			
 	//TODO: the initial position should be changed to current position
-	roverMarker = L.marker([38.3730, -110.7140], {title: "Rover"}).addTo(map);
+	roverMarker = L.marker([38.406441, -110.791933], {title: "Rover"}).addTo(map);
+	
+	//repeatly call updateRoverPos, displayMakerData 
 }
