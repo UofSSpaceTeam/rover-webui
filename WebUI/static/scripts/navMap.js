@@ -1,7 +1,10 @@
 //global variables 
 var roverMarker; 
 var mapGroup;
-var currentMarker; 
+var currentMarker;
+var greenIcon;
+var redIcon; 
+var blueIcon;
 
 function updateRoverPos() {
 	//TODO: make sure it is getting values from correct place
@@ -11,25 +14,65 @@ function updateRoverPos() {
 }
 
 function addMarker(){
-	alert(document.getElementById("NewName").value);
 	var marker = L.marker([document.getElementById("NewLat").value,
 		document.getElementById("NewLng").value ], 
-		{title: document.getElementById("NewName").value});
+		{title: document.getElementById("NewName").value,
+		icon: blueIcon});
 		
 	mapGroup.addLayer(marker);
 	
 	marker.on('click', function(e) {
-		//change old current marker Icon
+		if (currentMarker != null) {
+			currentMarker.setIcon(blueIcon);
+			currentMarker.update();
+		}
 		currentMarker = e.target; 
-		//change new current marker Icon 
-		displayMakerData(); 
+		currentMarker.setIcon(greenIcon);
+		displaySelectedMakerData(); 
 	}); 
 }
 
-function displayMakerData() {
+function dropMarker(){
+	var marker = L.marker([document.getElementById("YPos").value,
+		document.getElementById("XPos").value ], 
+		{title: "Dropped Marker"});
+
+	mapGroup.addLayer(marker);
+	
+	marker.on('click', function(e) {
+		if (currentMarker != null) {
+			currentMarker.setIcon(blueIcon);
+			currentMarker.update();
+		}
+		currentMarker = e.target; 
+		currentMarker.setIcon(greenIcon);
+		displaySelectedMakerData(); 
+	}); 
+}
+
+function displaySelectedMakerData() {
 	document.getElementById("CurrName").value = currentMarker.options.title;
 	document.getElementById("CurrLat").value = currentMarker.getLatLng().lat;
 	document.getElementById("CurrLng").value = currentMarker.getLatLng().lng;
+	//distance to
+	//Bearing to
+}
+
+function getDist(curLat, curLng) {
+	//taken from the navigation coordinate class 
+	//mean radius of earth
+	var RE = 6371000;
+	
+	function haversin(theta) {
+		return Math.sin(theta/2)*Math.sin(theta/2);
+	}
+	
+	var lat1 = curLat * Math.PI / 180;
+	var lng1 = curLng * Math.PI / 180;
+	var lat2 = this.lat * Math.PI / 180; 
+	var lng2 = this.lng * Math.PI / 180; 
+	
+	return (2*RE*Math.asin( Math.sqrt( haversin(lat2-lat1) + Math.cos(lat1)*Math.cos(lat2)*haversin(lon2-lon1))));
 }
 
 function getBearing(curLat, curLng) {
@@ -82,13 +125,28 @@ function navMap() {
 	var hotel = "/static/scripts/maps/hotel.jpg"
 	var hotelBounds = [[38.370145,-110.705247], [38.375459,-110.698541]];
 	L.imageOverlay(hotel, hotelBounds).addTo(map);
-	
 
 	mapGroup = new L.FeatureGroup();
-	map.addLayer(mapGroup);
-			
-	//TODO: the initial position should be changed to current position
-	roverMarker = L.marker([38.406441, -110.791933], {title: "Rover"}).addTo(map);
+	map.addLayer(mapGroup);		
 	
-	//repeatly call updateRoverPos, displayMakerData 
+	greenIcon = L.icon({
+		iconUrl: "/static/scripts/images/marker-icon-green.png",
+		iconSize:     [25, 41],
+        iconAnchor:   [12.5, 41]
+	});
+	
+	redIcon = L.icon({
+		iconUrl: "/static/scripts/images/marker-icon-red.png",
+		iconSize:     [25, 41],
+        iconAnchor:   [12.5, 41]
+	});
+	
+	blueIcon = L.icon({
+		iconUrl: "/static/scripts/images/marker-icon-blue.png",
+		iconSize:     [25, 41],
+        iconAnchor:   [12.5, 41]
+	});
+	
+	//TODO: the initial position should be changed to current position
+	roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
 }
