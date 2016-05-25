@@ -46,7 +46,6 @@ $(window).load(function(){
               <h1 align = "center"> Video Stream </h1>
                 <embed
                         type="application/x-vlc-plugin"
-                        pluginspage="http://www.videolan.org"
                         windowless = "true"
                         version="VideoLAN.VLCPlugin.2"
                         width="100%"
@@ -62,9 +61,9 @@ $(window).load(function(){
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
                       <span class="caret"></span></button>
                       <ul id ="cameras" class="dropdown-menu">
-                        <li><a id="camera1" value = "udp://@227.2.2.8:1235">Camera 1</a></li>
-                        <li><a id="camera2" value = "udp://@227.2.2.7:1234">Camera 2</a></li>
-                        <li><a id="camera3" value = "udp://@227.2.2.6:1233">Camera 3</a></li>
+                        <li id ="camera1"><a>Camera 1</a></li>
+                        <li id="camera2"><a>Camera 2</a></li>
+                        <li id="camera3"><a>Camera 3</a></li>
                       </ul>
                 </div>
                 <p> Camera Movement </p>
@@ -83,16 +82,15 @@ $(window).load(function(){
 
 <script>
   $('#camera1').on('click', function(){
-      document.getElementById("vlc").target = document.getElementById("camera1").value;
+      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.8:1235");
       alert(document.getElementById("vlc").getAttribute("target"));
   });
   $('#camera2').on('click', function(){
-      alert(document.getElementById("camera2").value);
-      document.getElementById("vlc").target = document.getElementById("camera2").value;
+      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.7:1234");
       alert(document.getElementById("vlc").getAttribute("target"));
   });
   $('#camera3').on('click', function(){
-      document.getElementById("vlc").target = document.getElementById("camera3").value;
+      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.6:1233");
       alert(document.getElementById("vlc").getAttribute("target"));
   });
 </script>
