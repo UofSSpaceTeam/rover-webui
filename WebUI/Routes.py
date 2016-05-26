@@ -23,6 +23,7 @@ class WebServerRoutes():
 		self.instance.route('/datapage', method="GET", callback=self.datapage)
 		self.instance.route('/options', method="GET", callback=self.options)
 
+
 		# static files (TBH I have no idea how this works.. but it does!)
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
 		self.instance.route('/favicon.ico', method="GET", callback=self.sendFavicon)
@@ -50,7 +51,7 @@ class WebServerRoutes():
 		return template('options')
 
 	def datapage(self):
-		return template('data')
+		return template('datapage')
 
 	# Static Routes for CSS/Images etc
 	def sendStatic(self, filename):

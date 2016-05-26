@@ -19,6 +19,7 @@
                         <li><a href=http://192.168.0.31>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li class = "active"><a href ="/options">Options</a></li>
+                        <li><a href ="/armpage">Arm</a></li>
                     </ul>
                 </div>
 

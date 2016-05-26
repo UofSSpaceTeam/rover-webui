@@ -44,18 +44,21 @@ $(window).load(function(){
         <div class="row">
             <div class = "col-md-8">
               <h1 align = "center"> Video Stream </h1>
-                <embed
-                        type="application/x-vlc-plugin"
-                        windowless = "true"
-                        version="VideoLAN.VLCPlugin.2"
-                        width="100%"
-                        height="100%"
-                        target="udp://@227.2.2.8:1235";
-                        id="vlc">
-                </embed>
+              <embed type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"
+                  width=100%
+                  height=100%
+                  id="vlc"
+              </embed>
+              <script>
+
+              var vlc = document.getElementById("vlc");
+              vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream", ":network-caching=100");
+              vlc.playlist.play();
+              </script>
             </div>
             <div class = "col-md-4">
                 <h1 align = "center"> Camera Controls </h1>
+
 
                <div class="dropdown"> Camera Selection:
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
@@ -76,21 +79,5 @@ $(window).load(function(){
             </div>
         </div>
 </div>
-
 </body>
 </html>
-
-<script>
-  $('#camera1').on('click', function(){
-      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.8:1235");
-      alert(document.getElementById("vlc").getAttribute("target"));
-  });
-  $('#camera2').on('click', function(){
-      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.7:1234");
-      alert(document.getElementById("vlc").getAttribute("target"));
-  });
-  $('#camera3').on('click', function(){
-      document.getElementById("vlc").setAttribute("target", "udp://@227.2.2.6:1233");
-      alert(document.getElementById("vlc").getAttribute("target"));
-  });
-</script>
