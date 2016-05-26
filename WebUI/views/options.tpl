@@ -33,16 +33,37 @@
 <body onload="DataLog();OptionPageDataUpdate();">
     <!---Main Div Container-->
     <div class="jumbotron">
+      <h1 font size ="20" align = "center">Options</h1>
 
                   <div class="row">
                       <!---Navigation Main Div-->
-                      <div class="col-md-8">
-                          <h1 font size ="20" align = "center">Options</h1>
+                      <div class="col-md-4">
+                        <p font size ="12">Motor Options</p>
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "motorControl">Motor Select
+                          <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                <li><a href="#" id = "motorOne">Speed</a></li>
+                                <li><a href="#" id = "motorTwo">Torque</a></li>
+                                <li><a href="#" id = "motorThree">Current</a></li>
+                          </ul><br>
+
+
+
+                      </div>
+                      <div class="col-md-4">
                           <!---Navigation Image and Script Div-->
-                          <center>
-                            <label> Deadzone data: </label><input type = "integer" id ="deadzoneValue"></input>
-                            <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate()">Update Data</button>
-                          </center>
+
+                            <p font size ="12" >Gamepad Options</p>
+                            <label> Deadzone data: </label><input type = "integer" id ="deadzoneValue"></input><br>
+                            <label> Controller Switch: </label>
+                            <input type="radio" name="controller" value="1">Controller #1
+                            <input type="radio" name="controller" value="2">Controller #2<br>
+
+                      </div>
+                      <div class = "col-md-4">
+                        <p font size ="12" >Other Options</p>
+                        <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate()">Update Data</button>
+                        <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "ResetData()">Reset Data</button>
                       </div>
                   </div>
 

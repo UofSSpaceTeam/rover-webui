@@ -19,9 +19,9 @@
                           <li><a href="/gamepadoptions">Gamepad Options</a></li>
                       </ul>
                     </ul>
-                </div>  
+                </div>
 </head>
-<body onload="GamePad();">
+<body onload="GamePad();Datalog();">
 <div align ="center" class="container">
     <div align ="center" class="jumbotron">
             <h1>Gamepad</h1>

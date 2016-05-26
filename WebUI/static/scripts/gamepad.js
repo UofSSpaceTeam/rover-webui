@@ -79,10 +79,11 @@ function GamePad(){
       document.getElementById("Stick2X").value = SendDataAxes[2];
       document.getElementById("Stick2Y").value = SendDataAxes[3];
 
+
     $.ajax({
             url: "/data/buttons",
             method: "POST",
-            data: JSON.stringify({"buttons" : SendDataButton}),
+            data: JSON.stringify({"buttons" : SendDataButSton}),
             contentType: "application/json"
           });
 
@@ -144,5 +145,7 @@ function GamePadDataUpdate(){
 function OptionPageDataUpdate(){
 
   document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
+
+
 
 }
