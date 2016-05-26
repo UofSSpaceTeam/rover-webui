@@ -30,7 +30,7 @@
     </head>
 
 
-<body onload="GamePad();DataLog()">
+<body onload="GamePad();DataLog();navMap();">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>
@@ -43,18 +43,30 @@
                 <div id="map" style="width: auto; height:100%; border: 1px solid #ccc"></div>
             </div>
             <!---Core Data Main Div-->
-                <h1 font size ="20" align = "center">Core Data</h1>
-                <div class = "col-md-1" align = "left">
-                    <p><label>X Position:</label><input type="text" id="XPos"></p>
-                    <p><label>Y Position:</label><input type="text" id="YPos"></p>
-                    <p><label>Stick 1 X Axis:</label><input type="text" id="Stick1X"></p>
-                    <p><label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y"></p>
-                    <p><label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X"></p>
-                    <p><label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y"></p>
-                    <p><label id = "marker_array"></label></p>
-                </div>
+			<h1 font size ="20" align = "center">Core Data</h1>
+			<div class = "col-md-1" align = "left">
+				<h4>Rover Data:</h4>
+				<label>X Position:</label><input type="text" id="XPos">
+				<label>Y Position:</label><input type="text" id="YPos">
+				<label>Stick 1 X Axis:</label><input type="text" id="Stick1X">
+				<label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y">
+				<label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X">
+				<label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y">
+				
+				<h4>Selected Marker:</h4>
+				<label>Name:</label><input type="text" id="SelName">
+				<label>Lat:</label><input type = "number" step= "any" id = "SelLat">
+				<label>Lng:</label><input type = "number" step= "any" id ="SelLng">
+				<label>Distance To(M):</label><input type = "number" step= .1 id ="SelDist">
+				<label>Bearing To:</label><input type = "number" step= .1 id ="SelBearing">
+				
+				<h4>New Marker</h4>
+				<label>Name: </label><input type="text" id="NewName">
+				<label>Lat: </label><input type = "number" step= "any" id = "NewLat">
+				<label>Lng: </label><input type = "number" step= "any" id ="NewLng">
+				<input id="add marker" type="button" value="add marker" onclick="addMarker();"/>
+			</div>
         </div>
-
     </div>
 </body>
 </html>

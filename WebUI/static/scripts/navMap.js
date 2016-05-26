@@ -1,7 +1,7 @@
 //global variables 
 var roverMarker; 
 var mapGroup;
-var currentMarker;
+var selectedMarker;
 var greenIcon;
 var redIcon; 
 var blueIcon;
@@ -22,12 +22,12 @@ function addMarker(){
 	mapGroup.addLayer(marker);
 	
 	marker.on('click', function(e) {
-		if (currentMarker != null) {
-			currentMarker.setIcon(blueIcon);
-			currentMarker.update();
+		if (selectedMarker != null) {
+			selectedMarker.setIcon(blueIcon);
+			selectedMarker.update();
 		}
-		currentMarker = e.target; 
-		currentMarker.setIcon(greenIcon);
+		selectedMarker = e.target; 
+		selectedMarker.setIcon(greenIcon);
 		displaySelectedMakerData(); 
 	}); 
 }
@@ -40,25 +40,25 @@ function dropMarker(){
 	mapGroup.addLayer(marker);
 	
 	marker.on('click', function(e) {
-		if (currentMarker != null) {
-			currentMarker.setIcon(blueIcon);
-			currentMarker.update();
+		if (selectedMarker != null) {
+			selectedMarker.setIcon(blueIcon);
+			selectedMarker.update();
 		}
-		currentMarker = e.target; 
-		currentMarker.setIcon(greenIcon);
+		selectedMarker = e.target; 
+		selectedMarker.setIcon(greenIcon);
 		displaySelectedMakerData(); 
 	}); 
 }
 
 function displaySelectedMakerData() {
-	document.getElementById("CurrName").value = currentMarker.options.title;
-	document.getElementById("CurrLat").value = currentMarker.getLatLng().lat;
-	document.getElementById("CurrLng").value = currentMarker.getLatLng().lng;
-	//distance to
-	//Bearing to
+	document.getElementById("SelName").value = selectedMarker.options.title;
+	document.getElementById("SelLat").value = selectedMarker.getLatLng().lat;
+	document.getElementById("SelLng").value = selectedMarker.getLatLng().lng;
+	document.getElementById("SelDist").value = roverMarker.getLatLng().distanceTo(selectedMarker.getLatLng()).toFixed(1)
+	document.getElementById("SelBearing").value = getBearingToSelected(roverMarker.getLatLng().lat, roverMarker.getLatLng().lng).toFixed(1)
 }
 
-function getDist(curLat, curLng) {
+function getDistToSelected(Lat, Lng) {
 	//taken from the navigation coordinate class 
 	//mean radius of earth
 	var RE = 6371000;
@@ -67,22 +67,22 @@ function getDist(curLat, curLng) {
 		return Math.sin(theta/2)*Math.sin(theta/2);
 	}
 	
-	var lat1 = curLat * Math.PI / 180;
-	var lng1 = curLng * Math.PI / 180;
-	var lat2 = this.lat * Math.PI / 180; 
-	var lng2 = this.lng * Math.PI / 180; 
+	var lat1 = Lat * Math.PI / 180;
+	var lng1 = Lng * Math.PI / 180;
+	var lat2 = selectedMarker.getLatLng().lat * Math.PI / 180; 
+	var lng2 = selectedMarker.getLatLng().lng / 180; 
 	
-	return (2*RE*Math.asin( Math.sqrt( haversin(lat2-lat1) + Math.cos(lat1)*Math.cos(lat2)*haversin(lon2-lon1))));
+	return (2*RE*Math.asin( Math.sqrt( haversin(lat2-lat1) + Math.cos(lat1)*Math.cos(lat2)*haversin(lng2-lng1))));
 }
 
-function getBearing(curLat, curLng) {
+function getBearingToSelected(Lat, Lng) {
 	//taken from the navigation coordinate class
-	var lat1 = curLat * Math.PI / 180;
-	var lng1 = curLng * Math.PI / 180;
-	var lat2 = currentMarker.getLatLng().lat * Math.PI / 180; 
-	var lng2 = currentMarker.getLatLng().lng * Math.PI / 180;
+	var lat1 = Lat * Math.PI / 180;
+	var lng1 = Lng * Math.PI / 180;
+	var lat2 = selectedMarker.getLatLng().lat * Math.PI / 180; 
+	var lng2 = selectedMarker.getLatLng().lng * Math.PI / 180;
 	
-	var bearing = (Math.atan2(Math.sin(lon2-lon1)*Math.cos(lat2), Math.cos(lat1)*Math.sin(lat2) -Math.sin(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1)));
+	var bearing = (Math.atan2(Math.sin(lng2-lng1)*Math.cos(lat2), Math.cos(lat1)*Math.sin(lat2) -Math.sin(lat1)*Math.cos(lat2)*Math.cos(lng2-lng1)));
 	return (bearing % (2*Math.PI)) * 180 / Math.PI; 
 }
 
@@ -149,4 +149,10 @@ function navMap() {
 	
 	//TODO: the initial position should be changed to current position
 	roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
+	
+	
+ /* 	var updateMap = setInterval(function() {
+		updateRoverPos();
+		displaySelectedMakerData(); 
+      }, 1000);  */
 }
