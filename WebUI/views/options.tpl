@@ -62,7 +62,7 @@
                       </div>
                       <div class = "col-md-4">
                         <p font size ="12" >Other Options</p>
-                        <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate()">Update Data</button>
+                        <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate();GamePad()">Update Data</button>
                         <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "ResetData()">Reset Data</button>
                       </div>
                   </div>
