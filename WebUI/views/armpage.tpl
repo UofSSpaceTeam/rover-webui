@@ -15,8 +15,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=http://192.168.0.30>Video Config</a></li>
-                        <li><a href=http://192.168.0.31>Radio Config</a></li>
+                        <li><a href=3.3.3.4>Video Config</a></li>
+                        <li><a href=3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li class = "active"><a href = "/armpage">Arm</a></li>
@@ -31,9 +31,16 @@
     </head>
 
 
-<body onload="DataLog();OptionPageDataUpdate();">
+<body onload="Gamepad()">
     <!---Main Div Container-->
     <div class="jumbotron">
+      <div class = ".col-md-8">
+        <h1> Arm Position</h1>
+        <canvas id="armCanvas" width=400 height=400>
+
+
+        </canvas>
+      </div>
 
 
     </div>
@@ -41,6 +48,31 @@
 </html>
 
 <script>
+setInterval(function() {
+
+  ArmPostion = [];
+
+  $.ajax({
+        url: "/req/Arm",
+        method: "POST",
+        data: JSON.stringify({"ArmPosition" : ArmPostion}),
+        contentType: "application/json",
+        complete: function(results) {
+
+
+  }
+});
+
+  var c = document.getElementById("armCanvas");
+  var ctx = c.getContext("2d");
+  ctx.beginPath();
+  ctx.moveTo(0,200);
+  ctx.lineTo(100, 100);
+  ctx.lineTo(350, 200);
+  ctx.stroke();
+
+}, 1000);
+
 
 
 

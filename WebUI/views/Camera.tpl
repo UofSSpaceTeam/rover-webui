@@ -22,10 +22,11 @@
     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li class="active"><a href="/camera">Camera</a></li>
-                        <li><a href=192.168.0.30>Video Config</a></li>
-                        <li><a href=192.168.0.31>Radio Config</a></li>
+                        <li><a href=3.3.3.4>Video Config</a></li>
+                        <li><a href=3.3.3.5>Radio Config</a></li>
                         <li><a href= "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
+                        <li><a href = "/armpage">Arm</a></li>
 
                     </ul>
 <script type='text/javascript'>
@@ -50,10 +51,6 @@ $(window).load(function(){
                   id="vlc"
               </embed>
               <script>
-
-              var vlc = document.getElementById("vlc");
-              vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream", ":network-caching=100");
-              vlc.playlist.play();
               </script>
             </div>
             <div class = "col-md-4">
@@ -67,6 +64,7 @@ $(window).load(function(){
                         <li id ="camera1"><a>Camera 1</a></li>
                         <li id="camera2"><a>Camera 2</a></li>
                         <li id="camera3"><a>Camera 3</a></li>
+                        <li id="3dCamera"><a>3D Camera </a></li>
                       </ul>
                 </div>
                 <p> Camera Movement </p>
@@ -74,10 +72,37 @@ $(window).load(function(){
                 <p align = "center"><button type="button" class="btn btn-default" id = "btnLeft" onclick = "cameraButton(3)"><span class = "glyphicon glyphicon-arrow-left"></span>Left</button>
                 <button type="button" class="btn btn-default" id = "btnRight" onclick = "cameraButton(4)"><span class = "glyphicon glyphicon-arrow-right"></span>Right</button></p>
                 <p align = "center"><button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)"><span class = "glyphicon glyphicon-arrow-down"></span>Down</button></p>
-                <p> Camera buttons: Start/Stop - <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5)"><span class = "glyphicon glyphicon-ok-sign"></span>Start</button>
-                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6)"><span class = "glyphicon glyphicon-remove-sign"></span>Start</button></p>
+                <p> Camera buttons: Start/Stop - <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5);PlayButton();"><span class = "glyphicon glyphicon-ok-sign"></span>Start</button>
+                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6);StopButton();"><span class = "glyphicon glyphicon-remove-sign"></span>Start</button></p>
             </div>
         </div>
 </div>
+
+<script>
+  var vlc = document.getElementById("vlc");
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream", ":network-caching=100");
+  $('#camera1').on('click', function(){
+    alert("1");
+
+  });
+  $('#camera2').on('click', function(){
+    alert("2");
+
+  });
+  $('#camera3').on('click', function(){
+    alert("3");
+  });
+
+  function PlayButton(){
+    vlc.playlist.play()
+
+  }
+
+  function StopButton(){
+    vlc.playlist.stop();
+
+
+  }
+</script>
 </body>
 </html>

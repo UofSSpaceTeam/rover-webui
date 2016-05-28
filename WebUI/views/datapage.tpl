@@ -17,10 +17,11 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=http://192.168.0.30>Video Config</a></li>
-                        <li><a href=http://192.168.0.31>Radio Config</a></li>
+                        <li><a href=3.3.3.4>Video Config</a></li>
+                        <li><a href=3.3.3.5>Radio Config</a></li>
                         <li class = "active"><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
+                        <li><a href = "/armpage">Arm</a></li>
                     </ul>
                 </div>
 
@@ -41,11 +42,13 @@
 
         <div class="row">
                   <div class = "col-md-8">
+                      <h1> Graph </h1>
                     <canvas id="mycanvas" width="800" height="400" style="width: 800px; height: 400px;"></canvas>
                   </div>
 
 
                   <div class="col-md-4">
+                    <h1> Data Select </h1>
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dataSelect">Data Select
                       <span class="caret"></span></button>
                             <ul class="dropdown-menu">

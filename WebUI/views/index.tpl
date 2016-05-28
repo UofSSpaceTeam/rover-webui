@@ -15,10 +15,11 @@
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=http://192.168.0.30>Video Config</a></li>
-                        <li><a href=http://192.168.0.31>Radio Config</a></li>
+                        <li><a href=3.3.3.4>Video Config</a></li>
+                        <li><a href=3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
+                        <li><a href = "/armpage">Arm</a></li>
                     </ul>
                 </div>
 
@@ -52,14 +53,14 @@
 				<label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y">
 				<label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X">
 				<label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y">
-				
+
 				<h4>Selected Marker:</h4>
 				<label>Name:</label><input type="text" id="SelName">
 				<label>Lat:</label><input type = "number" step= "any" id = "SelLat">
 				<label>Lng:</label><input type = "number" step= "any" id ="SelLng">
 				<label>Distance To(M):</label><input type = "number" step= .1 id ="SelDist">
 				<label>Bearing To:</label><input type = "number" step= .1 id ="SelBearing">
-				
+
 				<h4>New Marker</h4>
 				<label>Name: </label><input type="text" id="NewName">
 				<label>Lat: </label><input type = "number" step= "any" id = "NewLat">

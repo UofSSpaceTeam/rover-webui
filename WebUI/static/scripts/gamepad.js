@@ -5,6 +5,8 @@ function GamePad(){
   var hasGP = false;
   var repGP;
 
+  //All Local Values Set here
+  var controllerOption = localStorage.getItem("controllerOption")
   var deadzone = localStorage.getItem("deadzoneLocalStorage");
 
   var SendDataButton = [];
@@ -83,8 +85,11 @@ function GamePad(){
     $.ajax({
             url: "/data/buttons",
             method: "POST",
-            data: JSON.stringify({"buttons" : SendDataButSton}),
-            contentType: "application/json"
+            data: JSON.stringify({"buttons" : SendDataButton}),
+            contentType: "application/json",
+            complete: function(results) {
+                console.log("Buttons Sent");
+              }
           });
 
     $.ajax({
@@ -93,14 +98,23 @@ function GamePad(){
             data: JSON.stringify({"axes" : SendDataAxes}),
             contentType: "application/json",
             complete: function(results) {
-                console.log("Success");
+                console.log("Axes Sent");
               }
 
           });
 
+    $.ajax({
+            url: "/data/controller",
+            method: "POST",
+            data: JSON.stringify({"Controller" : controllerOption}),
+            contentType: "application/json",
+            complete: function(results) {
+              console.log("Controller Sent");
+            }
 
+        });
 
-  }
+    }
 
   $(document).ready(function() {
 
@@ -145,7 +159,5 @@ function GamePadDataUpdate(){
 function OptionPageDataUpdate(){
 
   document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
-
-
 
 }
