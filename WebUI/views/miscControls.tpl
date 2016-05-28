@@ -36,6 +36,16 @@
     <!---Main Div Container-->
     <div class="jumbotron">
       <div class = "col-md-8">
+        <h1>Drill Controls</h1>
+        <p>Drill Speed <input type = "textbox"></input></p>
+        <p>Drill Movement Up: <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
+        <p>Drill Movement Down:<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span>Down</button></p>
+        <button type="button" class="btn btn-default">LED #1</button>
+        <button type="button" class="btn btn-default">LED #2</button>
+        <button type="button" class="btn btn-default">LED #3</button>
+        <button type="button" class="btn btn-default">LED #4</button>
+        <button type="button" class="btn btn-default">LED #5</button>
+        <p>Drill Weight <input type = "textbox"></input></p>
       </div>
 
 
@@ -44,5 +54,19 @@
 </html>
 
 <script>
+
+miscArray = []
+
+$.ajax({
+      url: "/req/miscControls",
+      method: "POST",
+      data: JSON.stringify({"miscControls" : miscArray}),
+      contentType: "application/json",
+      complete: function(results) {
+        console.log("Misc info found")
+
+
+}
+});
 
 </script>

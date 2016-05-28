@@ -17,9 +17,8 @@ function DataLog(){
 
 								var Key = JSON.stringify(results).substr(35, 8);
 								var Value = JSON.stringify(results).substr(49,4);
-								datalogArray[0] = Key;
-								datalogArray[1] = Value;
 
+								localStorage.setItem("dataPoints",datalogArray)
 								localStorage.setItem("gpsCords",gpsCords);
 
 

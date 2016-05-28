@@ -1,9 +1,10 @@
 function DrawGraph(){
+    var labelsArray = localStorage.getItem("dataPoints");
     var chrt = document.getElementById("mycanvas").getContext("2d");
     var myarr = [65, 59, 80, 81, 56, 55, 40,100];
     var xaxis = ["January", "February", "March", "April", "May", "June", "July", "August"];
     var data = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: labelsArray ,
     datasets: [
         {
             label: "My First dataset",
