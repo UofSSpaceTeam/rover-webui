@@ -40,8 +40,6 @@ class WebServerRoutes():
 		return template('index')
 
 	def gamepad(self):
-		if self.parent is not None:
-			self.parent.setShared("WebserverTest", "hello from routes!")
 		return template('gamepad')
 
 	def camera(self):
@@ -124,11 +122,11 @@ class WebServerRoutes():
 		if self.parent is not None:
 			with self.dataSem:
 				try:
-					jsonData = json.dumps(self.parent.data[item])
-					print jsonData
+					jsonData = json.dumps(self.parent.data.pop(item))
 					return jsonData
+				except KeyError:
+					print "Err: requested key", str(item), "not found!"
 				except:
-					print "error something broke"
 					raise		
 
 		else:

@@ -55,19 +55,46 @@
 				<label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y">
 				<label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X">
 				<label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y">
-
+				<br>
+				
 				<h4>Selected Marker:</h4>
 				<label>Name:</label><input type="text" id="SelName">
 				<label>Lat:</label><input type = "number" step= "any" id = "SelLat">
 				<label>Lng:</label><input type = "number" step= "any" id ="SelLng">
 				<label>Distance To(M):</label><input type = "number" step= .1 id ="SelDist">
 				<label>Bearing To:</label><input type = "number" step= .1 id ="SelBearing">
+				<input id="removemarker" type="button" value="remove marker" onclick="removeSelected();"/>														
+				<br>
 
 				<h4>New Marker</h4>
 				<label>Name: </label><input type="text" id="NewName">
 				<label>Lat: </label><input type = "number" step= "any" id = "NewLat">
 				<label>Lng: </label><input type = "number" step= "any" id ="NewLng">
-				<input id="add marker" type="button" value="add marker" onclick="addMarker();"/>
+				<input id="addmarker" type="button" value="add marker" onclick="newMarker(document.getElementById('NewName').value,
+																							document.getElementById('NewLat').value,
+																							document.getElementById('NewLng').value);
+																				saveMarker(document.getElementById('NewName').value,
+																							document.getElementById('NewLat').value,
+																							document.getElementById('NewLng').value)"/>
+																							
+				<input id="dropmarker" type="button" value="drop marker" onclick="dropMarker(document.getElementById('NewName').value);"/>														
+				<br>
+
+				<h4>DMS To Decimal Degree</h4>
+				<label>Degree </label><input type = "number" step= "any" id = "deg">
+				<label>'</label><input type = "number" step= "any" id ="min">
+				<label>''</label><input type = "number" step= "any" id = "sec">
+				<input id="decimalDegree" type="button" value="to decimal Degree" onclick="DMSToDD(document.getElementById('deg').value,
+																						document.getElementById('min').value,
+																						document.getElementById('sec').value);"/>
+				<label>Decimal Degree</label><input type = "number" step= "any" id = "decimalDegree">
+				<br>
+
+				<textarea rows="5" cols="25" id = "markerDisplay"></textarea>
+				<input id="importMarker" type="button" value="import markers" onclick="getMultiMarkers(document.getElementById('markerDisplay').value);"/>													
+				<input id="printMarker" type="button" value="print markers" onclick="printMarkers()"/>														
+
+
 			</div>
         </div>
     </div>
