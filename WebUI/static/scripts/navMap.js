@@ -18,6 +18,7 @@ function updateRoverPos() {
 }
 
 function newMarker(name, lat, lng) {
+
 	var marker = L.marker([lat,lng], 
 						{title: name,
 						icon: blueIcon});
@@ -46,17 +47,17 @@ function newMarker(name, lat, lng) {
 }
 */
 
-function dropMarker(){
+function dropMarker(name){
 
 	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
 	if (gpsCords[0] != null && gpsCords[1] != null) {
-		newMarker("Dropped Marker",
+		newMarker(name,
 				gpsCords[0],
 				gpsCords[1]);
 				
 		saveMarker("Dropped Marker",
-				document.getElementById("YPos").value,
-				document.getElementById("XPos").value);
+			document.getElementById("YPos").value,
+			document.getElementById("XPos").value);
 	}
 } 
 
@@ -104,11 +105,36 @@ function readMarkers(markerArray){
 }
 
 function saveMarker(name, lat, lng) {
-	var markerInfo = { "name": name, "lat": lat, "lng": lng};
-	markers.push(markerInfo);
-	
-	localStorage.setItem("markers",JSON.stringify(markers));
+	var index = markers.indexOf(markers.find(x=> x.name === name));
+	if(index == -1) {
+		var markerInfo = { "name": name, "lat": lat, "lng": lng};
+		markers.push(markerInfo);
+		localStorage.setItem("markers",JSON.stringify(markers));
+	}
 }
+
+function getMultiMarkers(multiMarkers){
+	for( var marker of multiMarkers.split("\n")){
+			var markerInfo = marker.split(",");
+			var index = markers.indexOf(markers.find(x=> x.name === markerInfo[0]));
+			if(index == -1) {
+				newMarker(markerInfo[0], markerInfo[1],markerInfo[2]);
+				saveMarker(markerInfo[0], markerInfo[1],markerInfo[2]);
+			}
+	}
+}
+
+function printMarkers(){
+	var str = ""; 
+	for (i = 0; i < markers.length; i++){
+		str += markers[i]["name"] + "," +
+				markers[i]["lat"] + "," +
+				markers[i]["lng"] + "\n";	
+	}
+	
+	document.getElementById("markerDisplay").value = str; 
+}
+
 
 function DMSToDD(degree, min, sec) {
 	var DD = Number(degree) + Number(min / 60) + Number(sec / 3600) ; 
@@ -116,6 +142,15 @@ function DMSToDD(degree, min, sec) {
 }
 
 function navMap() {
+
+	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
+	if (gpsCords[0] != null && gpsCords[1] != null) {
+		var startLocation = [gpsCords[0], gpsCords[1]];
+	}
+	else{
+		//default starting area
+		var startLocation = [38.406441, -110.791933];
+	}
 
 	//online map
 	/* var map = L.map('map').setView([38.3730379, -110.7140391], 15);
@@ -134,7 +169,7 @@ function navMap() {
         maxZoom: 20,
         minZoom: 10,
         crs: L.CRS.Simple
-    }).setView([38.406441, -110.791933], 18);
+    }).setView(startLocation, 18);
     map.setMaxBounds(new L.LatLngBounds([38,-111], [39,-110]));	
 	
 	//add images to map
@@ -179,21 +214,24 @@ function navMap() {
 	markers = JSON.parse(localStorage.getItem("markers"));
 	if (markers == null) {	
 		markers = []
-		saveMarker("test1", 38.4065, -110.7920);
+/* 		saveMarker("test1", 38.4065, -110.7920);
 		saveMarker("test2", 38.4066, -110.7921);
-		saveMarker("test3", 38.4067, -110.7922);
+		saveMarker("test3", 38.4067, -110.7922); */
 	} 
 	
 	readMarkers(markers);
 	
-	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
+/* 	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
 	if (gpsCords[0] != null && gpsCords[1] != null) {
 		roverMarker = L.marker([gpsCords[0], gpsCords[1]], {title: "Rover", icon: redIcon}).addTo(map);
 	}
 	else{
 		//default starting area
 		roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
-	}
+	} */
+	
+	roverMarker = L.marker(startLocation, {title: "Rover", icon: redIcon}).addTo(map);
+
 	
   	var updateMap = setInterval(function() {
 		updateRoverPos();
