@@ -20,6 +20,8 @@
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/armpage">Arm</a></li>
+                        <li><a href = "/miscControls">Misc. Controls</a></li>
+                        
                     </ul>
                 </div>
 

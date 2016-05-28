@@ -24,6 +24,7 @@ class WebServerRoutes():
 		self.instance.route('/datapage', method="GET", callback=self.datapage)
 		self.instance.route('/options', method="GET", callback=self.options)
 		self.instance.route('/armpage', method = "GET", callback=self.armpage)
+		self.instance.route('/miscControls', method = "GET", callback=self.miscControls)
 
 
 		# static files (TBH I have no idea how this works.. but it does!)
@@ -57,6 +58,9 @@ class WebServerRoutes():
 
 	def armpage(self):
 		return template('armpage')
+
+	def miscControls(self):
+		return template('miscControls')
 
 	# Static Routes for CSS/Images etc
 	def sendStatic(self, filename):

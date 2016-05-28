@@ -27,6 +27,8 @@
                         <li><a href= "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/armpage">Arm</a></li>
+                        <li><a href = "/miscControls">Misc. Controls</a></li>
+
 
                     </ul>
 <script type='text/javascript'>
@@ -58,14 +60,8 @@ $(window).load(function(){
 
 
                <div class="dropdown"> Camera Selection:
-                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" align = "left">Camera
-                      <span class="caret"></span></button>
-                      <ul id ="cameras" class="dropdown-menu">
-                        <li id ="camera1"><a>Camera 1</a></li>
-                        <li id="camera2"><a>Camera 2</a></li>
-                        <li id="camera3"><a>Camera 3</a></li>
-                        <li id="3dCamera"><a>3D Camera </a></li>
-                      </ul>
+                 <button type="button" class="btn btn-default" onclick = "NextCamera()"><span class="glyphicon glyphicon-arrow-right"></span>Next Camera</button>
+                  <button type="button" class="btn btn-default"onclick = "NextCamera()"><span class="glyphicon glyphicon-arrow-left"></span>Previous Camera</button>
                 </div>
                 <p> Camera Movement </p>
                 <p align = "center"><button type="button" class="btn btn-default" id ="btnUp" onclick = "cameraButton(1)"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
@@ -80,21 +76,22 @@ $(window).load(function(){
 
 <script>
   var vlc = document.getElementById("vlc");
-  vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream", ":network-caching=100");
-  $('#camera1').on('click', function(){
-    alert("1");
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream1", ":network-caching=100");
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux2.sdp", "mystrea2", ":network-caching=100");
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux3.sdp", "mystrea2", ":network-caching=100")
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux4.sdp", "mystrea2", ":network-caching=100")
 
-  });
-  $('#camera2').on('click', function(){
-    alert("2");
+  function NextCamera(){
+    vlc.playlist.next();
+    vlc.playlist.play();
 
-  });
-  $('#camera3').on('click', function(){
-    alert("3");
-  });
-
+  }
+  function PreviousCamera(){
+    vlc.playlist.prev();
+    vlc.playlist.play();
+  }
   function PlayButton(){
-    vlc.playlist.play()
+    vlc.playlist.play();
 
   }
 
