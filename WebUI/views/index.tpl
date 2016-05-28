@@ -62,12 +62,33 @@
 				<label>Lng:</label><input type = "number" step= "any" id ="SelLng">
 				<label>Distance To(M):</label><input type = "number" step= .1 id ="SelDist">
 				<label>Bearing To:</label><input type = "number" step= .1 id ="SelBearing">
+				<input id="remove marker" type="button" value="remove marker" onclick="removeSelected();"/>														
+
 
 				<h4>New Marker</h4>
 				<label>Name: </label><input type="text" id="NewName">
 				<label>Lat: </label><input type = "number" step= "any" id = "NewLat">
 				<label>Lng: </label><input type = "number" step= "any" id ="NewLng">
-				<input id="add marker" type="button" value="add marker" onclick="addMarker();"/>
+				<input id="add marker" type="button" value="add marker" onclick="newMarker(document.getElementById('NewName').value,
+																							document.getElementById('NewLat').value,
+																							document.getElementById('NewLng').value);
+																				saveMarker(document.getElementById('NewName').value,
+																							document.getElementById('NewLat').value,
+																							document.getElementById('NewLng').value)"/>
+																							
+				<input id="drop marker" type="button" value="drop marker" onclick="dropMarker();"/>														
+				
+				<h4>DMS To Decimal Degree</h4>
+				<label>Degree </label><input type = "number" step= "any" id = "deg">
+				<label>'</label><input type = "number" step= "any" id ="min">
+				<label>''</label><input type = "number" step= "any" id = "sec">
+				<input id="decimal Degree" type="button" value="to decimal Degree" onclick="DMSToDD(document.getElementById('deg').value,
+																						document.getElementById('min').value,
+																						document.getElementById('sec').value);"/>
+				<label>Decimal Degree</label><input type = "number" step= "any" id = "decimalDegree">
+
+				
+				
 			</div>
         </div>
     </div>

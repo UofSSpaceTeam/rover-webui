@@ -9,14 +9,15 @@ var blueIcon;
 var markers;
 
 function updateRoverPos() {
-	//TODO: make sure it is getting values from correct place
-	var latlng = L.latLng(document.getElementById("YPos").value, document.getElementById("XPos").value);
-	roverMarker.setLatLng(latlng);
-	roverMarker.update();
+	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
+	if (gpsCords[0] != null && gpsCords[1] != null) {
+		var latlng = L.latLng(document.getElementById(gpsCords[0]).value, document.getElementById(gpsCords[1]).value);
+		roverMarker.setLatLng(latlng);
+		roverMarker.update();
+	}
 }
 
 function newMarker(name, lat, lng) {
-
 	var marker = L.marker([lat,lng], 
 						{title: name,
 						icon: blueIcon});
@@ -34,8 +35,7 @@ function newMarker(name, lat, lng) {
 	mapGroup.addLayer(marker);
 } 
 
-
-function addMarker(){
+/* function addMarker(){
 	newMarker(document.getElementById("NewName").value,
 			document.getElementById("NewLat").value,
 			document.getElementById("NewLng").value); 
@@ -44,23 +44,30 @@ function addMarker(){
 			document.getElementById("NewLat").value,
 			document.getElementById("NewLng").value);
 }
+*/
 
 function dropMarker(){
-	newMarker("Dropped Marker",
-			document.getElementById("YPos").value,
-			document.getElementById("XPos").value);
-			
-	saveMarker("Dropped Marker",
-			document.getElementById("YPos").value,
-			document.getElementById("XPos").value);
-}
+
+	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
+	if (gpsCords[0] != null && gpsCords[1] != null) {
+		newMarker("Dropped Marker",
+				gpsCords[0],
+				gpsCords[1]);
+				
+		saveMarker("Dropped Marker",
+				document.getElementById("YPos").value,
+				document.getElementById("XPos").value);
+	}
+} 
 
 function displaySelectedMakerData() {
-	document.getElementById("SelName").value = selectedMarker.options.title;
-	document.getElementById("SelLat").value = selectedMarker.getLatLng().lat;
-	document.getElementById("SelLng").value = selectedMarker.getLatLng().lng;
-	document.getElementById("SelDist").value = roverMarker.getLatLng().distanceTo(selectedMarker.getLatLng()).toFixed(1)
-	document.getElementById("SelBearing").value = getBearingToSelected(roverMarker.getLatLng().lat, roverMarker.getLatLng().lng).toFixed(1)
+	if (selectedMarker != null) {
+		document.getElementById("SelName").value = selectedMarker.options.title;
+		document.getElementById("SelLat").value = selectedMarker.getLatLng().lat;
+		document.getElementById("SelLng").value = selectedMarker.getLatLng().lng;
+		document.getElementById("SelDist").value = roverMarker.getLatLng().distanceTo(selectedMarker.getLatLng()).toFixed(1);
+		document.getElementById("SelBearing").value = getBearingToSelected(roverMarker.getLatLng().lat, roverMarker.getLatLng().lng).toFixed(1);
+	}
 }
 
 function getBearingToSelected(Lat, Lng) {
@@ -72,6 +79,20 @@ function getBearingToSelected(Lat, Lng) {
 	
 	var bearing = (Math.atan2(Math.sin(lng2-lng1)*Math.cos(lat2), Math.cos(lat1)*Math.sin(lat2) -Math.sin(lat1)*Math.cos(lat2)*Math.cos(lng2-lng1)));
 	return (bearing % (2*Math.PI)) * 180 / Math.PI; 
+}
+
+function removeSelected(){
+	if(selectedMarker != null){
+		index = markers.indexOf(markers.find(x=> x.name === selectedMarker.options.title));
+		//jsonObj = markers.find(x=> x.name === selectedMarker.options.title);
+		if (index > -1) {
+			markers.splice(index, 1);
+		}
+		
+		mapGroup.removeLayer(selectedMarker);
+		
+		localStorage.setItem("markers",JSON.stringify(markers));
+	}
 }
 
 function readMarkers(markerArray){
@@ -87,6 +108,11 @@ function saveMarker(name, lat, lng) {
 	markers.push(markerInfo);
 	
 	localStorage.setItem("markers",JSON.stringify(markers));
+}
+
+function DMSToDD(degree, min, sec) {
+	var DD = Number(degree) + Number(min / 60) + Number(sec / 3600) ; 
+	document.getElementById("decimalDegree").value = DD.toFixed(6); 
 }
 
 function navMap() {
@@ -130,10 +156,7 @@ function navMap() {
 	L.imageOverlay(hotel, hotelBounds).addTo(map);
 		
 	mapGroup = new L.FeatureGroup();
-	map.addLayer(mapGroup);
-		
-	//localStorage.setItem("mapGroup",JSON.stringify(mapGroup));
-	
+	map.addLayer(mapGroup);	
 	
 	greenIcon = L.icon({
 		iconUrl: "/static/scripts/images/marker-icon-green.png",
@@ -163,12 +186,17 @@ function navMap() {
 	
 	readMarkers(markers);
 	
-	//TODO: the initial position should be changed to current position
-	roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
+	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
+	if (gpsCords[0] != null && gpsCords[1] != null) {
+		roverMarker = L.marker([gpsCords[0], gpsCords[1]], {title: "Rover", icon: redIcon}).addTo(map);
+	}
+	else{
+		//default starting area
+		roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
+	}
 	
-	
- /* 	var updateMap = setInterval(function() {
+  	var updateMap = setInterval(function() {
 		updateRoverPos();
 		displaySelectedMakerData(); 
-      }, 1000); */
+    }, 1000); 
 }
