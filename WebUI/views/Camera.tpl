@@ -60,8 +60,9 @@ $(window).load(function(){
 
 
                <div class="dropdown"> Camera Selection:
-                 <button type="button" class="btn btn-default" onclick = "NextCamera()"><span class="glyphicon glyphicon-arrow-right"></span>Next Camera</button>
-                  <button type="button" class="btn btn-default"onclick = "NextCamera()"><span class="glyphicon glyphicon-arrow-left"></span>Previous Camera</button>
+                 <p id = "currentCameraLabel"> Current Camera:</p>
+                  <button type="button" class="btn btn-default"onclick = "PreviousCamera()"><span class="glyphicon glyphicon-arrow-left"></span>Previous Camera</button>
+                  <button type="button" class="btn btn-default" onclick = "NextCamera()"><span class="glyphicon glyphicon-arrow-right"></span>Next Camera</button>
                 </div>
                 <p> Camera Movement </p>
                 <p align = "center"><button type="button" class="btn btn-default" id ="btnUp" onclick = "cameraButton(1)"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
@@ -69,7 +70,7 @@ $(window).load(function(){
                 <button type="button" class="btn btn-default" id = "btnRight" onclick = "cameraButton(4)"><span class = "glyphicon glyphicon-arrow-right"></span>Right</button></p>
                 <p align = "center"><button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)"><span class = "glyphicon glyphicon-arrow-down"></span>Down</button></p>
                 <p> Camera buttons: Start/Stop - <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5);PlayButton();"><span class = "glyphicon glyphicon-ok-sign"></span>Start</button>
-                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6);StopButton();"><span class = "glyphicon glyphicon-remove-sign"></span>Start</button></p>
+                <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6);StopButton();"><span class = "glyphicon glyphicon-remove-sign"></span>Stop</button></p>
             </div>
         </div>
 </div>
@@ -77,18 +78,25 @@ $(window).load(function(){
 <script>
   var vlc = document.getElementById("vlc");
   vlc.playlist.add("rtsp://3.3.3.4:554/mux1.sdp", "mystream1", ":network-caching=100");
-  vlc.playlist.add("rtsp://3.3.3.4:554/mux2.sdp", "mystrea2", ":network-caching=100");
-  vlc.playlist.add("rtsp://3.3.3.4:554/mux3.sdp", "mystrea2", ":network-caching=100")
-  vlc.playlist.add("rtsp://3.3.3.4:554/mux4.sdp", "mystrea2", ":network-caching=100")
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux2.sdp", "mystream2", ":network-caching=100");
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux3.sdp", "mystream3", ":network-caching=100")
+  vlc.playlist.add("rtsp://3.3.3.4:554/mux4.sdp", "mystream4", ":network-caching=100")
 
   function NextCamera(){
+    var x = Number(localStorage.getItem("currentCameraNum")) + 1;
+    localStorage.setItem("currentCameraNum",x);
     vlc.playlist.next();
     vlc.playlist.play();
+    document.getElementById("currentCameraLabel").innerHTML = "Current Camera: " + x;
+
 
   }
   function PreviousCamera(){
+    var x = Number(localStorage.getItem("currentCameraNum")) - 1;
+    localStorage.setItem("currentCameraNum",x);
     vlc.playlist.prev();
     vlc.playlist.play();
+    document.getElementById("currentCameraLabel").innerHTML = "Current Camera: " + x;
   }
   function PlayButton(){
     vlc.playlist.play();

@@ -1,10 +1,9 @@
 function DrawGraph(){
-    var labelsArray = localStorage.getItem("dataPoints");
     var chrt = document.getElementById("mycanvas").getContext("2d");
     var myarr = [65, 59, 80, 81, 56, 55, 40,100];
-    var xaxis = ["January", "February", "March", "April", "May", "June", "July", "August"];
+    var xaxis = localStorage.getItem("dataPoints");
     var data = {
-    labels: labelsArray ,
+    labels:xaxis  ,
     datasets: [
         {
             label: "My First dataset",
@@ -25,10 +24,14 @@ function DrawGraph(){
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
+            data: myarr,
         }
     ]
 };
 
-    var myFirstChart = new Chart(chrt).Line(data);
+var pieOptions = {
+    animation : false,  // Edit: correction typo: from 'animated' to 'animation'
+}
+
+    var myFirstChart = new Chart(chrt).Line(data,pieOptions);
   }

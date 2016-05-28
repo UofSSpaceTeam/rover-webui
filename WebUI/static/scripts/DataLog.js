@@ -1,35 +1,47 @@
-datalogArray = [];
+datalogArrayX = [];
+datalogArrayY = [];
 gpsCords = [];
 function DataLog(){
 	setInterval(function() {
-		var x = Number(localStorage.getItem("Num")) + 1;
-		localStorage.setItem("Num",x);
-
 
 		//Gets Data From Rover
-		console.log(x)
 				$.ajax({
 							url: "/req/TestData",
 							method: "POST",
-							data: JSON.stringify({"DatalogArray" : datalogArray}),
+							data: ({"DatalogArrayX" : datalogArrayX}),
 							contentType: "application/json",
 							complete: function(results) {
+								var obj = JSON.parse(results.responseText)
+								var datalogPointCounter = Number(localStorage.getItem("datalogPointCounter")) + 1;
 
-								var Key = JSON.stringify(results).substr(35, 8);
-								var Value = JSON.stringify(results).substr(49,4);
+								localStorage.setItem("datalogPointCounter",datalogPointCounter);
+								datalogArrayX[datalogPointCounter] = obj.TestData;
 
-								localStorage.setItem("dataPoints",datalogArray)
-								localStorage.setItem("gpsCords",gpsCords);
+								localStorage.setItem("dataPoints",datalogArrayX)
+								DrawGraph();
 
 
 				}
 			});
 
+			$.ajax({
+						url: "/req/gpsCords",
+						method: "POST",
+						data: ({"gpsCords" : gpsCords}),
+						contentType: "application/json",
+						complete: function(results) {
+
+							localStorage.setItem("gpsCords",gpsCords);
+
+
+			}
+		});
+
 			//Sends Data to Rover
 			$.ajax({
 						url: "/data/buttons",
 						method: "POST",
-						data: JSON.stringify({"DatalogArray" : datalogArray}),
+						data: JSON.stringify({"DatalogArrayX" : datalogArrayX}),
 						contentType: "application/json",
 						complete: function(results) {
 
@@ -42,8 +54,12 @@ function DataLog(){
 }
 
 function ResetData(){
-	localStorage.setItem("Num",1);
-	localStorage.setItem("deadzoneLocalStorage",0);
+	localStorage.clear();
+	datalogArrayX = [];
+	datalogArrayY = [];
+	gpsCords = [];
+	datalogPointCounter = -1;
+
 
 }
 

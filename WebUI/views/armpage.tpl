@@ -15,8 +15,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=3.3.3.4>Video Config</a></li>
-                        <li><a href=3.3.3.5>Radio Config</a></li>
+                        <li><a href=http:3.3.3.4>Video Config</a></li>
+                        <li><a href=http:3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li class = "active"><a href = "/armpage">Arm</a></li>

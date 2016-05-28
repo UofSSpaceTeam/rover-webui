@@ -23,7 +23,7 @@
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/armpage">Arm</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
-                        
+
                     </ul>
                 </div>
 
@@ -58,6 +58,7 @@
                             <li><a href="#" id = "dropDown2"></a></li>
                             <li><a href="#" id = "dropDown3"></a></li>
                       </ul>
+                      <button type="button" class="btn btn-default" id ="ResetData" onclick = "ResetData()">Reset Data</button>
 
 
                   </div>
@@ -71,7 +72,7 @@
 <script>
 $(document).ready(function(){
               $("#dataSelect").click(function(){
-								document.getElementById("dropDown1").text  = datalogArray[0];
+								document.getElementById("dropDown1").text  = datalogArrayX[0];
 								});
         });
 </script>

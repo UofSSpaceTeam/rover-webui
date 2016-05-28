@@ -32,7 +32,7 @@
     </head>
 
 
-<body onload="DataLog();OptionPageDataUpdate();">
+<body onload="OptionPageDataUpdate();">
     <!---Main Div Container-->
     <div class="jumbotron">
       <h1 font size ="20" align = "center">Options</h1>
@@ -65,7 +65,6 @@
                       <div class = "col-md-4">
                         <p font size ="12" >Other Options</p>
                         <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate();GamePad();">Update Data</button>
-                        <button type="button" class="btn btn-default" id ="ResetData" onclick = "ResetData()">Reset Data</button>
                         <button type="button" class="btn btn-default" id ="ResetRoverSoftware" onclick = "ResetRoverSoftware()">Reset Rover Software</button><br>
                         <p font size ="12" >Battery Voltage</p>
                         <p>#1 <input type = "textbox" id = "batteryVolt1"></input></p>
