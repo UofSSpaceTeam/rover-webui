@@ -1,9 +1,7 @@
 function DrawGraph(){
     var chrt = document.getElementById("mycanvas").getContext("2d");
-    var myarr = [];
-    var xaxis = [];
-    myarr = localStorage.getItem("dataPointsY");
-    xaxis = localStorage.getItem("dataPoints");
+    var myarr = JSON.parse(localStorage.getItem("dataPointsY"));
+    var xaxis = localStorage.getItem("dataPoints");
     var data = {
     labels:myarr  ,
     datasets: [

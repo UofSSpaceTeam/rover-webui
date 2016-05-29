@@ -17,9 +17,8 @@ function DataLog(){
 								localStorage.setItem("datalogPointCounter",datalogPointCounter);
 								datalogArrayX[datalogPointCounter] = obj.TestData;
 								datalogArrayY[datalogPointCounter] = datalogPointCounter;
-								
-								localStorage.setItem("dataPoints",datalogArrayX)
-								localStorage.setItem("dataPointsY",datalogArrayY)
+								localStorage.setItem("dataPoints",JSON.stringify(datalogArrayX))
+								localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
 								DrawGraph();
 
 

@@ -38,8 +38,8 @@
       <div class = "col-md-8">
         <h1>Drill Controls</h1>
         <p>Drill Speed <input type = "textbox" id ="DrillSpeedValue"></input></p>
-        <p>Drill Movement Up: <button type="button" class="btn btn-default" id="DrillMovementUp" onclick="MovementUp()"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
-        <p>Drill Movement Down:<button type="button" class="btn btn-default" id="DrillMovementDown" onclick="MovementDown()"><span class="glyphicon glyphicon-arrow-down"></span>Down</button></p>
+        <p>Drill Movement Up: <button type="button" class="btn btn-default" id="DrillMovementUp"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
+        <p>Drill Movement Down:<button type="button" class="btn btn-default" id="DrillMovementDown"><span class="glyphicon glyphicon-arrow-down"></span>Down</button></p>
         <button type="button" class="btn btn-default">LED #1</button>
         <button type="button" class="btn btn-default">LED #2</button>
         <button type="button" class="btn btn-default">LED #3</button>
@@ -58,40 +58,49 @@
 miscArray = []
 drillControls = [];
 
-function MovementUp(){
-drillControls[0] = document.getElementById("DrillSpeedValue").value;
-drillControls[1] = 1;
-
-$.ajax({
-      url: "/data/drillControls",
-      method: "POST",
-      data: JSON.stringify({"drillControls" : drillControls}),
-      contentType: "application/json",
-      complete: function(results) {
-        console.log("Drill Controls sent")
-
-
-}
+$("#DrillMovementUp").mousedown(function() {
+  intervalId = setInterval(do_something, 500);
+}).mouseup(function() {
+  clearInterval(intervalId);
 });
 
+function do_something() {
+  drillControls[0] = document.getElementById("DrillSpeedValue").value;
+  drillControls[1] = 1;
+  $.ajax({
+        url: "/data/drillControls",
+        method: "POST",
+        data: JSON.stringify({"drillControls" : drillControls}),
+        contentType: "application/json",
+        complete: function(results) {
+          console.log("Drill Controls sent")
 
+
+  }
+  });
 
 }
 
-function MovementDown(){
-drillControls[0] = document.getElementById("DrillSpeedValue").value;
-drillControls[1] = -1;
-$.ajax({
-      url: "/data/drillControls",
-      method: "POST",
-      data: JSON.stringify({"drillControls" : drillControls}),
-      contentType: "application/json",
-      complete: function(results) {
-        console.log("Drill Controls sent")
-
-
-}
+$("#DrillMovementDown").mousedown(function() {
+  intervalId = setInterval(do_something2, 500);
+}).mouseup(function() {
+  clearInterval(intervalId);
 });
+
+function do_something2() {
+  drillControls[0] = document.getElementById("DrillSpeedValue").value;
+  drillControls[1] = -1;
+  $.ajax({
+        url: "/data/drillControls",
+        method: "POST",
+        data: JSON.stringify({"drillControls" : drillControls}),
+        contentType: "application/json",
+        complete: function(results) {
+          console.log("Drill Controls sent")
+
+
+  }
+  });
 
 }
 
