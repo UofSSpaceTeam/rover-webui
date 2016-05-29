@@ -16,8 +16,10 @@ function DataLog(){
 
 								localStorage.setItem("datalogPointCounter",datalogPointCounter);
 								datalogArrayX[datalogPointCounter] = obj.TestData;
-
+								datalogArrayY[datalogPointCounter] = datalogPointCounter;
+								
 								localStorage.setItem("dataPoints",datalogArrayX)
+								localStorage.setItem("dataPointsY",datalogArrayY)
 								DrawGraph();
 
 
@@ -58,7 +60,7 @@ function ResetData(){
 	datalogArrayX = [];
 	datalogArrayY = [];
 	gpsCords = [];
-	datalogPointCounter = -1;
+	datalogPointCounter = 0;
 
 
 }

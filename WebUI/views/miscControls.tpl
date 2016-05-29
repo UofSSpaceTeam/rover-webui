@@ -15,8 +15,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=3.3.3.4>Video Config</a></li>
-                        <li><a href=3.3.3.5>Radio Config</a></li>
+                        <li><a href=http//:3.3.3.4>Video Config</a></li>
+                        <li><a href=http//:3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/armpage">Arm</a></li>
@@ -37,9 +37,9 @@
     <div class="jumbotron">
       <div class = "col-md-8">
         <h1>Drill Controls</h1>
-        <p>Drill Speed <input type = "textbox"></input></p>
-        <p>Drill Movement Up: <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
-        <p>Drill Movement Down:<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"></span>Down</button></p>
+        <p>Drill Speed <input type = "textbox" id ="DrillSpeedValue"></input></p>
+        <p>Drill Movement Up: <button type="button" class="btn btn-default" id="DrillMovementUp" onclick="MovementUp()"><span class="glyphicon glyphicon-arrow-up"></span>Up</button></p>
+        <p>Drill Movement Down:<button type="button" class="btn btn-default" id="DrillMovementDown" onclick="MovementDown()"><span class="glyphicon glyphicon-arrow-down"></span>Down</button></p>
         <button type="button" class="btn btn-default">LED #1</button>
         <button type="button" class="btn btn-default">LED #2</button>
         <button type="button" class="btn btn-default">LED #3</button>
@@ -56,6 +56,44 @@
 <script>
 
 miscArray = []
+drillControls = [];
+
+function MovementUp(){
+drillControls[0] = document.getElementById("DrillSpeedValue").value;
+drillControls[1] = 1;
+
+$.ajax({
+      url: "/data/drillControls",
+      method: "POST",
+      data: JSON.stringify({"drillControls" : drillControls}),
+      contentType: "application/json",
+      complete: function(results) {
+        console.log("Drill Controls sent")
+
+
+}
+});
+
+
+
+}
+
+function MovementDown(){
+drillControls[0] = document.getElementById("DrillSpeedValue").value;
+drillControls[1] = -1;
+$.ajax({
+      url: "/data/drillControls",
+      method: "POST",
+      data: JSON.stringify({"drillControls" : drillControls}),
+      contentType: "application/json",
+      complete: function(results) {
+        console.log("Drill Controls sent")
+
+
+}
+});
+
+}
 
 $.ajax({
       url: "/req/miscControls",
@@ -68,5 +106,4 @@ $.ajax({
 
 }
 });
-
 </script>

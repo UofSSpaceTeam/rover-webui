@@ -17,8 +17,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=3.3.3.4>Video Config</a></li>
-                        <li><a href=3.3.3.5>Radio Config</a></li>
+                        <li><a href=http//:3.3.3.4>Video Config</a></li>
+                        <li><a href=http//:3.3.3.5>Radio Config</a></li>
                         <li class = "active"><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/armpage">Arm</a></li>
@@ -58,7 +58,7 @@
                             <li><a href="#" id = "dropDown2"></a></li>
                             <li><a href="#" id = "dropDown3"></a></li>
                       </ul>
-                      <button type="button" class="btn btn-default" id ="ResetData" onclick = "ResetData()">Reset Data</button>
+                        <button type="button" class="btn btn-default" id ="ResetData" onclick = "ResetData()">Reset Data</button>
 
 
                   </div>
@@ -72,7 +72,7 @@
 <script>
 $(document).ready(function(){
               $("#dataSelect").click(function(){
-								document.getElementById("dropDown1").text  = datalogArrayX[0];
+								document.getElementById("dropDown1").text  = datalogArray[0];
 								});
         });
 </script>
