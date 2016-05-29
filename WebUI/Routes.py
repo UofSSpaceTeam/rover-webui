@@ -3,10 +3,11 @@ import json
 
 class WebServerRoutes():
 
-	def __init__(self, parent=None):
+	def __init__(self, parent=None, dataSem=None):
 		self.val = True
 		self.instance = Bottle()
 		self.parent = parent
+		self.dataSem = dataSem
 		self.buildRoutes()
 
 
@@ -117,7 +118,15 @@ class WebServerRoutes():
 	# POST Route for requesting data from the rover
 	def sendData(self, item):
 		if self.parent is not None:
-			return json.dumps({item : self.parent.state[item]})
+			with self.dataSem:
+				try:
+					jsonData = json.dumps(self.parent.data[item])
+					print jsonData
+					return jsonData
+				except:
+					print "error something broke"
+					raise		
+
 		else:
 			return json.dumps({item : "test"})
 
