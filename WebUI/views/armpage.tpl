@@ -35,13 +35,14 @@
 <body onload="Gamepad()">
     <!---Main Div Container-->
     <div class="jumbotron">
-      <div class = ".col-md-8">
+      <div class = "col-md-8">
         <h1> Arm Position</h1>
         <canvas id="armCanvas" width=400 height=400>
 
 
         </canvas>
       </div>
+      <div class
 
 
     </div>

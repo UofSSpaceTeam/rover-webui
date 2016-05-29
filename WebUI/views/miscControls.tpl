@@ -19,7 +19,6 @@
                         <li><a href=http//:3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
-                        <li><a href = "/armpage">Arm</a></li>
                         <li class = "active"><a href = "/miscControls">Misc. Controls</a></li>
                     </ul>
                 </div>
@@ -35,6 +34,7 @@
 <body>
     <!---Main Div Container-->
     <div class="jumbotron">
+      <div class ="row">
       <div class = "col-md-8">
         <h1>Drill Controls</h1>
         <p>Drill Speed <input type = "textbox" id ="DrillSpeedValue"></input></p>
@@ -50,6 +50,7 @@
 
 
     </div>
+  </div>
 </body>
 </html>
 

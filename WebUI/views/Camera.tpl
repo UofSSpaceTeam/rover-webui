@@ -26,7 +26,6 @@
                         <li><a href=http//:3.3.3.5>Radio Config</a></li>
                         <li><a href= "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
-                        <li><a href = "/armpage">Arm</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
 
 
@@ -71,6 +70,10 @@ $(window).load(function(){
                 <p align = "center"><button type="button" class="btn btn-default" id = "btnDown" onclick = "cameraButton(2)"><span class = "glyphicon glyphicon-arrow-down"></span>Down</button></p>
                 <p> Camera buttons: Start/Stop - <button type="button" class="btn btn-default" id = "btnStop" onclick = "cameraButton(5);PlayButton();"><span class = "glyphicon glyphicon-ok-sign"></span>Start</button>
                 <button type="button" class = "btn btn-default" id ="btnStart" onclick = "cameraButton(6);StopButton();"><span class = "glyphicon glyphicon-remove-sign"></span>Stop</button></p>
+                <p>Arm Point #1<input type = "textbox" id = "armPoint1"></input></p>
+                <p>Arm Point #2<input type = "textbox" id = "armPoint2"></input></p>
+                <canvas id="armCanvas" width=400 height=400>
+                </canvas>
             </div>
         </div>
 </div>
@@ -108,6 +111,36 @@ $(window).load(function(){
 
 
   }
+
+
+
+  //Arm Script
+  setInterval(function() {
+
+
+    ArmPostion = [];
+  $.ajax({
+          url: "/req/Arm_Feedback",
+          method: "POST",
+          data: JSON.stringify({"ArmPosition" : ArmPostion}),
+          contentType: "application/json",
+          complete: function(results) {
+
+
+    }
+  });
+    var c = document.getElementById("armCanvas");
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.moveTo(0,200);
+    ctx.lineTo(100, 100);
+    ctx.lineTo(350, 200);
+    ctx.stroke();
+
+  }, 1000);
+
+
+
 </script>
 </body>
 </html>

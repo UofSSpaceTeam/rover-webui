@@ -19,7 +19,6 @@
                         <li><a href=http//:3.3.3.5>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li class = "active"><a href ="/options">Options</a></li>
-                        <li><a href ="/armpage">Arm</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
                     </ul>
                 </div>
