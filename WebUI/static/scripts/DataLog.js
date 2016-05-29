@@ -16,9 +16,8 @@ function DataLog(){
 
 								localStorage.setItem("datalogPointCounter",datalogPointCounter);
 								datalogArrayX[datalogPointCounter] = obj.TestData;
-								datalogArrayY[datalogPointCounter] = datalogPointCounter;
-								localStorage.setItem("dataPoints",JSON.stringify(datalogArrayX))
-								localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
+
+								localStorage.setItem("dataPoints",datalogArrayX)
 								DrawGraph();
 
 
@@ -31,8 +30,10 @@ function DataLog(){
 						data: ({"gpsCords" : gpsCords}),
 						contentType: "application/json",
 						complete: function(results) {
-
-							localStorage.setItem("gpsCords",gpsCords);
+							//alert(results.responseText); 
+							var obj = JSON.parse(results.responseText);
+							gpsCords = obj.latlng;
+							localStorage.setItem("gpsCords",JSON.stringify(gpsCords));
 
 
 			}
@@ -59,7 +60,7 @@ function ResetData(){
 	datalogArrayX = [];
 	datalogArrayY = [];
 	gpsCords = [];
-	datalogPointCounter = 0;
+	datalogPointCounter = -1;
 
 
 }
