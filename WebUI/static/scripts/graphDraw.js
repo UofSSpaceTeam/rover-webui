@@ -2,6 +2,8 @@ function DrawGraph(){
     var chrt = document.getElementById("mycanvas").getContext("2d");
     var myarr = JSON.parse(localStorage.getItem("dataPointsY"));
     var xaxis = JSON.parse(localStorage.getItem("dataPointsX"));
+    localStorage.setItem("dataPointsY",JSON.stringify(myarr));
+    localStorage.setItem("dataPointsX",JSON.stringify(xaxis));
     var data = {
     labels:myarr  ,
     datasets: [
@@ -29,9 +31,9 @@ function DrawGraph(){
     ]
 };
 
-var pieOptions = {
+var chartOptions = {
     animation : false,  // Edit: correction typo: from 'animated' to 'animation'
 }
 
-    var myFirstChart = new Chart(chrt).Line(data, pieOptions);
+    var myFirstChart = new Chart(chrt).Line(data, chartOptions);
   }

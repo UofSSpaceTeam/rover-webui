@@ -9,11 +9,13 @@ var blueIcon;
 var markers;
 
 function updateRoverPos() {
-	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
-	if (gpsCords[0] != null && gpsCords[1] != null) {
-		var latlng = L.latLng(document.getElementById(gpsCords[0]).value, document.getElementById(gpsCords[1]).value);
-		roverMarker.setLatLng(latlng);
-		roverMarker.update();
+	var gpsCords = JSON.parse(localStorage.getItem("gpsCords",gpsCords));
+	if(gpsCords != null) {
+		if (gpsCords[0] != null && gpsCords[1] != null) {
+			var latlng = L.latLng(gpsCords[0], gpsCords[1]);
+			roverMarker.setLatLng(latlng);
+			roverMarker.update();
+		}
 	}
 }
 
@@ -35,17 +37,6 @@ function newMarker(name, lat, lng) {
 			
 	mapGroup.addLayer(marker);
 } 
-
-/* function addMarker(){
-	newMarker(document.getElementById("NewName").value,
-			document.getElementById("NewLat").value,
-			document.getElementById("NewLng").value); 
-			
-	saveMarker(document.getElementById("NewName").value,
-			document.getElementById("NewLat").value,
-			document.getElementById("NewLng").value);
-}
-*/
 
 function dropMarker(name){
 
@@ -96,6 +87,7 @@ function removeSelected(){
 	}
 }
 
+//assumes array of json objects
 function readMarkers(markerArray){
 	for (i = 0; i < markerArray.length; i++){
 		newMarker(markerArray[i]["name"],
@@ -113,6 +105,7 @@ function saveMarker(name, lat, lng) {
 	}
 }
 
+//assumes csv string
 function getMultiMarkers(multiMarkers){
 	for( var marker of multiMarkers.split("\n")){
 			var markerInfo = marker.split(",");
@@ -143,17 +136,12 @@ function DMSToDD(degree, min, sec) {
 
 function navMap() {
 
-	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
-	if (gpsCords[0] != null && gpsCords[1] != null) {
-		var startLocation = [gpsCords[0], gpsCords[1]];
-	}
-	else{
-		//default starting area
-		var startLocation = [38.406441, -110.791933];
-	}
-
+	//default starting area
+	//change as needed
+	var startLocation = [38.406441, -110.791933];
+	
 	//online map
-	/* var map = L.map('map').setView([38.3730379, -110.7140391], 15);
+	/* var map = L.map('map').setView(startLocation, 15);
 	mapLink = 
 		'<a href="http://www.esri.com/">Esri</a>';
 	wholink = 
@@ -162,15 +150,16 @@ function navMap() {
 		'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 		attribution: '&copy; '+mapLink+', '+wholink,
 		maxZoom: 18,
-		}).addTo(map); */
+		}).addTo(map); */ 
+		
+	//online map ends here
 		
 	//offline maps
 	var map = L.map('map', {
         maxZoom: 20,
-        minZoom: 10,
         crs: L.CRS.Simple
     }).setView(startLocation, 18);
-    map.setMaxBounds(new L.LatLngBounds([38,-111], [39,-110]));	
+    //map.setMaxBounds(new L.LatLngBounds([38,-111], [39,-110]));	
 	
 	//add images to map
 	//bounds are [south-east corner],[north-west corner]
@@ -189,10 +178,13 @@ function navMap() {
 	var hotel = "/static/scripts/maps/hotel.jpg"
 	var hotelBounds = [[38.370145,-110.705247], [38.375459,-110.698541]];
 	L.imageOverlay(hotel, hotelBounds).addTo(map);
+	
+	//offline map ends here
 		
 	mapGroup = new L.FeatureGroup();
 	map.addLayer(mapGroup);	
 	
+	//icon images 
 	greenIcon = L.icon({
 		iconUrl: "/static/scripts/images/marker-icon-green.png",
 		iconSize:     [25, 41],
@@ -211,25 +203,15 @@ function navMap() {
         iconAnchor:   [12.5, 41]
 	});	
 	
+	//get markers from local storage
 	markers = JSON.parse(localStorage.getItem("markers"));
 	if (markers == null) {	
 		markers = []
-/* 		saveMarker("test1", 38.4065, -110.7920);
-		saveMarker("test2", 38.4066, -110.7921);
-		saveMarker("test3", 38.4067, -110.7922); */
 	} 
 	
 	readMarkers(markers);
 	
-/* 	var gpsCords = localStorage.getItem("gpsCords",gpsCords);
-	if (gpsCords[0] != null && gpsCords[1] != null) {
-		roverMarker = L.marker([gpsCords[0], gpsCords[1]], {title: "Rover", icon: redIcon}).addTo(map);
-	}
-	else{
-		//default starting area
-		roverMarker = L.marker([38.406441, -110.791933], {title: "Rover", icon: redIcon}).addTo(map);
-	} */
-	
+	//make the rover marker
 	roverMarker = L.marker(startLocation, {title: "Rover", icon: redIcon}).addTo(map);
 
 	

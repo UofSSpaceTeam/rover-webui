@@ -38,25 +38,6 @@ function GamePad(){
         html+= "<br/>";
 
       //Updates Rover Position//
-      if(gp.buttons[1].pressed){
-        SendDataButton[0]+=0.001;
-        document.getElementById("XPos").value =SendDataButton[0];
-
-      }
-      else if(gp.buttons[0].pressed){
-        SendDataButton[1]-=0.001;
-        document.getElementById("YPos").value = SendDataButton[1];
-      }
-      else if(gp.buttons[3].pressed){
-        SendDataButton[1]+=0.001;
-        document.getElementById("YPos").value = SendDataButton[1];
-      }
-      else if(gp.buttons[2].pressed){
-        SendDataButton[0]-=0.001;
-        document.getElementById("XPos").value = SendDataButton[0];
-      }
-
-    }
 
       SendDataAxes[0] = gp.axes[0].toFixed(4);
       SendDataAxes[1] = gp.axes[1].toFixed(4);
@@ -85,7 +66,7 @@ function GamePad(){
     $.ajax({
             url: "/data/buttons",
             method: "POST",
-            data: JSON.stringify({"buttons" : SendDataButton}),
+            data: JSON.stringify({"buttons" : gp.buttons}),
             contentType: "application/json",
             complete: function(results) {
                 console.log("Buttons Sent");
@@ -160,4 +141,5 @@ function OptionPageDataUpdate(){
 
   document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
 
+}
 }

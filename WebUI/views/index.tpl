@@ -11,6 +11,7 @@
         <script src="static/scripts/bootstrap.min.js"></script>
         <script src="/static/scripts/gamepad.js"></script>
         <script src="/static/scripts/DataLog.js"></script>
+        <script src="/static/scripts/graphDraw.js"></script>
         <div class="dropdown">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="/home">Navigation</a></li>
@@ -50,11 +51,7 @@
 				<h4>Rover Data:</h4>
 				<label>X Position:</label><input type="text" id="XPos">
 				<label>Y Position:</label><input type="text" id="YPos">
-				<label>Stick 1 X Axis:</label><input type="text" id="Stick1X">
-				<label>Stick 1 Y Axis:</label><input type="text" id="Stick1Y">
-				<label>Stick 2 X Axis:</label><input type = "text" id = "Stick2X">
-				<label>Stick 2 Y Axis:</label><input type = "text" id ="Stick2Y">
-				<br>
+
 
 				<h4>Selected Marker:</h4>
 				<label>Name:</label><input type="text" id="SelName">
@@ -63,8 +60,11 @@
 				<label>Distance To(M):</label><input type = "number" step= .1 id ="SelDist">
 				<label>Bearing To:</label><input type = "number" step= .1 id ="SelBearing">
 				<input id="removemarker" type="button" value="remove marker" onclick="removeSelected();"/>
-				<br>
 
+      </div>
+      <div class = "col-md-1">
+      </div class = "col-md-1">
+      <div class = "col-md-1" align = "right">
 				<h4>New Marker</h4>
 				<label>Name: </label><input type="text" id="NewName">
 				<label>Lat: </label><input type = "number" step= "any" id = "NewLat">
@@ -77,7 +77,6 @@
 																							document.getElementById('NewLng').value)"/>
 
 				<input id="dropmarker" type="button" value="drop marker" onclick="dropMarker(document.getElementById('NewName').value);"/>
-				<br>
 
 				<h4>DMS To Decimal Degree</h4>
 				<label>Degree </label><input type = "number" step= "any" id = "deg">
@@ -87,12 +86,10 @@
 																						document.getElementById('min').value,
 																						document.getElementById('sec').value);"/>
 				<label>Decimal Degree</label><input type = "number" step= "any" id = "decimalDegree">
-				<br>
-
 				<textarea rows="5" cols="25" id = "markerDisplay"></textarea>
 				<input id="importMarker" type="button" value="import markers" onclick="getMultiMarkers(document.getElementById('markerDisplay').value);"/>
 				<input id="printMarker" type="button" value="print markers" onclick="printMarkers()"/>
-
+      </div>
 
 			</div>
         </div>

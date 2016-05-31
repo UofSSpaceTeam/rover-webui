@@ -103,24 +103,25 @@ setInterval(function() {
   $.ajax({
         url: "/req/batteryVoltage",
         method: "POST",
-        data: JSON.stringify({"batteryVoltage" : BatteryVolt}),
+        data: JSON.stringify({"batteryVoltage" : batteryVolt}),
         contentType: "application/json",
         complete: function(results) {
           console.log("Battery Voltage Recieved")
+          
 
 
   }
 });
 
-document.getElementById("batteryVolt1").value = BatteryVolt[0];
-document.getElementById("batteryVolt1").value = BatteryVolt[1];
-document.getElementById("batteryVolt1").value = BatteryVolt[2];
-document.getElementById("batteryVolt1").value = BatteryVolt[3];
-document.getElementById("batteryVolt1").value = BatteryVolt[4];
-document.getElementById("batteryVolt1").value = BatteryVolt[5];
-document.getElementById("batteryVolt1").value = BatteryVolt[6];
-document.getElementById("batteryVolt1").value = BatteryVolt[7];
-document.getElementById("batteryVolt1").value = BatteryVolt[8];
+document.getElementById("batteryVolt1").value = batteryVolt[0];
+document.getElementById("batteryVolt1").value = batteryVolt[1];
+document.getElementById("batteryVolt1").value = batteryVolt[2];
+document.getElementById("batteryVolt1").value = batteryVolt[3];
+document.getElementById("batteryVolt1").value = batteryVolt[4];
+document.getElementById("batteryVolt1").value = batteryVolt[5];
+document.getElementById("batteryVolt1").value = batteryVolt[6];
+document.getElementById("batteryVolt1").value = batteryVolt[7];
+document.getElementById("batteryVolt1").value = batteryVolt[8];
 
 
 

@@ -12,6 +12,8 @@
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
         <script src="/static/scripts/DataLog.js"></script>
+        <script src ="/static/scripts/Chart.js"></script>
+        <script src = "/static/scripts/graphDraw.js"></script>
         <!--Liveplayer Script -->
 
         <!--VLC SCRIPT -->
