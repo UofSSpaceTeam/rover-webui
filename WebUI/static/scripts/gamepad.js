@@ -38,6 +38,25 @@ function GamePad(){
         html+= "<br/>";
 
       //Updates Rover Position//
+      if(gp.buttons[1].pressed){
+        SendDataButton[0]+=0.001;
+        document.getElementById("XPos").value =SendDataButton[0];
+
+      }
+      else if(gp.buttons[0].pressed){
+        SendDataButton[1]-=0.001;
+        document.getElementById("YPos").value = SendDataButton[1];
+      }
+      else if(gp.buttons[3].pressed){
+        SendDataButton[1]+=0.001;
+        document.getElementById("YPos").value = SendDataButton[1];
+      }
+      else if(gp.buttons[2].pressed){
+        SendDataButton[0]-=0.001;
+        document.getElementById("XPos").value = SendDataButton[0];
+      }
+
+    }
 
       SendDataAxes[0] = gp.axes[0].toFixed(4);
       SendDataAxes[1] = gp.axes[1].toFixed(4);
@@ -56,11 +75,6 @@ function GamePad(){
       }
 
     }
-
-      document.getElementById("Stick1X").value = SendDataAxes[0];
-      document.getElementById("Stick1Y").value = SendDataAxes[1];
-      document.getElementById("Stick2X").value = SendDataAxes[2];
-      document.getElementById("Stick2Y").value = SendDataAxes[3];
 
 
     $.ajax({
@@ -141,5 +155,4 @@ function OptionPageDataUpdate(){
 
   document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
 
-}
 }

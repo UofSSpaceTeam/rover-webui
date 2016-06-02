@@ -1,25 +1,23 @@
-datalogArrayX = [];
-datalogArrayY = [];
+datalogMoisture = JSON.parse(localStorage.getItem("dataPointsMoisture"));
+datalogWheel = JSON.parse(localStorage.getItem("dataPointsWheel"));
+datalogTemperature = JSON.parse(localStorage.getItem("dataPointsTemperature"));
+datalogArrayY = JSON.parse(localStorage.getItem("dataPointsY"));
 gpsCords = [];
 function DataLog(){
 	setInterval(function() {
-
+		var message = "datalogTemperature pulls values from here.";
 		//Gets Data From Rover
 				$.ajax({
 							url: "/req/TestData",
 							method: "POST",
-							data: ({"DatalogArrayX" : datalogArrayX}),
+							data: ({"datalogTemperature" : message}),
 							contentType: "application/json",
 							complete: function(results) {
 								var obj = JSON.parse(results.responseText)
-								var datalogPointCounter = Number(localStorage.getItem("datalogPointCounter")) + 1;
-								localStorage.setItem("datalogPointCounter",datalogPointCounter);
-								datalogArrayX[datalogPointCounter] = obj.TestData
-								datalogArrayY[datalogPointCounter] = datalogPointCounter;
-								localStorage.setItem("dataPointsX",JSON.stringify(datalogArrayX))
-								localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
 
-								localStorage.setItem("dataPoints",datalogArrayX)
+								var type = JSON.stringify(obj).substring(3,2);
+								DataSave(type,obj);
+
 								DrawGraph();
 
 
@@ -42,33 +40,71 @@ function DataLog(){
 		});
 
 			//Sends Data to Rover
-			$.ajax({
-						url: "/data/buttons",
-						method: "POST",
-						data: JSON.stringify({"DatalogArrayX" : datalogArrayX}),
-						contentType: "application/json",
-						complete: function(results) {
 
-
-
-			}
-		});
 }, 1000);
 
 }
 
 function ResetData(){
+	$('#mycanvas').remove(); // this is my <canvas> element
+	$('#graph-div').append('<canvas id="mycanvas" width="800" height="400" style="width: 800px; height: 400px;"><canvas>');
 	localStorage.clear();
-	datalogArrayX = [];
+	datalogTemperature = [];
 	datalogArrayY = [];
 	gpsCords = [];
 	datalogPointCounter = -1;
 
 
+
 }
 
 function ResetRoverSoftware(){
+	alert(datatype);
 
 
+
+}
+
+function ReloadGraph(){
+	$('#mycanvas').remove(); // this is my <canvas> element
+	$('#graph-div').append('<canvas id="mycanvas" width="800" height="400" style="width: 800px; height: 400px;"><canvas>');
+	arrayStartPoint = datalogPointCounter;
+
+}
+
+function DataSave(datatype, obj){
+	var arrayStartPoint = Number(localStorage.getItem("arrayStartPointLocal")) + 1;
+	var datalogPointCounter = Number(localStorage.getItem("datalogPointCounter")) + 1;
+	localStorage.setItem("datalogPointCounter",datalogPointCounter);
+	localStorage.setItem("arrayStartPointLocal",arrayStartPoint);
+
+
+	if(datatype == "T"){
+		datalogTemperature[arrayStartPoint] = obj.TestData;
+		datalogArrayY[arrayStartPoint] = datalogPointCounter;
+		localStorage.setItem("dataPointsTemperature",JSON.stringify(datalogTemperature))
+		localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
+
+
+
+	}
+	else if(datatype == "M"){
+		datalogMoisture[arrayStartPoint] = obj.TestData;
+		datalogArrayY[arrayStartPoint] = datalogPointCounter;
+		localStorage.setItem("dataPointsMoisture",JSON.stringify(datalogMoisture))
+		localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
+
+
+
+	}
+	else if(datatype == "W"){
+		datalogTemperature[arrayStartPoint] = obj.TestData;
+		datalogArrayY[arrayStartPoint] = datalogPointCounter;
+		localStorage.setItem("dataPointsWheel",JSON.stringify(datalogWheel))
+		localStorage.setItem("dataPointsY",JSON.stringify(datalogArrayY))
+
+
+
+	}
 
 }

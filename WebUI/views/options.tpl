@@ -15,8 +15,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=http//:3.3.3.4>Video Config</a></li>
-                        <li><a href=http//:3.3.3.5>Radio Config</a></li>
+                        <li><a href=http://3.3.3.4>Video Config</a></li>
+                        <li><a href=http://3.3.3.1>Radio Config</a></li>
                         <li><a href = "/datapage">Data</a></li>
                         <li class = "active"><a href ="/options">Options</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
@@ -107,7 +107,7 @@ setInterval(function() {
         contentType: "application/json",
         complete: function(results) {
           console.log("Battery Voltage Recieved")
-          
+
 
 
   }

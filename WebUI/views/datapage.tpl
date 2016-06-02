@@ -17,8 +17,8 @@
                     <ul class="nav nav-tabs">
                         <li><a href="/home">Navigation</a></li>
                         <li><a href="/camera">Camera</a></li>
-                        <li><a href=http//:3.3.3.4>Video Config</a></li>
-                        <li><a href=http//:3.3.3.5>Radio Config</a></li>
+                        <li><a href=http://3.3.3.4>Video Config</a></li>
+                        <li><a href=http://3.3.3.1>Radio Config</a></li>
                         <li class = "active"><a href = "/datapage">Data</a></li>
                         <li><a href ="/options">Options</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
@@ -42,7 +42,7 @@
     <div class="jumbotron">
 
         <div class="row">
-                  <div class = "col-md-8">
+                  <div id ="graph-div" class = "col-md-8">
                       <h1> Graph </h1>
                     <canvas id="mycanvas" width="800" height="400" style="width: 800px; height: 400px;"></canvas>
                   </div>
@@ -53,11 +53,12 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id = "dataSelect">Data Select
                       <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                            <li><a href="#" id = "dropDown1"></a></li>
-                            <li><a href="#" id = "dropDown2"></a></li>
-                            <li><a href="#" id = "dropDown3"></a></li>
+                            <li><a href="#" id = "temperatureDropDown">Temperature</a></li>
+                            <li><a href="#" id = "moistureDropDown">Moisture</a></li>
+                            <li><a href="#" id = "wheelDropDown">Wheel (RPMS)</a></li>
                       </ul>
                         <button type="button" class="btn btn-default" id ="ResetData" onclick = "ResetData()">Reset Data</button>
+                        <button type="button" class ="btn btn-default" id ="ReloadGraph" onclick="ReloadGraph()">Reload Graph</button>
 
 
                   </div>
@@ -67,11 +68,3 @@
     </div>
 </body>
 </html>
-
-<script>
-$(document).ready(function(){
-              $("#dataSelect").click(function(){
-								document.getElementById("dropDown1").text  = datalogArray[0];
-								});
-        });
-</script>

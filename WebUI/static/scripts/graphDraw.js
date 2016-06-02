@@ -1,11 +1,28 @@
 function DrawGraph(){
+    var CurrentData = localStorage.getItem("CurrentDataSelected");
     var chrt = document.getElementById("mycanvas").getContext("2d");
-    var myarr = JSON.parse(localStorage.getItem("dataPointsY"));
-    var xaxis = JSON.parse(localStorage.getItem("dataPointsX"));
-    localStorage.setItem("dataPointsY",JSON.stringify(myarr));
+    if(CurrentData == "Temp"){
+      var data = localStorage.getItem("dataPointsTemperature");
+      localStorage.setItem("dataPointsX",data);
+
+    }
+    else if(CurrentData =="Moist"){
+      var data = localStorage.getItem("dataPointsMoisture");
+      localStorage.setItem("dataPointsX",data);
+
+    }
+    else if (CurrentData == "Wheel"){
+      var data = localStorage.getItem("dataPointsWheel");
+      localStorage.setItem("dataPointsX",data);
+
+    }
+
+    yaxis = JSON.parse(localStorage.getItem("dataPointsY"));
+    xaxis = JSON.parse(localStorage.getItem("dataPointsX"));
+    localStorage.setItem("dataPointsY",JSON.stringify(yaxis));
     localStorage.setItem("dataPointsX",JSON.stringify(xaxis));
     var data = {
-    labels:myarr  ,
+    labels: xaxis ,
     datasets: [
         {
             label: "My First dataset",
@@ -26,7 +43,7 @@ function DrawGraph(){
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: xaxis,
+            data: yaxis,
         }
     ]
 };
@@ -37,3 +54,16 @@ var chartOptions = {
 
     var myFirstChart = new Chart(chrt).Line(data, chartOptions);
   }
+
+  $(document).ready(function(){
+                 $("#temperatureDropDown").click(function(){
+                    localStorage.setItem("CurrentDataSelected","Temp");
+    								});
+                 $("#moistureDropDown").click(function(){
+                    localStorage.setItem("CurrentDataSelected","Moist");
+                  });
+                 $("#wheelDropDown").click(function(){
+                     localStorage.setItem("CurrentDataSelected","Wheel");
+                   });
+
+            });
