@@ -20,6 +20,7 @@
                         <li><a href = "/datapage">Data</a></li>
                         <li class = "active"><a href ="/options">Options</a></li>
                         <li><a href = "/miscControls">Misc. Controls</a></li>
+                        <li><a href = "/armpage">Arm Page </a></li>
                     </ul>
                 </div>
 
@@ -65,15 +66,6 @@
                         <p font size ="12" >Other Options</p>
                         <button type="button" class="btn btn-default" id ="UpdateOptions" onclick = "GamePadDataUpdate();GamePad();">Update Data</button>
                         <button type="button" class="btn btn-default" id ="ResetRoverSoftware" onclick = "ResetRoverSoftware()">Reset Rover Software</button><br>
-                        <p font size ="12" >Battery Voltage</p>
-                        <p>#1 <input type = "textbox" id = "batteryVolt1"></input></p>
-                        <p>#2 <input type = "textbox" id = "batteryVolt2"></input></p>
-                        <p>#3 <input type = "textbox" id = "batteryVolt3"></input></p>
-                        <p>#4 <input type = "textbox" id = "batteryVolt4"></input></p>
-                        <p>#5 <input type = "textbox" id = "batteryVolt5"></input></p>
-                        <p>#6 <input type = "textbox" id = "batteryVolt6"></input></p>
-                        <p>#7 <input type = "textbox" id = "batteryVolt7"></input></p>
-                        <p>#8 <input type = "textbox" id = "batteryVolt8"></input></p>
                       </div>
                   </div>
 
@@ -96,6 +88,7 @@ function ControllerUpdate(){
       localStorage.setItem("controllerOption",1)
 
     }
+  alert(localStorage.getItem("controllerOption"));
 }
 
 setInterval(function() {
@@ -113,15 +106,6 @@ setInterval(function() {
   }
 });
 
-document.getElementById("batteryVolt1").value = batteryVolt[0];
-document.getElementById("batteryVolt1").value = batteryVolt[1];
-document.getElementById("batteryVolt1").value = batteryVolt[2];
-document.getElementById("batteryVolt1").value = batteryVolt[3];
-document.getElementById("batteryVolt1").value = batteryVolt[4];
-document.getElementById("batteryVolt1").value = batteryVolt[5];
-document.getElementById("batteryVolt1").value = batteryVolt[6];
-document.getElementById("batteryVolt1").value = batteryVolt[7];
-document.getElementById("batteryVolt1").value = batteryVolt[8];
 
 
 
