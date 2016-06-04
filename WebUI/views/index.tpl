@@ -34,7 +34,7 @@
     </head>
 
 
-<body onload="GamePad();DataLog();navMap();">
+<body onload="GamePad();Datalog();Nav();">
     <!---Main Div Container-->
     <div class="jumbotron">
         <script src="/static/scripts/gamepad.js"></script>

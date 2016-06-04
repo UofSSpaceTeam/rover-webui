@@ -39,7 +39,7 @@
     </head>
 
 
-<body onload="DataLog();DrawGraph();">
+<body onload="DataLog();DrawGraph();Gamepad();">
     <div class="jumbotron">
 
         <div class="row">

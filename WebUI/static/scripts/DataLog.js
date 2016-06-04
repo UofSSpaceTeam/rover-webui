@@ -59,7 +59,6 @@ function ResetData(){
 }
 
 function ResetRoverSoftware(){
-	alert(datatype);
 
 
 

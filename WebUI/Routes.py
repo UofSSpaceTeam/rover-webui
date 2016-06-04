@@ -127,7 +127,7 @@ class WebServerRoutes():
 				except KeyError:
 					print "Err: requested key", str(item), "not found!"
 				except:
-					raise		
+					raise
 
 		else:
 			return json.dumps({item : "test"})

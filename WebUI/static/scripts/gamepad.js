@@ -1,3 +1,4 @@
+
 function GamePad(){
   //Added by Liam//
   var buttonInfo ='{"button": "0"}'
@@ -7,7 +8,7 @@ function GamePad(){
 
   //All Local Values Set here
   var controllerOption = localStorage.getItem("controllerOption")
-  var deadzone = localStorage.getItem("deadzoneLocalStorage");
+  var deadzone = 0.10;
 
   var SendDataButton = [];
   var SendDataAxes = [];
@@ -15,8 +16,6 @@ function GamePad(){
   var Test = 0;
   var RoverYPos = 0;
   var RoverXPos = 0;
-  SendDataButton[0] = parseFloat(document.getElementById("XPos").value);
-  SendDataButton[1] = parseFloat(document.getElementById("YPos").value);
 
   function canGame() {
     return "getGamepads" in navigator;
@@ -58,11 +57,29 @@ function GamePad(){
 
     }
 
+
+
       SendDataAxes[0] = gp.axes[0].toFixed(4);
       SendDataAxes[1] = gp.axes[1].toFixed(4);
       SendDataAxes[2] = gp.axes[2].toFixed(4);
       SendDataAxes[3] = gp.axes[3].toFixed(4);
 
+      SendDataButton[0] = gp.buttons[0].value;
+      SendDataButton[1] = gp.buttons[1].value;
+      SendDataButton[2] = gp.buttons[2].value;
+      SendDataButton[3] = gp.buttons[3].value;
+      SendDataButton[4] = gp.buttons[4].value;
+      SendDataButton[5] = gp.buttons[5].value;
+      SendDataButton[6] = gp.buttons[6].value;
+      SendDataButton[7] = gp.buttons[7].value;
+      SendDataButton[8] = gp.buttons[8].value;
+      SendDataButton[9] = gp.buttons[9].value;
+      SendDataButton[10] = gp.buttons[10].value;
+      SendDataButton[11] = gp.buttons[11].value;
+      SendDataButton[12] = gp.buttons[12].value;
+      SendDataButton[13] = gp.buttons[13].value;
+      SendDataButton[14] = gp.buttons[14].value;
+      SendDataButton[15] = gp.buttons[15].value;
 
 
     //Loops through Axis values
@@ -76,11 +93,17 @@ function GamePad(){
 
     }
 
+    document.getElementById("axes1").value = SendDataAxes[0]
+    document.getElementById("axes2").value = SendDataAxes[1]
+    document.getElementById("axes3").value = SendDataAxes[2]
+    document.getElementById("axes4").value = SendDataAxes[3]
+
+
 
     $.ajax({
             url: "/data/buttons",
             method: "POST",
-            data: JSON.stringify({"buttons" : gp.buttons}),
+            data: JSON.stringify({"buttons" : SendDataButton }),
             contentType: "application/json",
             complete: function(results) {
                 console.log("Buttons Sent");
@@ -142,17 +165,4 @@ function GamePad(){
     }
 
   });
-}
-
-
-function GamePadDataUpdate(){
-
-  localStorage.setItem("deadzoneLocalStorage", document.getElementById("deadzoneValue").value);
-
-}
-
-function OptionPageDataUpdate(){
-
-  document.getElementById("deadzoneValue").value = localStorage.getItem("deadzoneLocalStorage");
-
 }
