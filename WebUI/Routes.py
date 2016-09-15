@@ -18,15 +18,7 @@ class WebServerRoutes():
 		self.instance.route('/home', method="GET", callback=self.mainPage)
 
 		# other pages
-		self.instance.route('/gamepad', method="GET", callback=self.gamepad)
-		self.instance.route('/gamepadoptions', method="GET", callback=self.gamepadOptions)
-		self.instance.route('/camera', method="GET", callback=self.camera)
-		self.instance.route('/datapage', method="GET", callback=self.datapage)
-		self.instance.route('/options', method="GET", callback=self.options)
-		self.instance.route('/armpage', method = "GET", callback=self.armpage)
-		self.instance.route('/miscControls', method = "GET", callback=self.miscControls)
-
-
+		
 		# static files (TBH I have no idea how this works.. but it does!)
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
 		self.instance.route('/favicon.ico', method="GET", callback=self.sendFavicon)
@@ -38,27 +30,6 @@ class WebServerRoutes():
 	# define the template to show and any preprocessing
 	def mainPage(self):
 		return template('index')
-
-	def gamepad(self):
-		return template('gamepad')
-
-	def camera(self):
-		return template('camera')
-
-	def gamepadOptions(self):
-		return template('gamepadoptions')
-
-	def options(self):
-		return template('options')
-
-	def datapage(self):
-		return template('datapage')
-
-	def armpage(self):
-		return template('armpage')
-
-	def miscControls(self):
-		return template('miscControls')
 
 	# Static Routes for CSS/Images etc
 	def sendStatic(self, filename):
