@@ -9,9 +9,8 @@
         <link rel ="stylesheet" href="/static/css/NoGutter.css">
         <script src="static/scripts/jquery.min.js"></script>
         <script src="static/scripts/bootstrap.min.js"></script>
-        <script src="/static/scripts/gamepad.js"></script>
-        <script src="/static/scripts/DataLog.js"></script>
-        <script src="/static/scripts/graphDraw.js"></script>
+        <script src="/static/scripts/chart.js"></script>
+
         <div class="dropdown">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="/home">Index</a></li>
@@ -31,8 +30,38 @@
     <div class="jumbotron">
 
         <div class="row">
-            <!---Navigation Main Div-->
+          <canvas id="myChart" width="400" height="200"></canvas>
           </div>
     </div>
+    <script>
+            var canvas = document.getElementById('myChart');
+            var data = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    borderWidth: 2,
+                    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                    hoverBorderColor: "rgba(255,99,132,1)",
+                    data: [65, 59, 30, 81, 56, 55, 40],
+                }
+            ]
+        };
+        var option = {
+        animation: {
+        				duration:5000
+        }
+
+        };
+
+
+        var myBarChart = Chart.Bar(canvas,{
+        	data:data,
+          options:option
+        });
+
+    </script>
 </body>
 </html>
