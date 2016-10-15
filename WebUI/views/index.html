@@ -2,10 +2,10 @@
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <body ng-app"">
+  <div ng-app="" ng-init="myCol='lightblue';title='Weather Balloon Data'">
+    <h1> {{title}} </h1>
   <p>Change the value of the input field:</p>
 
-  <div ng-app="" ng-init="myCol='lightblue';title='Test'">
-    <h1> {{title}} </h1>
   <input style="background-color:{{myCol}}" ng-model="myCol" value="{{myCol}}">
 
   </div>
@@ -15,4 +15,24 @@
   <p>The background color of the input box will be whatever you write in the input field.</p>
 
   </body>
+  <button onclick="getData()">Get Data </button>
+
+  <script>
+    function getData(){
+      alert("Called")
+      $http({
+        method: 'GET',
+        url: '/someUrl'
+      }).then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          alert("Test")
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error stat.
+          alert("Error")
+        });
+
+    }
+  </script>
 </html>
