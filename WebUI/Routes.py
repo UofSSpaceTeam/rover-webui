@@ -1,4 +1,4 @@
-from bottle import Bottle, route, get, post, template, static_file, request, response
+from .bottle import Bottle, route, get, post, template, static_file, request, response
 import json
 
 class WebServerRoutes():
@@ -115,7 +115,7 @@ class WebServerRoutes():
 			if self.parent is not None:
 				self.parent.uplink.put(data)
 			else:
-				print data
+				print(data)
 
 	# POST Route for requesting data from the rover
 	def sendData(self, item):
@@ -125,7 +125,7 @@ class WebServerRoutes():
 					jsonData = json.dumps(self.parent.data.pop(item))
 					return jsonData
 				except KeyError:
-					print "Err: requested key", str(item), "not found!"
+					print("Err: requested key", str(item), "not found!")
 				except:
 					raise
 
