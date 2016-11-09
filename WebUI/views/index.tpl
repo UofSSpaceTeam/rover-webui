@@ -71,10 +71,17 @@
             }, 500);
         }
         window.setInterval(function(){
+          var gp = navigator.getGamepads()[0];
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"axes" : "Test"}),
+            data: JSON.stringify({"joystick1" : [gp.axes[0], gp.axes[1]]}),
+            contentType: "application/json"
+          });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"joystick2" : [gp.axes[3], gp.axes[4]]}),
             contentType: "application/json"
           });
 
