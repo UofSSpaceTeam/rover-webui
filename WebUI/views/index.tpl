@@ -84,8 +84,20 @@
             data: JSON.stringify({"joystick2" : [gp.axes[3], gp.axes[4]]}),
             contentType: "application/json"
           });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"trigger1" : gp.axes[2]}),
+            contentType: "application/json"
+          });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"trigger2" : gp.axes[5]}),
+            contentType: "application/json"
+          });
 
-        }, 500)
+        }, 150)
 
     });
     </script>
