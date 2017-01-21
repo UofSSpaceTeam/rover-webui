@@ -102,13 +102,13 @@
 
 		// Updates the live stream video to the specified camera's stream (Front, left or right camera stream)
 		$scope.openFCamStream = function(){
-			$scope.liveStreamURL = 'http://ipofcamera'; // front camera
+			$scope.liveStreamURL = 'http://localhost:4200'; // front camera
 		}
 		$scope.openLCamStream = function(){
-			$scope.liveStreamURL = 'rtsp://jblive.videocdn.scaleengine.net/jb-live/play/jblive.stream'; // left camera
+			$scope.liveStreamURL = 'http://localhost:4200'; // left camera
 		}
 		$scope.openRCamStream = function(){
-			$scope.liveStreamURL = 'rtmp://jblive.videocdn.scaleengine.net/jb-live/play/jblive.stream'; // right camera
+			$scope.liveStreamURL = 'http://localhost:4200'; // right camera
 		}
 	});
 
