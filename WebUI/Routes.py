@@ -18,7 +18,8 @@ class WebServerRoutes():
 		self.instance.route('/home', method="GET", callback=self.mainPage)
 
 		# other pages
-		
+		self.instance.route('/cameraPage', method="GET", callback=self.mainPage)
+
 		# static files (TBH I have no idea how this works.. but it does!)
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
 		self.instance.route('/favicon.ico', method="GET", callback=self.sendFavicon)
@@ -30,6 +31,9 @@ class WebServerRoutes():
 	# define the template to show and any preprocessing
 	def mainPage(self):
 		return template('index')
+
+	def camera(self):
+		return template('cameraPage')
 
 	# Static Routes for CSS/Images etc
 	def sendStatic(self, filename):

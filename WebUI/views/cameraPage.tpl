@@ -5,12 +5,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="static\scripts\bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="TestScript.js"></script>
 </head>
   <body>
     <div class="jumbotron text-center">
-  <h1>Camera Page</h1>
-  <p></p>
+      <div class >
+        <img src="\static\images\USST_Logo.png" alt="Logo">
+        <h1>Camera Control Interface</h1>
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="#">Home</a></li>
+            <li role="presentation" class = "active"><a href="#">Camera Page</a></li>
+            <li role="presentation"><a href="#">Data Page</a></li>
+            <li role="presentation"><a href="#">Arm Page</a></li>
+        </ul>
+      </div>
 </div>
 
 
@@ -46,9 +53,9 @@
 			<video controls ng-src="{{liveStreamURL}}" >
 			Your browser does not support the video tag or RTP streams.
 			</video>
-			
+
 		</div>
-		
+
 		<!--
 			DIV TO HOLD THE 3 CAMERA ANGLES
 			PICTURES THAT REFRESH EVERY 30 SECONDS
@@ -72,20 +79,20 @@
    	 				<br>Right-facing camera<br>
    	 			</div>
    	 			<img ng-src="{{rightCamera}}" ng-click="openRCamStream()" class="img-responsive">
-   	 		</div>	
+   	 		</div>
    	 </div>
   	</div>
-  	
+
 </div>
 <div class="extraInfo">
 (These 3 camera images take a new snapshot/refresh every 30 seconds)
 </div>
 
 <script>
-	
+
 	var app = angular.module('myApp', []);
 	app.controller('myCtrl', function($scope, $interval) {
-		
+
 		// Function updateImages
 		// Updates camera images for front, left and right cameras
 		$scope.updateImages = function(){
@@ -93,10 +100,10 @@
 			$scope.leftCamera = 'output.png';
 			$scope.rightCamera = 'output.png';
 		};
-		
+
 		// Updating images when the page loads
 		$scope.updateImages();
-		
+
 		// Interval that updates camera images every 30 seconds
 		$interval( function(){ $scope.updateImages(); }, 3000); // time in milliseconds
 
