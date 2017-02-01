@@ -81,10 +81,12 @@ class WebServerRoutes():
 	# POST Route for sending data directly to the rover database
 	#	Incoming data must be valid JSON (checked)
 	def recvData(self, item):
-		data = self.byteify(json.loads(str(request.body.read(), encoding='UTF-8')))
-		if isinstance(data, dict):
+		msg_dict = self.byteify(json.loads(str(request.body.read(), encoding='UTF-8')))
+		if isinstance(msg_dict, dict):
+			key = list(msg_dict.keys())[0]
+			data = msg_dict[key]
 			if self.parent is not None:
-				self.parent.uplink.put(data)
+				self.parent.publish(key, data)
 			else:
 				print(data)
 
