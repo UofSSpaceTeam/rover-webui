@@ -1,4 +1,4 @@
-function GamePadMasterFunction() {
+function GamePadMasterFunction(){
   alert("running");
   var hasGP = false;
   var repGP;
