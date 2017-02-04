@@ -13,23 +13,15 @@
 </head>
 <body onload="">
   <div class="jumbotron text-center">
-    <div class >
-      <img src="\static\images\USST_Logo.png" alt="Logo">
-      <h1> Rover Control Interface</h1>
-      <ul class="nav nav-pills">
-          <li role="presentation" class="active"><a href="home">Home</a></li>
-          <li role="presentation"><a href="cameraPage">Camera Page</a></li>
-          <li role="presentation"><a href="#">Data Page</a></li>
-          <li role="presentation"><a href="#">Arm Page</a></li>
-      </ul>
-    </div>
-    <div id ="map">
-      <h2> Local Area Map</h2>
-      <img class = "img-responsive" src="\static\images\output.png" alt="Map"></img>
-    </div>
+    <h1> Rover Control Interface</h1>
+    <ul class="list-inline">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Menu 1</a></li>
+    <li><a href="#">Menu 2</a></li>
+    <li><a href="#">Menu 3</a></li>
+  </ul>
     <div id="gamepadPrompt"></div>
-    <div id="gamepadDisplay">
-    </div>
+    <div id="gamepadDisplay"></div>
   </div>
     </body>
 </html>
