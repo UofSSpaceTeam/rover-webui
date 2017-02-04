@@ -18,7 +18,6 @@ class WebServerRoutes():
 		self.instance.route('/home', method="GET", callback=self.mainPage)
 
 		# other pages
-		self.instance.route('/cameraPage', method="GET", callback=self.mainPage)
 
 		# static files (TBH I have no idea how this works.. but it does!)
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
