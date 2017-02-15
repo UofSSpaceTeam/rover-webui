@@ -87,13 +87,13 @@
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"trigger1" : gp.axes[2]}),
+            data: JSON.stringify({"Ltrigger" : gp.axes[2]}),
             contentType: "application/json"
           });
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"trigger2" : gp.axes[5]}),
+            data: JSON.stringify({"Rtrigger" : gp.axes[5]}),
             contentType: "application/json"
           });
 
