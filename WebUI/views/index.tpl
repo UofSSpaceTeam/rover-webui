@@ -6,16 +6,27 @@
     <script src="/static/scripts/jquery.min.js"></script>
     <script src="/static/scripts/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/static/scripts/TestScript.js"></script>
+    <script src="/static/scripts/GamePad.js"></script>
     <script src="/static/scripts/msgpack-lite-master/dist/msgpack.min.js"></script>
     <script src="https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js"></script>
 
 </head>
-<body onload="Test()">
-
+<body onload="GamePadMasterFunction()">
+  <div class="jumbotron text-center">
+    <h1> Rover Control Interface</h1>
+    <ul class="list-inline">
+    <li><a href="#">Home1</a></li>
+    <li><a href="#">Menu 1</a></li>
+    <li><a href="#">Menu 2</a></li>
+    <li><a href="#">Menu 3</a></li>
+  </ul>
     <div id="gamepadPrompt"></div>
     <div id="gamepadDisplay"></div>
-    <script>
+  </div>
+
+  <script>
+  alert("running");
+  function GamePadMasterFunction(){
     var hasGP = false;
     var repGP;
 
@@ -100,6 +111,7 @@
         }, 150)
 
     });
-    </script>
+  }
+</script>
     </body>
 </html>

@@ -18,7 +18,6 @@ class WebServerRoutes():
 		self.instance.route('/home', method="GET", callback=self.mainPage)
 
 		# other pages
-		
 		# static files (TBH I have no idea how this works.. but it does!)
 		self.instance.route('/static/:filename#.*#', method="GET", callback=self.sendStatic)
 		self.instance.route('/favicon.ico', method="GET", callback=self.sendFavicon)
