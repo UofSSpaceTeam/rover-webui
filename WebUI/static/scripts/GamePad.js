@@ -2,6 +2,7 @@ function GamePadMasterFunction(){
   alert("running");
   var hasGP = false;
   var repGP;
+  var gpCheck = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
 
   function canGame() {
       return "getGamepads" in navigator;
@@ -23,12 +24,36 @@ function GamePadMasterFunction(){
       }
 
       $("#gamepadDisplay").html(html);
+      //OnlyAlertsOncePressed
+      for(var i=0;i<gp.buttons.length;i++){
+        if(gp.buttons[i].pressed == true){
+          if(gpCheck[i]==false){
+            gpCheck[i] = true
+            $.ajax({
+              url: "/data/GamePadData",
+              method: "POST",
+              data: JSON.stringify({"button" : [gp.buttons[i].pressed]}),
+              contentType: "application/json"
+            });
+          }
+        }
+        else{
+          if(gpCheck[i]==true){
+            gpCheck[i] = false
+            $.ajax({
+              url: "/data/GamePadData",
+              method: "POST",
+              data: JSON.stringify({"button": [gp.buttons[i].pressed]}),
+              contentType: "application/json"
+            });
+          }
+        }
+      }
   }
 
   $(document).ready(function() {
 
       if(canGame()) {
-
           var prompt = "To begin using your gamepad, connect it and press any button!";
           $("#gamepadPrompt").text(prompt);
 
@@ -54,34 +79,17 @@ function GamePadMasterFunction(){
               }
           }, 500);
       }
-      window.setInterval(function(){
-        var gp = navigator.getGamepads()[0];
-        $.ajax({
-          url: "/data/GamePadData",
-          method: "POST",
-          data: JSON.stringify({"joystick1" : [gp.axes[0], gp.axes[1]]}),
-          contentType: "application/json"
-        });
-        $.ajax({
-          url: "/data/GamePadData",
-          method: "POST",
-          data: JSON.stringify({"joystick2" : [gp.axes[3], gp.axes[4]]}),
-          contentType: "application/json"
-        });
-        $.ajax({
-          url: "/data/GamePadData",
-          method: "POST",
-          data: JSON.stringify({"trigger1" : gp.axes[2]}),
-          contentType: "application/json"
-        });
-        $.ajax({
-          url: "/data/GamePadData",
-          method: "POST",
-          data: JSON.stringify({"trigger2" : gp.axes[5]}),
-          contentType: "application/json"
-        });
-
-      }, 150)
 
   });
+
+
+        window.setInterval(function(){
+          var gp = navigator.getGamepads()[0];
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"joystick1" : []}),
+            contentType: "application/json"
+          });
+        }, 150)
 }
