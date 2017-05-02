@@ -110,25 +110,25 @@
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"ButtonA" : gp.buttons[0]}),
+            data: JSON.stringify({"ButtonA" : gp.buttons[0].pressed}),
             contentType: "application/json"
           });
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"ButtonB" : gp.buttons[1]}),
+            data: JSON.stringify({"ButtonB" : gp.buttons[1].pressed}),
             contentType: "application/json"
           });
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"ButtonX" : gp.buttons[2]}),
+            data: JSON.stringify({"ButtonX" : gp.buttons[2].pressed}),
             contentType: "application/json"
           });
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"ButtonY" : gp.buttons[3]}),
+            data: JSON.stringify({"ButtonY" : gp.buttons[3].pressed}),
             contentType: "application/json"
           });
 
