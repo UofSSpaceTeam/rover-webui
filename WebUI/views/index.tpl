@@ -107,6 +107,30 @@
             data: JSON.stringify({"Rtrigger" : gp.axes[5]}),
             contentType: "application/json"
           });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"ButtonA" : gp.buttons[0]}),
+            contentType: "application/json"
+          });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"ButtonB" : gp.buttons[1]}),
+            contentType: "application/json"
+          });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"ButtonX" : gp.buttons[2]}),
+            contentType: "application/json"
+          });
+          $.ajax({
+            url: "/data/GamePadData",
+            method: "POST",
+            data: JSON.stringify({"ButtonY" : gp.buttons[3]}),
+            contentType: "application/json"
+          });
 
         }, 150)
 
