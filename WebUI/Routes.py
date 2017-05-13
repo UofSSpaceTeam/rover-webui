@@ -85,7 +85,12 @@ class WebServerRoutes():
 			key = list(msg_dict.keys())[0]
 			data = msg_dict[key]
 			if self.parent is not None:
-				self.parent.publish(key, data)
+				if key == "gamepad1":
+					# Break gamepad message into individual components
+					for k in data.keys():
+						self.parent.publish(k, data[k])
+				else:
+					self.parent.publish(key, data)
 			else:
 				print(data)
 
