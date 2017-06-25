@@ -1,4 +1,5 @@
-from .bottle import Bottle, route, get, post, template, static_file, request, response
+from bottle import Bottle, route, get, post, template, static_file, request, response
+from bottle.ext.websocket import websocket
 import json
 
 class WebServerRoutes():
@@ -25,6 +26,9 @@ class WebServerRoutes():
 		# communication - All Data received from rover
 		self.instance.route('/data/<item>', method="POST", callback=self.recvData)
 		self.instance.route('/req/<item>', method="POST", callback=self.sendData)
+
+		# websocket
+		self.instance.route('/websocket', method="GET", apply=[websocket], callback=self.handle_websocket)
 
 	# define the template to show and any preprocessing
 	def mainPage(self):
@@ -108,6 +112,16 @@ class WebServerRoutes():
 
 		else:
 			return json.dumps({item : "test"})
+
+	# Websocket Route for sending streaming data to the rover (ie. fast control)
+	def handle_websocket(self, ws):
+		if ws is None:
+			print('WARN: Connection is not a websocket!')
+		while ws is not None:
+			msg = ws.receive()
+			if msg is not None:
+				ws.send(msg)
+			else: break
 
 	# Utility to more robustly parse json into a python dict
 	def byteify(self, input):

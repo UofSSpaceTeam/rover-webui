@@ -27,11 +27,43 @@
       Your browser does not support the HTML5 canvas tag.
     </canvas>
   </div>
-    </body>
+  <h2>Bottle Websockets!</h2>
+    <form id="send" action='.'>
+        <input type="text" value="message" />
+        <input type="submit" value="Send" />
+    </form>
+    <div id="messages"></div>
+  </body>
 </html>
 
 <script>
   window.onload = function() {
+
+    $(document).ready(function() {
+            if (!window.WebSocket) {
+                if (window.MozWebSocket) {
+                    window.WebSocket = window.MozWebSocket;
+                } else {
+                    $('#messages').append("<li>Your browser doesn't support WebSockets.</li>");
+                }
+            }
+            ws = new WebSocket('ws://127.0.0.1:8000/websocket');
+            ws.onopen = function(evt) {
+                $('#messages').append('<li>WebSocket connection opened.</li>');
+            }
+            ws.onmessage = function(evt) {
+                $('#messages').append('<li>' + evt.data + '</li>');
+            }
+            ws.onclose = function(evt) {
+                $('#messages').append('<li>WebSocket connection closed.</li>');
+            }
+            $('#send').submit(function() {
+                ws.send($('input:first').val());
+                $('input:first').val('').focus();
+                return false;
+            });
+        });
+
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
     var img = new Image;
