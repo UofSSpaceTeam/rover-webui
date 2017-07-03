@@ -15,7 +15,8 @@ function GamePadMasterFunction(){
           html += "id: "+gp.id+"<br/>";
 
       for(var i=0;i<gp.buttons.length;i++) {
-          html+= "Button "+(i+1)+": ";
+          //html+= "Button "+(i+1)+": ";
+          html+= (getButtonName(i+1))+": ";
           if(gp.buttons[i].pressed) html+= " pressed";
           html+= "<br/>";
       }
