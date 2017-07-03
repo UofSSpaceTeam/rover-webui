@@ -2,7 +2,8 @@ function GamePadMasterFunction(){
   alert("running");
   var hasGP = false;
   var repGP;
-  var gpCheck = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false]
+  var gpCheck = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+  var buttonName = ["buttonA", "buttonB", "buttonX", "buttonY"];
 
   function canGame() {
       return "getGamepads" in navigator;
@@ -29,10 +30,12 @@ function GamePadMasterFunction(){
         if(gp.buttons[i].pressed == true){
           if(gpCheck[i]==false){
             gpCheck[i] = true
+            var msg = {};
+            msg[buttonName[i]+"_down" ] = true;
             $.ajax({
               url: "/data/GamePadData",
               method: "POST",
-              data: JSON.stringify({"button" : [gp.buttons[i].pressed]}),
+              data: JSON.stringify(msg),
               contentType: "application/json"
             });
           }
@@ -40,10 +43,12 @@ function GamePadMasterFunction(){
         else{
           if(gpCheck[i]==true){
             gpCheck[i] = false
+            var msg = {};
+            msg[buttonName[i]+"_up" ] = false;
             $.ajax({
               url: "/data/GamePadData",
               method: "POST",
-              data: JSON.stringify({"button": [gp.buttons[i].pressed]}),
+              data: JSON.stringify(msg),
               contentType: "application/json"
             });
           }
@@ -85,10 +90,19 @@ function GamePadMasterFunction(){
 
         window.setInterval(function(){
           var gp = navigator.getGamepads()[0];
+          var gpdata = {};
+          gpdata["joystick1"] = [gp.axes[0],gp.axes[1]];
+          gpdata["joystick2"] = [gp.axes[3],gp.axes[2]];
+          gpdata["triggerL" ] = gp.axes[5];
+          gpdata["triggerR" ] = gp.axes[4];
+          for (i=0; i<4; i++) {
+            gpdata[buttonName[i]] = gp.buttons[i].pressed; //Why this no work?
+
+          }
           $.ajax({
             url: "/data/GamePadData",
             method: "POST",
-            data: JSON.stringify({"joystick1" : []}),
+            data: JSON.stringify({"gamepad1" : gpdata}),
             contentType: "application/json"
           });
         }, 150)
