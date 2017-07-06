@@ -7,7 +7,7 @@
     <script src="/static/scripts/GamePad.js"></script>
 
 </head>
-<body onload="GamePadMasterFunction()">
+<body >
   <h1 class = "text-center">USST</h1>
   <h2 class = "text-center">Rover Control Interface</h2>
   <div class="container">
@@ -35,6 +35,7 @@
 <script>
   window.onload = function() {
 
+    GamePadMasterFunction();
     $(document).ready(function() {
             if (!window.WebSocket) {
                 if (window.MozWebSocket) {
