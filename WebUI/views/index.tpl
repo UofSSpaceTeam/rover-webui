@@ -137,8 +137,9 @@
   }, 1000);
 
   function GPSUpdate(){
-    $.get("RoverPosition", function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+    $.get("req/RoverPosition", function(data, status){
+        alert(data[0])
+
     });
   }
   //RoverPosition

@@ -25,7 +25,7 @@ class WebServerRoutes():
 
 		# communication - All Data received from rover
 		self.instance.route('/data/<item>', method="POST", callback=self.recvData)
-		self.instance.route('/req/<item>', method="POST", callback=self.sendData)
+		self.instance.route('/req/<item>', method="GET", callback=self.sendData)
 
 		# websocket
 		self.instance.route('/websocket', method="GET", apply=[websocket], callback=self.handle_websocket)
@@ -103,7 +103,7 @@ class WebServerRoutes():
 		if self.parent is not None:
 			with self.dataSem:
 				try:
-					jsonData = json.dumps(self.parent.data.pop(item))
+					jsonData = json.dumps(self.parent.data[item])
 					return jsonData
 				except KeyError:
 					print("Err: requested key", str(item), "not found!")
