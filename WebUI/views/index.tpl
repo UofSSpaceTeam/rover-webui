@@ -101,6 +101,7 @@
         img.src = "/static/Map.png";
         width = c.width;
         height = c.height;
+        ctx.drawImage(img,0,0,width,height);
   }
 
   function calculateFunction(){
@@ -114,25 +115,33 @@
 }
   function DrawLine(sLat,sLong,eLat,eLong){
     var c=document.getElementById("myCanvas");
-    var ctx=c.getContext("2d");
-    ctx.beginPath();
-    ctx.moveTo(0,0);
-    ctx.lineTo(300,150);
-    ctx.stroke()
-  }
+    var horz=c.getContext("2d");
+    var vert=c.getContext("2d");
+    horz.beginPath();
+    horz.moveTo(0,0);
+    horz.lineTo(300,150);
+    horz.stroke()
 
+  }
   function DrawRover(){
     var c=document.getElementById("myCanvas");
     var ctx=c.getContext("2d");
     ctx.beginPath();
-    ctx.arc(x,y,50,0,2*Math.PI);
+    ctx.arc(0,0,50,0,2*Math.PI);
     ctx.stroke();
 
   }
   window.setInterval(function(){
-    DrawRover(x+=1,y+=1)
-
+    DrawRover()
+    GPSUpdate()
   }, 1000);
 
+  function GPSUpdate(){
+    $.get("RoverPosition", function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
+  }
+  //RoverPosition
+//RoverHeading
 
 </script>
