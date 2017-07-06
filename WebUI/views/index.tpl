@@ -69,6 +69,13 @@
 </html>
 
 <script>
+
+
+  var RoverX = 100;
+  var RoverY = 100;
+  var StartMotion = false;
+  var sLat = 0.0;
+  var sLong = 0.0;
   window.onload = function() {
 
     $(document).ready(function() {
@@ -105,8 +112,9 @@
   }
 
   function calculateFunction(){
-    var sLat = document.getElementById("sLat").value
-    var sLong = document.getElementById("sLong").value
+    StartMotion = true;
+    sLat = document.getElementById("sLat").value
+    sLong = document.getElementById("sLong").value
     var eLat = document.getElementById("eLat").value
     var eLong = document.getElementById("eLong").value
     var distLat = (Math.abs(sLat) - Math.abs(eLat)) * 110575;
@@ -127,7 +135,7 @@
     var c=document.getElementById("myCanvas");
     var ctx=c.getContext("2d");
     ctx.beginPath();
-    ctx.arc(0,0,50,0,2*Math.PI);
+    ctx.arc(RoverX,RoverY,10,0,2*Math.PI);
     ctx.stroke();
 
   }
@@ -137,10 +145,22 @@
   }, 1000);
 
   function GPSUpdate(){
-    $.get("req/RoverPosition", function(data, status){
-        alert(data[0])
-
-    });
+    if(StartMotion == true){
+      $.get("req/RoverPosition", function(data, status){
+        if(data[0] > sLat){
+          RoverY+=1;
+        }
+        elseif(data[0]<sLat){
+          RoverY-=1;
+        }
+        if(data[1] >sLong){
+          RoverX+=1;
+        }
+        elseif(data[0]<sLong){
+          RoverX-=1;
+        }
+      });
+    }
   }
   //RoverPosition
 //RoverHeading
