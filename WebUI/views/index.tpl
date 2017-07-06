@@ -25,9 +25,11 @@
   <div class="container">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Camera</a></li>
+        <li><a href="/camera">Camera</a></li>
         <li><a href="#">Settings</a></li>
-        <li><a href="#">Stats</a></li>
+        <li><a href="/stats">Stats</a></li>
+        <li><a href="http://3.3.3.4:7890/?action=stream">Camera0</a></li>
+        <li><a href="http://3.3.3.4:7891/?action=stream">Camera1</a></li>
       </ul>
   </div>
   <div class="jumbotron text-center">
@@ -78,6 +80,7 @@
   var sLong = 0.0;
   window.onload = function() {
 
+    GamePadMasterFunction();
     $(document).ready(function() {
             if (!window.WebSocket) {
                 if (window.MozWebSocket) {
