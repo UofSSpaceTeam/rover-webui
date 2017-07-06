@@ -148,16 +148,20 @@
     if(StartMotion == true){
       $.get("req/RoverPosition", function(data, status){
         if(data[0] > sLat){
-          RoverY+=1;
+          RoverY+=1
+          sLat = data[0]
         }
-        elseif(data[0]<sLat){
-          RoverY-=1;
+        if(data[0]<sLat){
+          RoverY-=1
+          sLat = data[0]
         }
         if(data[1] >sLong){
-          RoverX+=1;
+          RoverX+=1
+          sLong = data[1]
         }
-        elseif(data[0]<sLong){
-          RoverX-=1;
+        if(data[1]<sLong){
+          RoverX-=1
+          sLong = data[1]
         }
       });
     }
