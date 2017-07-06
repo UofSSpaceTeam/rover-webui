@@ -145,11 +145,12 @@
   window.setInterval(function(){
     DrawRover()
     GPSUpdate()
-  }, 1000);
+  }, 100);
 
   function GPSUpdate(){
     if(StartMotion == true){
       $.get("req/RoverPosition", function(data, status){
+        data = JSON.parse(data)
         if(data[0] > sLat){
           RoverY+=1
           sLat = data[0]
@@ -166,6 +167,7 @@
           RoverX-=1
           sLong = data[1]
         }
+        alert(data[0])
       });
     }
   }
