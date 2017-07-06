@@ -15,7 +15,9 @@
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">Camera</a></li>
         <li><a href="#">Settings</a></li>
-        <li><a href="#">Stats</a></li>
+        <li><a href="/stats">Stats</a></li>
+        <li><a href="http://3.3.3.4:7890/?action=stream">Camera0</a></li>
+        <li><a href="http://3.3.3.4:7891/?action=stream">Camera1</a></li>
       </ul>
   </div>
   <div class="jumbotron text-center">

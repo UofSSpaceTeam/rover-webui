@@ -17,6 +17,7 @@ class WebServerRoutes():
 		self.instance.route('/', method="GET", callback=self.mainPage)
 		self.instance.route('/index', method="GET", callback=self.mainPage)
 		self.instance.route('/home', method="GET", callback=self.mainPage)
+		self.instance.route('/stats', method="GET", callback=self.statsPage)
 
 		# other pages
 		# static files (TBH I have no idea how this works.. but it does!)
@@ -33,6 +34,9 @@ class WebServerRoutes():
 	# define the template to show and any preprocessing
 	def mainPage(self):
 		return template('index')
+
+	def statsPage(self):
+		return template('stats')
 
 	# Static Routes for CSS/Images etc
 	def sendStatic(self, filename):
