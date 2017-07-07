@@ -1,5 +1,4 @@
 function GamePadMasterFunction(){
-  alert("running");
   var hasGP = false;
   var repGP;
   var gpCheck = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];

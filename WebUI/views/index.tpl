@@ -10,11 +10,6 @@
 
 
 <style>
-#statsDiv{
-  position: absolute;
-  left: 1520px;
-  top: 180px;
-}
 
 </style>
 
@@ -25,29 +20,31 @@
   <div class="container">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="/camera">Camera</a></li>
-        <li><a href="#">Settings</a></li>
-        <li><a href="/stats">Stats</a></li>
         <li><a href="http://3.3.3.4:7890/?action=stream">Camera0</a></li>
         <li><a href="http://3.3.3.4:7891/?action=stream">Camera1</a></li>
       </ul>
   </div>
-  <div class="jumbotron text-center">
+  <div class="jumbotron text-centered">
+    <div class="row">
+      <div class="col-sm-12">
+        <canvas id="myCanvas" style="border:1px solid #d3d3d3;width:100%;height:100%">
 
-    <canvas id="myCanvas" width = "1069" height ="808" style="border:1px solid #d3d3d3;">
-
-    </canvas>
-    <div id = "statsDiv">
-      <h1>Coordinates</h2>
-        <h2>Start</h2>
-        <div class="form-group">
-          <label for="usr">Latitude</label>
-          <input type="float" class="form-control" id="sLat">
-        </div>
-        <div class="form-group">
-            <label for="sLong">Longitude</label>
-            <input type="float" class="form-control" id="sLong">
-        </div>
+        </canvas>
+      </div>
+    </div>
+    <div class = "row">
+      <div class = "col-sm-6">
+            <h2>Start</h2>
+            <div class="form-group">
+              <label for="usr">Latitude</label>
+              <input type="float" class="form-control" id="sLat">
+            </div>
+            <div class="form-group">
+                <label for="sLong">Longitude</label>
+                <input type="float" class="form-control" id="sLong">
+            </div>
+      </div>
+      <div class = "col-sm-6">
         <h2>End</h2>
         <div class="form-group">
           <label for="usr">Latitude</label>
@@ -58,9 +55,9 @@
             <input type="float" class="form-control" id="eLong">
         </div>
         <button type="button" class="btn btn-default" onclick="calculateFunction()">Enter</button>
-
-    </div>
+      </div>
   </div>
+
   <h2>Bottle Websockets!</h2>
     <form id="send" action='.'>
         <input type="text" value="message" />
@@ -72,12 +69,34 @@
 
 <script>
 
+  var imgSrc = "/static/Map.png";
 
-  var RoverX = 100;
-  var RoverY = 100;
+  var BottomLeftReference = [52.119890,-106.656574]
+  var TopRightReferece = [52.126923,-106.63845]
+
+  var width = (TopRightReferece[1] - BottomLeftReference[1]) * 111303
+  var height = (TopRightReferece[0]-BottomLeftReference[0]) * 110575
+
+  var RoverX = 0;
+  var RoverY = 0;
+
   var StartMotion = false;
+
+  //Nav Variables
+
   var sLat = 0.0;
   var sLong = 0.0;
+  var eLat = 0.0;
+  var eLong = 0.0;
+  var distLat = 0.0;
+  var distLong = 0.0;
+  var pixPerMeterLat = 0.0;
+  var pixPerMeterLong = 0.0;
+
+  //Img Variables
+  var c = document.getElementById("myCanvas");
+  var img = new Image;
+
   window.onload = function() {
 
     GamePadMasterFunction();
@@ -105,12 +124,12 @@
                 return false;
             });
         });
-        var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
-        var img = new Image;
-        img.src = "/static/Map.png";
-        width = c.width;
-        height = c.height;
+        img.src = imgSrc;
+        var width = img.width;
+        var height = img.height;
+        c.width = width
+        c.height = height
         ctx.drawImage(img,0,0,width,height);
   }
 
@@ -118,28 +137,37 @@
     StartMotion = true;
     sLat = document.getElementById("sLat").value
     sLong = document.getElementById("sLong").value
-    var eLat = document.getElementById("eLat").value
-    var eLong = document.getElementById("eLong").value
-    var distLat = (Math.abs(sLat) - Math.abs(eLat)) * 110575;
-    var distLong = (Math.abs(sLong) - Math.abs(eLong)) * 111303;
-    DrawLine(sLat,sLong,eLat,eLong)
+    eLat = document.getElementById("eLat").value
+    eLong = document.getElementById("eLong").value
+    distLat = (Math.abs(sLat) - Math.abs(eLat)) * 110575;
+    distLong = (Math.abs(sLong) - Math.abs(eLong)) * 111303;
+    pixPerMeterLat = Math.abs(distLat / img.height);
+    pixPerMeterLong = Math.abs(distLong / img.width);
+    DrawLine()
 }
-  function DrawLine(sLat,sLong,eLat,eLong){
+  function DrawLine(){
     var c=document.getElementById("myCanvas");
     var horz=c.getContext("2d");
-    var vert=c.getContext("2d");
+    var RoverEY = ((eLat - BottomLeftReference[0]) * 110575) / height
+    var RoverEX = ((eLong - BottomLeftReference[1]) * 111303) / width
     horz.beginPath();
-    horz.moveTo(0,0);
-    horz.lineTo(300,150);
+    horz.moveTo(img.width * RoverX,img.height - (img.height * RoverY));
+    horz.lineTo(img.width * RoverEX,img.height - (img.height * RoverEY));
     horz.stroke()
 
   }
   function DrawRover(){
-    var c=document.getElementById("myCanvas");
-    var ctx=c.getContext("2d");
-    ctx.beginPath();
-    ctx.arc(RoverX,RoverY,10,0,2*Math.PI);
-    ctx.stroke();
+    if (StartMotion == true){
+      RoverY = ((sLat - BottomLeftReference[0]) * 110575) / height
+      RoverX = ((sLong - BottomLeftReference[1]) * 111303) / width
+      var c=document.getElementById("myCanvas");
+      var ctx=c.getContext("2d");
+      ctx.beginPath();
+      ctx.arc(img.width * RoverX, (img.height - (img.height * RoverY)),10,0,2*Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+      ctx.stroke();
+    }
 
   }
   window.setInterval(function(){
@@ -151,27 +179,15 @@
     if(StartMotion == true){
       $.get("req/RoverPosition", function(data, status){
         data = JSON.parse(data)
-        if(data[0] > sLat){
-          RoverY+=1
-          sLat = data[0]
-        }
-        if(data[0]<sLat){
-          RoverY-=1
-          sLat = data[0]
-        }
-        if(data[1] >sLong){
-          RoverX+=1
-          sLong = data[1]
-        }
-        if(data[1]<sLong){
-          RoverX-=1
-          sLong = data[1]
-        }
-        alert(data[0])
+        sLat = data[0];
+        sLong = data[1];
       });
     }
   }
-  //RoverPosition
-//RoverHeading
+
+  function ReferenceUpdate(){
+
+
+  }
 
 </script>
