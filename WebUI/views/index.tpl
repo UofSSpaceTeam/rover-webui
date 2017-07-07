@@ -58,6 +58,36 @@
       </div>
   </div>
 
+  <div class = "row">
+    <div class = "col-sm-6">
+          <h2>Bottom Left GPS Reference</h2>
+          <div class="form-group">
+            <label for="usr">Latitude</label>
+            <input type="float" class="form-control" id="BLLat">
+          </div>
+          <div class="form-group">
+              <label for="sLong">Longitude</label>
+              <input type="float" class="form-control" id="BLLong">
+          </div>
+    </div>
+    <div class = "col-sm-6">
+      <h2>Top Right GPS Reference</h2>
+      <div class="form-group">
+        <label for="usr">Latitude</label>
+        <input type="float" class="form-control" id="TRLat">
+      </div>
+      <div class="form-group">
+          <label for="eLong">Longitude</label>
+          <input type="float" class="form-control" id="TRLong">
+      </div>
+      <div class="form-group">
+          <label for="eLong">Image Source</label>
+          <input type="float" class="form-control" id="ImageSource">
+      </div>
+      <button type="button" class="btn btn-default" onclick="ReferenceUpdate()">Enter</button>
+    </div>
+</div>
+
   <h2>Bottle Websockets!</h2>
     <form id="send" action='.'>
         <input type="text" value="message" />
@@ -186,7 +216,19 @@
   }
 
   function ReferenceUpdate(){
+    BottomLeftReference[0] = document.getElementById("BLLat").value;
+    BottomLeftReference[1] = document.getElementById("BLLong").value;
+    TopRightReferece[0] = document.getElementById("TRLat").value;
+    TopRightReferece[0] = document.getElementById("TRLong").value;
+    imgSrc = document.getElementById("ImageSource").value;
 
+    var ctx = c.getContext("2d");
+    img.src = imgSrc;
+    var width = img.width;
+    var height = img.height;
+    c.width = width
+    c.height = height
+    ctx.drawImage(img,0,0,width,height);
 
   }
 
