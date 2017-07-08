@@ -154,13 +154,6 @@
                 return false;
             });
         });
-        var ctx = c.getContext("2d");
-        img.src = imgSrc;
-        var width = img.width;
-        var height = img.height;
-        c.width = width
-        c.height = height
-        ctx.drawImage(img,0,0,width,height);
   }
 
   function calculateFunction(){
@@ -186,12 +179,21 @@
     horz.stroke()
 
   }
-  function DrawRover(){
+
+  window.setInterval(function(){
+    var c = document.getElementById("myCanvas")
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0,0,c.width,c.height)
+    img.src = imgSrc;
+    var width = img.width;
+    var height = img.height;
+    c.width = width
+    c.height = height
+    ctx.drawImage(img,0,0,width,height);
+
     if (StartMotion == true){
       RoverY = ((sLat - BottomLeftReference[0]) * 110575) / height
       RoverX = ((sLong - BottomLeftReference[1]) * 111303) / width
-      var c=document.getElementById("myCanvas");
-      var ctx=c.getContext("2d");
       ctx.beginPath();
       ctx.arc(img.width * RoverX, (img.height - (img.height * RoverY)),10,0,2*Math.PI);
       ctx.fillStyle = "black";
@@ -199,9 +201,6 @@
       ctx.stroke();
     }
 
-  }
-  window.setInterval(function(){
-    DrawRover()
     GPSUpdate()
   }, 100);
 
