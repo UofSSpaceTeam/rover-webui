@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
     <link rel="stylesheet" href="/static/scripts/bootstrap-3.3.7-dist/css/bootstrap.min.css"></link>
     <script src="/static/scripts/jquery.min.js"></script>
     <script src="/static/scripts/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
     <script src="/static/scripts/GamePad.js"></script>
     <script src="/static/scripts/ButtonIDs.js"></script>
     <script src="/static/scripts/StatsController.js"></script>
-    <script src="/static/scripts/msgpack-lite-master/dist/msgpack.min.js"></script>
-    <script src="https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js"></script>
   </head>
 
 <!--  CUSTOM CSS CLASSES  -->

@@ -16,12 +16,15 @@
 
 <body>
   <h1 class = "text-center">USST</h1>
+  <div id="NavFeedback">
   <h2 class = "text-center">Rover Control Interface</h2>
+  </div>
   <div class="container">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="http://3.3.3.4:7890/?action=stream">Camera0</a></li>
         <li><a href="http://3.3.3.4:7891/?action=stream">Camera1</a></li>
+        <li><a href="/stats">Stats</a></li>
       </ul>
   </div>
   <div class="jumbotron text-centered">
@@ -99,10 +102,22 @@
 
 <script>
 
-  var imgSrc = "/static/Map.png";
+  // var imgSrc = "/static/Map.png";
 
-  var BottomLeftReference = [52.119890,-106.656574]
-  var TopRightReferece = [52.126923,-106.63845]
+  // Hotel parking lot
+  var imgSrc = "/static/images/test.png";
+  var BottomLeftReference = [51.459923, -112.708389]
+  var TopRightReferece = [51.460636, -112.707169]
+
+  // Mcmullen Island
+  // var imgSrc = "/static/images/test.png";
+  // var BottomLeftReference = [51.459923, -112.708389]
+  // var TopRightReferece = [51.460636, -112.707169]
+
+  //Compound
+  // var imgSrc = "/static/images/test.png";
+  // var BottomLeftReference = [51.459923, -112.708389]
+  // var TopRightReferece = [51.460636, -112.707169]
 
   var width = (TopRightReferece[1] - BottomLeftReference[1]) * 111303
   var height = (TopRightReferece[0]-BottomLeftReference[0]) * 110575
@@ -192,8 +207,20 @@
       RoverX = ((sLong - BottomLeftReference[1]) * 111303) / width
       var c=document.getElementById("myCanvas");
       var ctx=c.getContext("2d");
+      // ctx.save();
+      // // Use the identity matrix while clearing the canvas
+      // ctx.setTransform(1, 0, 0, 1, 0, 0);
+      // ctx.clearRect(0, 0, c.width, c.height);
+      // // Restore the transform
+      // ctx.restore();
+      // img.src = imgSrc;
+      // var width = img.width;
+      // var height = img.height;
+      // c.width = width
+      // c.height = height
+      // ctx.drawImage(img,0,0,width,height);
       ctx.beginPath();
-      ctx.arc(img.width * RoverX, (img.height - (img.height * RoverY)),10,0,2*Math.PI);
+      ctx.arc(img.width * RoverX, (img.height - (img.height * RoverY)),1,0,2*Math.PI);
       ctx.fillStyle = "black";
       ctx.fill();
       ctx.stroke();
@@ -211,6 +238,17 @@
         data = JSON.parse(data)
         sLat = data[0];
         sLong = data[1];
+      });
+      $.get("req/TargetReached", function(data, status) {
+        console.log(data)
+        data = JSON.parse(data)
+        var elem = document.getElementById("NavFeedback");
+        if(data == true) {
+            elem.style.color = "Green";
+        } else {
+            elem.style.color = "Red";
+
+        }
       });
     }
   }

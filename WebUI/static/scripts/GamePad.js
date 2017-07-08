@@ -92,9 +92,9 @@ function GamePadMasterFunction(){
           var gp = navigator.getGamepads()[0];
           var gpdata = {};
           gpdata["joystick1"] = [gp.axes[0],gp.axes[1]];
-          gpdata["joystick2"] = [gp.axes[3],gp.axes[2]];
-          gpdata["triggerL" ] = gp.axes[5];
-          gpdata["triggerR" ] = gp.axes[4];
+          gpdata["joystick2"] = [gp.axes[3],gp.axes[4]];
+          gpdata["triggerL" ] = gp.axes[2];
+          gpdata["triggerR" ] = gp.axes[5];
           for (i=0; i<4; i++) {
             gpdata[buttonName[i]] = gp.buttons[i].pressed; //Why this no work?
 
