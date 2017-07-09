@@ -95,6 +95,7 @@ function GamePadMasterFunction(){
           gpdata["joystick2"] = [gp.axes[3],gp.axes[4]];
           gpdata["triggerL" ] = gp.axes[2];
           gpdata["triggerR" ] = gp.axes[5];
+          gpdata["dpad"]      = [gp.axes[6], gp.axes[7]]
           for (i=0; i<4; i++) {
             gpdata[buttonName[i]] = gp.buttons[i].pressed; //Why this no work?
 
