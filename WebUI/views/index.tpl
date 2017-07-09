@@ -105,19 +105,19 @@
   // var imgSrc = "/static/Map.png";
 
   // Hotel parking lot
-  var imgSrc = "/static/images/test.png";
-  var BottomLeftReference = [51.459923, -112.708389]
-  var TopRightReferece = [51.460636, -112.707169]
+  // var imgSrc = "/static/images/test.png";
+  // var BottomLeftReference = [51.459923, -112.708389]
+  // var TopRightReferece = [51.460636, -112.707169]
 
   // Mcmullen Island
-  // var imgSrc = "/static/images/test.png";
-  // var BottomLeftReference = [51.459923, -112.708389]
-  // var TopRightReferece = [51.460636, -112.707169]
+  // var imgSrc = "/static/images/mcmullen.png";
+  // var BottomLeftReference = [51.469566, -112.774124]
+  // var TopRightReferece = [51.470394, -112.772202]
 
   //Compound
-  // var imgSrc = "/static/images/test.png";
-  // var BottomLeftReference = [51.459923, -112.708389]
-  // var TopRightReferece = [51.460636, -112.707169]
+  var imgSrc = "/static/images/compound.png";
+  var BottomLeftReference = [51.47007, -112.75396]
+  var TopRightReferece = [51.472237, -112.75071]
 
   var width = (TopRightReferece[1] - BottomLeftReference[1]) * 111303
   var height = (TopRightReferece[0]-BottomLeftReference[0]) * 110575
