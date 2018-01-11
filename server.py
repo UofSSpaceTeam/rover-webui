@@ -1,35 +1,49 @@
 import json
-
-from bottle import route, run, template, static_file
+from aiohttp import web
 from robocluster import Device
 
-server = Device('web-ui', 'rover')
-server.storage.RoverPosition = [52, 115]
-server.storage.TargetReached = False
+routes = web.RouteTableDef()
 
-@server.every('1s')
+serverd = Device('webui', 'rover')
+serverd.storage.TargetReached = False
+
+@serverd.every('1s')
 async def toggle():
-    server.storage.TargetReached = not server.storage.TargetReached
+    serverd.storage.TargetReached = not\
+            serverd.storage.TargetReached
 
-@route('/')
-def home():
-    return template('index')
+@routes.get('/')
+async def index(request):
+    print('Home page')
+    return web.FileResponse('./views/index.html')
 
-@route('/static/<path:re:.*>')
-def static(path):
-    return static_file(path, root='./static/')
+@routes.get('/stats')
+async def stats(request):
+    print('stats')
+    return web.FileResponse('./views/stats.html')
 
-@route('/req/<item>', method='GET')
-def request(item):
-    print('Request for {}'.format(item))
-    if item in server.storage:
-        return json.dumps(server.storage[item])
+@routes.get('/vue')
+async def vuepage(request):
+    print('vuetest')
+    return web.FileResponse('./vue/index.html')
+
+@routes.get('/req/{name}')
+async def req(request):
+    name = request.match_info['name']
+    print('data request {}'.format(name))
+    if name in serverd.storage:
+        return web.json_response(serverd.storage[name])
     else:
-        return template('nothin')
+        return web.Response(text='none')
 
-@route('/data/<item>', method='POST')
-def post(item):
-    print('POST: {}'.format(item))
+@routes.post('/data/{name}')
+async def post(request):
+    print('data post {}'.format(request.match_info['name']))
 
-server.start()
-run(host='localhost', port=8080)
+app = web.Application()
+
+app.router.add_routes(routes)
+app.router.add_static('/static', './static/')
+
+serverd.start()
+web.run_app(app)
