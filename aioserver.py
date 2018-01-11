@@ -20,6 +20,11 @@ async def index(request):
     print('Home page')
     return {}
 
+@routes.get('/vue')
+async def vuepage(request):
+    print('vuetest')
+    return web.FileResponse('./vue/index.html')
+
 @routes.get('/req/{name}')
 async def req(request):
     name = request.match_info['name']
