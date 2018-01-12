@@ -1,8 +1,8 @@
 var template =`
-    <div id="app">
-        <img src="https://vuejs.org/images/logo.png" alt="Vue logo">
-        <h1>{{ greeting }}</h1>
-    </div>
+  <div>
+    <storage-text resource='TargetReached'></storage-text>
+    <h1>{{ greeting }}</h1>
+  </div>
 `;
 var app = new Vue({
   el: '#app',
