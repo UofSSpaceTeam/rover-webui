@@ -7,7 +7,7 @@ routes = web.RouteTableDef()
 serverd = Device('webui', 'rover')
 serverd.storage.TargetReached = False
 
-@serverd.every('1s')
+# @serverd.every('1s')
 async def toggle():
     serverd.storage.TargetReached = not\
             serverd.storage.TargetReached
@@ -36,9 +36,14 @@ async def req(request):
     else:
         return web.Response(text='none')
 
-@routes.post('/data/{name}')
+@routes.post('/submit/{name}')
 async def post(request):
-    print('data post {}'.format(request.match_info['name']))
+    name = request.match_info['name']
+    data = await request.read()
+    data = json.loads(data.decode('utf-8'))
+    print('data post {}'.format(data))
+    serverd.storage[name] = data[name]
+    return web.Response()
 
 app = web.Application()
 

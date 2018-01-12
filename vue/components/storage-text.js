@@ -1,7 +1,9 @@
 var template =`
 <div>
     <h3>{{resource}} : {{value}}</h3>
-    <button v-on:click="loadValue">Refresh</button>
+    <input v-model="new_value"></input>
+    <button v-on:click="getValue">Get value</button>
+    <button v-on:click="setValue">Set value</button>
 </div>
 `;
 
@@ -10,25 +12,35 @@ Vue.component('storage-text', {
     props: ['resource'],
     data: function() {
         return {
-            value: false
+            value: false,
+            new_value: false,
         }
     },
     created: function() {
-        this.loadValue();
+        this.getValue();
+        // setInterval(this.getValue, 100);
     },
     methods: {
-        loadValue: function() {
+        getValue: function() {
             // store "this" in a new variable because js
             var self = this;
-            axios.get('/req/'+this.resource).then(function(response) {
+            axios.get('/req/'+this.resource)
+            .then(function(response) {
                 console.log(response.data);
                 self.value = response.data;
             }).catch(function() {
-                console.log("Failed to load value");
+                console.log("Failed to get value");
             });
         },
-        toggle: function() {
-            this.value = !this.value;
+        setValue: function() {
+            postdata = {};
+            postdata[this.resource] = this.new_value;
+            axios.post('/submit/'+this.resource, postdata)
+            .then(function(response) {
+                console.log("Succesfully changed data");
+            }).catch(function() {
+                console.log("Failed to set value");
+            });
         }
     }
 })
