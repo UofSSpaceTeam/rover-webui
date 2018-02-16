@@ -3,10 +3,15 @@
 var template =`
 <div>
     <h1>Data Visualization</h1>
-    <pie-chart :data="{'2017-01-01': 11, '2017-01-02': 6}"></pie-chart>
+    <column-chart xtitle="Stats" :data="data1" ></column-chart>
 </div>
 `;
 
 Vue.component('data-visualization', {
     template: template,
+    props: {
+        data1: {
+        type: Object
+    }
+    }
 })
