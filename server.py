@@ -50,6 +50,7 @@ app = web.Application()
 app.router.add_routes(routes)
 app.router.add_static('/static', './static/')
 app.router.add_static('/vue', './vue/')
+app.router.add_static('/lib', './lib/')
 
 serverd.start()
 web.run_app(app)
