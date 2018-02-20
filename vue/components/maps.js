@@ -1,23 +1,36 @@
 var template =`
 <div>
     <h1>Navigation</h1>
-     <div id="map" class="map" style="height:400px;width:80%;"></div>
-     <div
-        class="form-check"
-        v-for="layer in layers"
-        :key="layer.id"
-        >
-        <label class="form-check-label">
-        <input
-           class="form-check-input"
-            type="checkbox"
-            v-model="layer.active"
-            @change="layerChanged(layer.id, layer.active)"
-        />
-        {{ layer.name }}
-        </label>
-    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div id="map" class="map" style="height:400px;width:80%;"></div>
+        </div>
 
+        <div class="col-md-3">
+            <div
+                class="form-check"
+                v-for="layer in layers"
+                :key="layer.id"
+                >
+                <label class="form-check-label">
+                <input
+                   class="form-check-input"
+                   type="checkbox"
+                   v-model="layer.active"
+                   @change="layerChanged(layer.id, layer.active)"
+                />
+                    {{ layer.name }}
+                </label>
+            </div>
+            <h5> Add a new way point </h5>
+            <p>Longitude</p>
+            <input v-model="long" placeholder="Longitude">
+            <p>Latitude</p>
+            <input v-model="lat" placeholder="Latitude">
+            <button v-on:click="newWayPoint(lat,long)"> Enter New Waypoint </button>
+        </div>
+
+    </div>
 </div>
 `;
 
@@ -29,6 +42,8 @@ Vue.component('maps', {
     data: function() {
         return{
         map: null,
+        lat:null,
+        long:null,
         tileLayer: null,
         layers: [{
             id: 0,
@@ -40,7 +55,16 @@ Vue.component('maps', {
                 type: 'marker',
                 coords: [52.133350, -106.628288],
             },],
-    },
+            },
+            {
+                id: 1,
+                name: 'Waypoints',
+                active: false,
+                features: [],
+            },
+
+
+
   ],
         }
     },
@@ -79,9 +103,23 @@ Vue.component('maps', {
             }
           });
     },
+
+    newWayPoint: function(lat,long){
+    //Waypoints layer
+        layer = this.layers.find(layer => layer.id === 1);
+        layer.features.push(
+            {
+              type: 'marker',
+              coords: [lat, long],
+            },
+
+        )
+    }
+
 },
     mounted() {
         this.initMap();
         this.initLayers();
     },
+
 })
