@@ -23,10 +23,10 @@ var template =`
                 </label>
             </div>
             <h5> Add a new way point </h5>
-            <p>Longitude</p>
-            <input v-model="long" placeholder="Longitude">
             <p>Latitude</p>
             <input v-model="lat" placeholder="Latitude">
+            <p>Longitude</p>
+            <input v-model="long" placeholder="Longitude">
             <button v-on:click="newWayPoint(lat,long)"> Enter New Waypoint </button>
         </div>
 
@@ -60,12 +60,18 @@ Vue.component('maps', {
                 id: 1,
                 name: 'Waypoints',
                 active: false,
-                features: [],
+                features: [{
+                    type: 'marker',
+                    coords: [52.133350, -106.628288],
+                },
+
+
+
+
+
+                ],
             },
-
-
-
-  ],
+            ],
         }
     },
 
@@ -107,13 +113,15 @@ Vue.component('maps', {
     newWayPoint: function(lat,long){
     //Waypoints layer
         layer = this.layers.find(layer => layer.id === 1);
-        layer.features.push(
-            {
-              type: 'marker',
-              coords: [lat, long],
-            },
-
-        )
+        // Create new JS Object
+        newMarker = {
+                    type: 'marker',
+                    coords: [lat, long],
+                };
+        // Push JS Object and then convert to leaflet object
+        layer.features.push(newMarker);
+        layer.features[layer.features.length-1].leafletObject = L.marker(newMarker.coords);
+        layer.features[layer.features.length-1].leafletObject.addTo(this.map);
     }
 
 },
