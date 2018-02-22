@@ -24,10 +24,10 @@ var template =`
             </div>
             <h5> Add a new way point </h5>
             <p>Latitude</p>
-            <input v-model="lat" placeholder="Latitude">
+            <input v-model="markerLat" placeholder="Latitude">
             <p>Longitude</p>
-            <input v-model="long" placeholder="Longitude">
-            <button v-on:click="newWayPoint(lat,long)"> Enter New Waypoint </button>
+            <input v-model="markerLong" placeholder="Longitude">
+            <button v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
         </div>
 
     </div>
@@ -38,12 +38,14 @@ var template =`
 
 Vue.component('maps', {
     template: template,
-
+    props: ['resource1','resource2'],
     data: function() {
         return{
         map: null,
-        lat:null,
-        long:null,
+        markerLat:null,
+        markerLong:null,
+        roverLat: null,
+        roverLong: null,
         tileLayer: null,
         layers: [{
             id: 0,
@@ -54,25 +56,28 @@ Vue.component('maps', {
                 name: 'Current Rover Position',
                 type: 'marker',
                 coords: [52.133350, -106.628288],
-            },],
+                }]
             },
-            {
+                {
                 id: 1,
                 name: 'Waypoints',
                 active: false,
                 features: [{
                     type: 'marker',
-                    coords: [52.133350, -106.628288],
-                },
-
-
-
-
-
-                ],
-            },
-            ],
+                    coords: [52.133350, -106.628288]
+                    }]
+                }
+            ]
         }
+    },
+
+    created: function() {
+        this.getRoverLat();
+        // setInterval(this.getRoverLat, 10000);
+        this.getRoverLong();
+        // setInterval(this.getRoverLong, 10000);
+        this.updateRoverCoord(this.roverLat,this.roverLong);
+        // setInterval(this.updateRoverCoord, 10000, this.roverLat, this.roverLong);
     },
 
     methods: {
@@ -98,31 +103,96 @@ Vue.component('maps', {
                 });
         },
 
-      layerChanged: function(layerId, active) {
-          const layer = this.layers.find(layer => layer.id === layerId);
+        layerChanged: function(layerId, active) {
+            const layer = this.layers.find(layer => layer.id === layerId);
 
-          layer.features.forEach((feature) => {
-            if (active) {
-              feature.leafletObject.addTo(this.map);
-            } else {
-              feature.leafletObject.removeFrom(this.map);
-            }
-          });
-    },
+            layer.features.forEach((feature) => {
+                if (active) {
+                    feature.leafletObject.addTo(this.map);
+                } else {
+                    feature.leafletObject.removeFrom(this.map);
+                }
+            });
+        },
 
-    newWayPoint: function(lat,long){
-    //Waypoints layer
-        layer = this.layers.find(layer => layer.id === 1);
-        // Create new JS Object
-        newMarker = {
-                    type: 'marker',
-                    coords: [lat, long],
-                };
-        // Push JS Object and then convert to leaflet object
-        layer.features.push(newMarker);
-        layer.features[layer.features.length-1].leafletObject = L.marker(newMarker.coords);
-        layer.features[layer.features.length-1].leafletObject.addTo(this.map);
-    }
+        updateRoverCoord: function(roverLat,roverLong){
+        //Waypoints layer
+            layer = this.layers.find(layer => layer.id === 0);
+            // Create new JS Object
+            newLoc = {
+                id: 0,
+                name: 'Current Rover Position',
+                type: 'marker',
+                coords: [roverLat, roverLong],
+            };
+            // Push JS Object and then convert to leaflet object
+            layer.features.pop();
+            layer.features.push(newLoc);
+            layer.features[layer.features.length-1].leafletObject = L.marker(newLoc.coords);
+            layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+        },
+
+        newWayPoint: function(markerLat,markerLong){
+        //Waypoints layer
+            layer = this.layers.find(layer => layer.id === 1);
+            // Create new JS Object
+            newMarker = {
+                        type: 'marker',
+                        coords: [markerLat, markerLong],
+                    };
+            // Push JS Object and then convert to leaflet object
+            layer.features.push(newMarker);
+            layer.features[layer.features.length-1].leafletObject = L.marker(newMarker.coords);
+            layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            this.setMarkerLat();
+            this.setMarkerLong();
+        },
+
+        getRoverLat: function() {
+                // store "this" in a new variable because js
+                var self = this;
+                axios.get('/req/'+this.resource1)
+                .then(function(response) {
+                    console.log(response.data);
+                    self.roverLat = response.data;
+                }).catch(function() {
+                    console.log("Failed to get value");
+                });
+        },
+
+        getRoverLonge: function() {
+                // store "this" in a new variable because js
+                var self = this;
+                axios.get('/req/'+this.resource2)
+                .then(function(response) {
+                    console.log(response.data);
+                    self.roverLong = response.data;
+                }).catch(function() {
+                    console.log("Failed to get value");
+                });
+        },
+
+        setMarkerLat: function() {
+                postdata = {};
+                postdata['markerLat'] = this.markerLat;
+                axios.post('/submit/markerLat', postdata)
+                .then(function(response) {
+                    console.log("Succesfully changed data");
+                }).catch(function() {
+                    console.log("Failed to set value");
+                });
+        },
+
+        setMarkerLong: function() {
+                postdata = {};
+                postdata['markerLong'] = this.markerLong;
+                axios.post('/submit/markerLong', postdata)
+                .then(function(response) {
+                    console.log("Succesfully changed data");
+                }).catch(function() {
+                    console.log("Failed to set value");
+                });
+        }
 
 },
     mounted() {

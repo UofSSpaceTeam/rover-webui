@@ -1,7 +1,7 @@
 var template =`
 <div>
     <h1>Data Visualization</h1>
-    <column-chart xtitle="Stats" :data="[[resource1,res1Value],[resource2,res2Value]]" :refresh="1"></column-chart>
+    <column-chart xtitle="Stats" :data="[[resource1,res1Value],[resource2,res2Value]]" :refresh="10000"></column-chart>
 </div>
 `;
 
@@ -16,9 +16,9 @@ Vue.component('data-visualization', {
     },
     created: function() {
         this.getRes1Value();
-        setInterval(this.getRes1Value, 1);
+        // setInterval(this.getRes1Value, 10000);
         this.getRes2Value();
-        setInterval(this.getRes2Value, 1);
+        // setInterval(this.getRes2Value, 10000);
     },
     methods: {
         getRes1Value: function() {
