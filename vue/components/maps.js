@@ -160,7 +160,7 @@ Vue.component('maps', {
                 });
         },
 
-        getRoverLonge: function() {
+        getRoverLong: function() {
                 // store "this" in a new variable because js
                 var self = this;
                 axios.get('/req/'+this.resource2)
