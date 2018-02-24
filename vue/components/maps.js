@@ -38,7 +38,7 @@ var template =`
 
 Vue.component('maps', {
     template: template,
-    props: ['resource1','resource2'],
+    props: ['resource1','resource2','resource3','resource4'],
     data: function() {
         return{
         map: null,
@@ -174,8 +174,8 @@ Vue.component('maps', {
 
         setMarkerLat: function() {
                 postdata = {};
-                postdata['markerLat'] = this.markerLat;
-                axios.post('/submit/markerLat', postdata)
+                postdata[this.resource3] = this.markerLat;
+                axios.post('/submit/'+this.resource3, postdata)
                 .then(function(response) {
                     console.log("Succesfully changed data");
                 }).catch(function() {
@@ -185,8 +185,8 @@ Vue.component('maps', {
 
         setMarkerLong: function() {
                 postdata = {};
-                postdata['markerLong'] = this.markerLong;
-                axios.post('/submit/markerLong', postdata)
+                postdata[this.resource4] = this.markerLong;
+                axios.post('/submit/'+this.resource4, postdata)
                 .then(function(response) {
                     console.log("Succesfully changed data");
                 }).catch(function() {
