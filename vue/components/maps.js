@@ -22,12 +22,12 @@ var template =`
                     {{ layer.name }}
                 </label>
             </div>
-            <h5> Add a new way point </h5>
+            <h5 id="addNew"> Add a new way point </h5>
             <p>Latitude</p>
             <input v-model="markerLat" placeholder="Latitude">
             <p>Longitude</p>
             <input v-model="markerLong" placeholder="Longitude">
-            <button v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
+            <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
         </div>
 
     </div>

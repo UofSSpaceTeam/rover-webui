@@ -1,5 +1,5 @@
 var template =`
-<div>
+<div class="chart">
     <h1>Data Visualization</h1>
     <column-chart xtitle="Stats" :data="[[resource1,res1Value],[resource2,res2Value]]" :refresh="10000"></column-chart>
 </div>
