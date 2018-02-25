@@ -194,11 +194,11 @@ Vue.component('maps', {
         this.initMap();
         this.initLayers();
          this.getRoverLat();
-        // setInterval(this.getRoverLat, 10000);
+        setInterval(this.getRoverLat, 100);
         this.getRoverLong();
-        // setInterval(this.getRoverLong, 10000);
+        setInterval(this.getRoverLong, 100);
         this.updateRoverCoord(this.roverLat,this.roverLong);
-        // setInterval(this.updateRoverCoord, 10000, this.roverLat, this.roverLong);
+        setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
 
     },
 
