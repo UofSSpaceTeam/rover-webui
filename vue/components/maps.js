@@ -100,10 +100,14 @@ Vue.component('maps', {
 
         layerChanged: function(layerId, active) {
             const layer = this.layers.find(layer => layer.id === layerId);
-
             layer.features.forEach((feature) => {
                 if (active) {
-                    feature.leafletObject.addTo(this.map);
+                    if (layerId === 0) {
+                        this.updateRoverCoord(this.roverLat,this.roverLong);
+                        setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
+                    } else {
+                        feature.leafletObject.addTo(this.map);
+                    }
                 } else {
                     feature.leafletObject.removeFrom(this.map);
                 }
@@ -111,20 +115,25 @@ Vue.component('maps', {
         },
 
         updateRoverCoord: function(roverLat,roverLong){
-        //Current Position layer
+            this.getRoverLat();
+            this.getRoverLong();
+            //Current Position layer
             layer = this.layers.find(layer => layer.id === 0);
             // Create new JS Object
-            newLoc = {
+            newRover = {
                 id: 0,
                 name: 'Current Rover Position',
                 type: 'marker',
-                coords: [roverLat, roverLong],
+                coords: [this.roverLat, this.roverLong],
             };
-            // Push JS Object and then convert to leaflet object
-            layer.features.pop();
-            layer.features.push(newLoc);
-            layer.features[0].leafletObject = L.marker(newLoc.coords);
-            layer.features[0].leafletObject.addTo(this.map);
+            if (layer.active) {
+                // Remove current rover marker from map
+                layer.features[0].leafletObject.removeFrom(this.map);
+                // Push JS Object and then convert to leaflet object
+                layer.features.push(newRover);
+                layer.features[0].leafletObject = L.marker(newRover.coords);
+                layer.features[0].leafletObject.addTo(this.map);
+            }
         },
 
         newWayPoint: function(markerLat,markerLong){
@@ -148,7 +157,7 @@ Vue.component('maps', {
                 var self = this;
                 axios.get('/req/'+this.resource1)
                 .then(function(response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     self.roverLat = response.data;
                 }).catch(function() {
                     console.log("Failed to get value");
@@ -160,7 +169,7 @@ Vue.component('maps', {
                 var self = this;
                 axios.get('/req/'+this.resource2)
                 .then(function(response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     self.roverLong = response.data;
                 }).catch(function() {
                     console.log("Failed to get value");
@@ -193,13 +202,11 @@ Vue.component('maps', {
     mounted() {
         this.initMap();
         this.initLayers();
-         this.getRoverLat();
-        setInterval(this.getRoverLat, 100);
-        this.getRoverLong();
-        setInterval(this.getRoverLong, 100);
-        this.updateRoverCoord(this.roverLat,this.roverLong);
-        setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
-
+        // this.getRoverLat();
+        // setInterval(this.getRoverLat, 1000);
+        // this.getRoverLong();
+        // setInterval(this.getRoverLong, 1000);
+        // this.updateRoverCoord(this.roverLat,this.roverLong);
+        // setInterval(this.updateRoverCoord, 1000, this.roverLat, this.roverLong);
     },
-
 })
