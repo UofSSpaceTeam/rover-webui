@@ -42,11 +42,11 @@ Vue.component('maps', {
     data: function() {
         return{
         map: null,
-        markerLat:null,
-        markerLong:null,
-        roverLat: null,
-        roverLong: null,
-        tileLayer: null,
+        markerLat:1.0,
+        markerLong:1.0,
+        roverLat: 1.0,
+        roverLong: 1.0,
+        tileLayer: 1.0,
         layers: [{
             id: 0,
             name: 'Rover',
@@ -72,12 +72,7 @@ Vue.component('maps', {
     },
 
     created: function() {
-        this.getRoverLat();
-        // setInterval(this.getRoverLat, 10000);
-        this.getRoverLong();
-        // setInterval(this.getRoverLong, 10000);
-        this.updateRoverCoord(this.roverLat,this.roverLong);
-        // setInterval(this.updateRoverCoord, 10000, this.roverLat, this.roverLong);
+
     },
 
     methods: {
@@ -116,7 +111,7 @@ Vue.component('maps', {
         },
 
         updateRoverCoord: function(roverLat,roverLong){
-        //Waypoints layer
+        //Current Position layer
             layer = this.layers.find(layer => layer.id === 0);
             // Create new JS Object
             newLoc = {
@@ -128,8 +123,8 @@ Vue.component('maps', {
             // Push JS Object and then convert to leaflet object
             layer.features.pop();
             layer.features.push(newLoc);
-            layer.features[layer.features.length-1].leafletObject = L.marker(newLoc.coords);
-            layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            layer.features[0].leafletObject = L.marker(newLoc.coords);
+            layer.features[0].leafletObject.addTo(this.map);
         },
 
         newWayPoint: function(markerLat,markerLong){
@@ -198,6 +193,13 @@ Vue.component('maps', {
     mounted() {
         this.initMap();
         this.initLayers();
+         this.getRoverLat();
+        // setInterval(this.getRoverLat, 10000);
+        this.getRoverLong();
+        // setInterval(this.getRoverLong, 10000);
+        this.updateRoverCoord(this.roverLat,this.roverLong);
+        // setInterval(this.updateRoverCoord, 10000, this.roverLat, this.roverLong);
+
     },
 
 })
