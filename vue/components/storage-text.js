@@ -2,8 +2,8 @@ var template =`
 <div>
     <h3>{{resource}} : {{value}}</h3>
     <input v-model="new_value"></input>
-    <button v-on:click="getValue">Get value</button>
-    <button v-on:click="setValue">Set value</button>
+    <button class="btn-primary" v-on:click="getValue">Get value</button>
+    <button class="btn-primary" v-on:click="setValue">Set value</button>
 </div>
 `;
 

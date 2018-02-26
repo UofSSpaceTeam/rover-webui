@@ -16,8 +16,9 @@ background-size: 20px 20px;
 
 }
 
-h1,p,input,label,h3,h5,canvas{
+h1,p,label,h3,h5,canvas{
     color:white;
+    font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
 }
 
 
@@ -37,4 +38,9 @@ h1,p,input,label,h3,h5,canvas{
 
 h1{
 text-align:center;
+padding:10px;
+}
+
+.chart h1{
+color:black;
 }

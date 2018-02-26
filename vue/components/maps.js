@@ -63,7 +63,7 @@ Vue.component('maps', {
                 name: 'Waypoints',
                 active: false,
                 features: [{
-                    type: 'marker',
+                    type: 'circleMarker',
                     coords: [52.133350, -106.628288]
                     }]
                 }
@@ -95,6 +95,13 @@ Vue.component('maps', {
                     markerFeatures.forEach((feature) => {
                         feature.leafletObject = L.marker(feature.coords).bindPopup(feature.name);
                         });
+
+
+                        const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
+                    markerFeatures2.forEach((feature) => {
+                        feature.leafletObject = L.circleMarker(feature.coords);
+                        });
+
                 });
         },
 
@@ -141,13 +148,16 @@ Vue.component('maps', {
             layer = this.layers.find(layer => layer.id === 1);
             // Create new JS Object
             newMarker = {
-                        type: 'marker',
+                        type: 'circleMarker',
                         coords: [markerLat, markerLong],
                     };
             // Push JS Object and then convert to leaflet object
             layer.features.push(newMarker);
-            layer.features[layer.features.length-1].leafletObject = L.marker(newMarker.coords);
-            layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords);
+
+            if(layer.active){
+                layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            }
             this.setMarkerLat();
             this.setMarkerLong();
         },
