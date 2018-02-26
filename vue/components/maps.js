@@ -15,6 +15,7 @@ var template =`
                 <label class="form-check-label">
                 <input
                    class="form-check-input"
+                   id="toggle"
                    type="checkbox"
                    v-model="layer.active"
                    @change="layerChanged(layer.id, layer.active)"
