@@ -16,9 +16,9 @@ Vue.component('data-visualization', {
     },
     created: function() {
         this.getRes1Value();
-        // setInterval(this.getRes1Value, 10000);
+        setInterval(this.getRes1Value, 100);
         this.getRes2Value();
-        // setInterval(this.getRes2Value, 10000);
+        setInterval(this.getRes2Value, 100);
     },
     methods: {
         getRes1Value: function() {

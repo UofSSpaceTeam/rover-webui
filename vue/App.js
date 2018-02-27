@@ -1,8 +1,9 @@
 var template =`
   <div>
     <storage-text resource='TargetReached'></storage-text>
-    <data-visualization  resource1="SpeedData" resource2="FuelData"></data-visualization>
+    <storage-text resource='StartNavigation'></storage-text>
     <maps resource1="roverLat" resource2="roverLong" resource3="markerLat" resource4="markerLong"></maps>
+    <data-visualization  resource1="WheelSpeed" resource2="BatteryCurrent"></data-visualization>
   </div>
 `;
 
