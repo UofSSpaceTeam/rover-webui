@@ -18,7 +18,7 @@ Vue.component('storage-text', {
     },
     created: function() {
         this.getValue();
-        // setInterval(this.getValue, 100);
+        setInterval(this.getValue, 100);
     },
     methods: {
         getValue: function() {

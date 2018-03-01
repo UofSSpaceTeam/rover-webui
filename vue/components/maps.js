@@ -65,7 +65,7 @@ Vue.component('maps', {
                 active: false,
                 features: [{
                     type: 'circleMarker',
-                    coords: [52.133350, -106.628288]
+                    coords: [52.131644, -106.628814]
                     }]
                 }
             ]
