@@ -10,6 +10,12 @@ serverd.storage.TargetReached = False
 serverd.storage.roverLat = 52.132653
 serverd.storage.roverLong = -106.628012
 
+@serverd.on('*/GPSPosition')
+def update_gps_pos(event, data):
+    print(data)
+    serverd.storage.roverLat = data[0]
+    serverd.storage.roverLong = data[1]
+
 # @serverd.every('1s')
 async def toggle():
     serverd.storage.TargetReached = not\
