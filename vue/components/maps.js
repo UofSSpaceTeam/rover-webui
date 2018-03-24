@@ -3,7 +3,7 @@ var template =`
     <h1>Navigation</h1>
     <div class="row">
         <div class="col-md-9">
-            <div id="map" class="map" style="height:400px;width:80%;"></div>
+            <div id="map" v-on:click="newWayPointClick($event,addOnClick)" class="map" style="height:400px;width:80%;"></div>
         </div>
 
         <div class="col-md-3">
@@ -22,7 +22,29 @@ var template =`
                 />
                     {{ layer.name }}
                 </label>
+
+                 <input
+                   class="form-check-input"
+                   id="toggle"
+                   type="checkbox"
+                   v-model="layer.active"
+                   @change="layerChanged(layer.id, layer.active)"
+                />
+                    {{ layer.name }}
+                </label>
+
             </div>
+             <div
+                class="click-check">
+                <label class="form-check-label">
+            <input
+                   type="checkbox"
+                   v-model="addOnClick"
+                />
+                Add Waypoint On Click
+                </label>
+            </div>
+
             <h5 id="addNew"> Add a new way point </h5>
             <p>Latitude</p>
             <input v-model="markerLat" placeholder="Latitude">
@@ -44,6 +66,7 @@ Vue.component('maps', {
         return{
         map: null,
         markerLat:1.0,
+        addOnClick: true,
         markerLong:1.0,
         roverLat: 1.0,
         roverLong: 1.0,
@@ -207,6 +230,30 @@ Vue.component('maps', {
                 }).catch(function() {
                     console.log("Failed to set value");
                 });
+        },
+
+        newWayPointClick: function(event,checked){
+            var latlng = this.map.mouseEventToLatLng(event);
+            var markerLat = latlng.lat
+            var markerLong = latlng.lng
+
+            if(checked){
+                layer = this.layers.find(layer => layer.id === 1);
+                // Create new JS Object
+                newMarker = {
+                            type: 'circleMarker',
+                            coords: [markerLat, markerLong],
+                        };
+                // Push JS Object and then convert to leaflet object
+                layer.features.push(newMarker);
+                layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords);
+
+                if(layer.active){
+                    layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+                }
+                this.setMarkerLat();
+                this.setMarkerLong();
+           }
         }
 
 },
