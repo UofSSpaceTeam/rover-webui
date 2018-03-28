@@ -18,7 +18,7 @@ async def toggle():
 @routes.get('/')
 async def index(request):
     print('Home page')
-    return web.FileResponse('./views/index.html')
+    return web.FileResponse('./vue/index.html')
 
 @routes.get('/stats')
 async def stats(request):
