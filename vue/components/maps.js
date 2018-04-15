@@ -51,7 +51,25 @@ var template =`
             <p>Longitude</p>
             <input v-model="markerLong" placeholder="Longitude">
             <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
+
+
+        <div id= "waypointsOrganization">
+        <h2> Waypoints</h2>
+        <div
+            class="waypointsOrganize"
+            v-for="wayPoint in layers[1].features"
+            >
+
+         <p>Waypoint{{wayPoint.id}}</p>
+
+         <button class="btn-primary" v-on:click="deleteWaypoint(wayPoint.id)" > Delete </button>
+         </div>
+
         </div>
+
+        </div>
+
+
 
     </div>
 </div>
@@ -88,7 +106,8 @@ Vue.component('maps', {
                 active: false,
                 features: [{
                     type: 'circleMarker',
-                    coords: [52.133350, -106.628288]
+                    coords: [52.133350, -106.628288],
+                    id: 0
                     }]
                 }
             ]
@@ -101,8 +120,8 @@ Vue.component('maps', {
 
     methods: {
         initMap: function() {
+        console.log(this.layers)
             this.map = L.map('map').setView([52.146973, -106.647034], 12);
-           // L.control.mousePosition().addTo(this.map);
             this.tileLayer = L.tileLayer(
               'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
                {
@@ -121,9 +140,9 @@ Vue.component('maps', {
                         });
 
 
-                        const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
+                    const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
                     markerFeatures2.forEach((feature) => {
-                        feature.leafletObject = L.circleMarker(feature.coords);
+                        feature.leafletObject = L.circleMarker(feature.coords).bindPopup("Waypoint "+String(feature.id));
                         });
 
                 });
@@ -168,16 +187,21 @@ Vue.component('maps', {
         },
 
         newWayPoint: function(markerLat,markerLong){
-        //Waypoints layer
+            //Waypoints layer
             layer = this.layers.find(layer => layer.id === 1);
             // Create new JS Object
             newMarker = {
                         type: 'circleMarker',
                         coords: [markerLat, markerLong],
+                        id: 0
                     };
             // Push JS Object and then convert to leaflet object
+
+            if(layer.features.length !=0){
+                newMarker.id = layer.features[layer.features.length-1].id + 1
+            }
             layer.features.push(newMarker);
-            layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords);
+            layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
 
             if(layer.active){
                 layer.features[layer.features.length-1].leafletObject.addTo(this.map);
@@ -243,10 +267,16 @@ Vue.component('maps', {
                 newMarker = {
                             type: 'circleMarker',
                             coords: [markerLat, markerLong],
+                            id: 0
                         };
+
+
+                if(layer.features.length !=0){
+                newMarker.id = layer.features[layer.features.length-1].id + 1
+                }
                 // Push JS Object and then convert to leaflet object
                 layer.features.push(newMarker);
-                layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords);
+                layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
 
                 if(layer.active){
                     layer.features[layer.features.length-1].leafletObject.addTo(this.map);
@@ -254,7 +284,34 @@ Vue.component('maps', {
                 this.setMarkerLat();
                 this.setMarkerLong();
            }
+        },
+
+        deleteWaypoint : function(id){
+            layer = this.layers.find(layer => layer.id === 1);
+            layer.features[id].leafletObject.removeFrom(this.map);
+            layer.features.splice(id,1)
+
+            for(i=id; i <layer.features.length; i++){
+                   layer.features[i].id -= 1;
+            }
+
+
+        /*
+            for(i=id;i<layer.features.length;i++){
+                layer.features[i].leafletObject.removeFrom(this.map);
+                //cords = layer.features[i].coords;
+                //id2 = layer.features[i].id;
+                //layer.features[i].leafletObject = L.circleMarker(cords).bindPopup("Waypoint "+String(id2));
+                layer.features[i].leafletObject.addTo(this.map);
+            }
+
+            */
+
+            // *********
+
         }
+
+
 
 },
     mounted() {

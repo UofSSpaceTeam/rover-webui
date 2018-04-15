@@ -3,6 +3,16 @@ margin:10px;
 
 }
 
+#waypointsOrganization{
+    background-color:white;
+    color:black;
+    padding:30px;
+}
+
+#waypointsOrganization  p{
+    color:black;
+}
+
 
 
 body{
