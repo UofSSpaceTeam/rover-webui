@@ -121,11 +121,11 @@ Vue.component('maps', {
     methods: {
         initMap: function() {
         console.log(this.layers)
-            this.map = L.map('map').setView([52.146973, -106.647034], 12);
+            this.map = L.map('map').setView([38.374105, -110.738415], 12);
             this.tileLayer = L.tileLayer(
-              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
+              '/lib/combined/{z}/{x}/{y}.png',
                {
-             maxZoom: 18,
+             maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
             }
             );
