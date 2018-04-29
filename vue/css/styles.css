@@ -14,6 +14,11 @@ margin:10px;
 }
 
 
+#waypointsOrganization  p{
+    display: inline-block;
+}
+
+
 
 body{
     background:
