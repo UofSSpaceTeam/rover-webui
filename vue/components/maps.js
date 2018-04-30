@@ -87,7 +87,7 @@ var template =`
 
 Vue.component('maps', {
     template: template,
-    props: ['resource1','resource2','resource3','resource4'],
+    props: ['resource1','resource2','resource3','resource4','resource5'],
     data: function() {
         return{
         map: null,
@@ -128,11 +128,12 @@ Vue.component('maps', {
 
     },
 
+// '/lib/tiles3/{z}/{x}/{y}.png'
     methods: {
         initMap: function() {
             this.map = L.map('map').setView([38.374105, -110.738415], 12);
             this.tileLayer = L.tileLayer(
-              '/lib/tiles3/{z}/{x}/{y}.png',
+              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
                {
              maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
@@ -249,7 +250,7 @@ Vue.component('maps', {
         getRoverHeading: function() {
                 // store "this" in a new variable because js
                 var self = this;
-                axios.get('/req/roverHeading')
+                axios.get('/req/'+this.resource5)
                 .then(function(response) {
                     // console.log(response.data);
                     self.roverHeading = response.data;

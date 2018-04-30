@@ -70,7 +70,7 @@ Vue.component('data-visualization', {
 
 
             this.currentGauge = new RadialGauge({
-                renderTo: 'currentGauge', width: 300,height: 300, minValue: 0,maxValue: 5,
+                renderTo: 'currentGauge', width: 300,height: 300, minValue: 0,maxValue: 5, value:4.5,
                 majorTicks: ["0","1","2","3","4","5"], units: "Amps"
             }).draw();
 
@@ -108,7 +108,7 @@ Vue.component('data-visualization', {
             var self = this;
             axios.get('/req/'+this.resource2)
             .then(function(response) {
-                console.log(response.data);
+                //console.log(response.data);
                 self.res2Value = response.data;
             }).catch(function() {
                 console.log("Failed to get value");
