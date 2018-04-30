@@ -7,8 +7,9 @@ routes = web.RouteTableDef()
 serverd = Device('webui', 'rover')
 serverd.storage.TargetReached = False
 
-serverd.storage.roverLat = 52.132653
-serverd.storage.roverLong = -106.628012
+serverd.storage.roverLat = 38.406460
+serverd.storage.roverLong = -110.791900
+serverd.storage.roverHeading = 20
 
 # @serverd.every('1s')
 async def toggle():

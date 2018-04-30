@@ -93,9 +93,11 @@ Vue.component('maps', {
         map: null,
         markerLat:1.0,
         addOnClick: false,
+        icon:null,
         markerLong:1.0,
         roverLat: 1.0,
         roverLong: 1.0,
+        roverHeading: 0,
         tileLayer: 1.0,
         layers: [{
             id: 0,
@@ -137,13 +139,15 @@ Vue.component('maps', {
             }
             );
             this.tileLayer.addTo(this.map);
+            this.icon = new L.Icon.Default();
+            this.icon.options.shadowSize = [0,0];
         },
 
         initLayers: function() {
                 this.layers.forEach((layer) => {
                     const markerFeatures = layer.features.filter(feature => feature.type === 'marker');
                     markerFeatures.forEach((feature) => {
-                        feature.leafletObject = L.marker(feature.coords).bindPopup(feature.name);
+                        feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading, icon: this.icon}).bindPopup(feature.name);
                         });
 
 
@@ -174,6 +178,7 @@ Vue.component('maps', {
         updateRoverCoord: function(roverLat,roverLong){
             this.getRoverLat();
             this.getRoverLong();
+            this.getRoverHeading();
             //Current Position layer
             var layer = this.layers.find(layer => layer.id === 0);
             // Create new JS Object
@@ -188,7 +193,7 @@ Vue.component('maps', {
                 layer.features[0].leafletObject.removeFrom(this.map);
                 // Push JS Object and then convert to leaflet object
                 layer.features.push(newRover);
-                layer.features[0].leafletObject = L.marker(newRover.coords);
+                layer.features[0].leafletObject = L.marker(newRover.coords,{rotationAngle:this.roverHeading,icon:this.icon});
                 layer.features[0].leafletObject.addTo(this.map);
             }
         },
@@ -236,6 +241,18 @@ Vue.component('maps', {
                 .then(function(response) {
                     // console.log(response.data);
                     self.roverLong = response.data;
+                }).catch(function() {
+                    console.log("Failed to get value");
+                });
+        },
+
+        getRoverHeading: function() {
+                // store "this" in a new variable because js
+                var self = this;
+                axios.get('/req/roverHeading')
+                .then(function(response) {
+                    // console.log(response.data);
+                    self.roverHeading = response.data;
                 }).catch(function() {
                     console.log("Failed to get value");
                 });
