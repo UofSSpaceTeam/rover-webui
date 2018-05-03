@@ -18,6 +18,7 @@ async def toggle():
     serverd.storage.TargetReached = not\
             serverd.storage.TargetReached
 
+@serverd.on('*/FilteredGPS')
 @serverd.on('*/GPSPosition')
 def update_device(event, data):
     serverd.storage.roverLat = data[0]
