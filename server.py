@@ -27,6 +27,10 @@ def update_device(event, data):
 async def update_heading(event, data):
     serverd.storage.roverHeading = data
 
+@serverd.on('*/Autopilot')
+def update_autopilot_enabled(event, data):
+    serverd.storage.Autopilot = data
+
 @routes.get('/')
 async def index(request):
     print('Home page')
@@ -45,7 +49,7 @@ async def vuepage(request):
 @routes.get('/req/{name}')
 async def req(request):
     name = request.match_info['name']
-    print('data request {}'.format(name))
+    # print('data request {}'.format(name))
     if name in serverd.storage:
         return web.json_response(serverd.storage[name])
     else:
@@ -56,7 +60,7 @@ async def post(request):
     name = request.match_info['name']
     data = await request.read()
     data = json.loads(data.decode('utf-8'))
-    print('data post {}'.format(data))
+    # print('data post {}'.format(data))
     serverd.storage[name] = data[name]
     await serverd.publish(name, data[name])
     return web.Response()
