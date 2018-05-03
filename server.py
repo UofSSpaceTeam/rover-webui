@@ -18,6 +18,15 @@ async def toggle():
     serverd.storage.TargetReached = not\
             serverd.storage.TargetReached
 
+@serverd.on('*/GPSPosition')
+def update_device(event, data):
+    serverd.storage.roverLat = data[0]
+    serverd.storage.roverLong = data[1]
+
+@serverd.on('*/roverHeading')
+async def update_heading(event, data):
+    serverd.storage.roverHeading = data
+
 @routes.get('/')
 async def index(request):
     print('Home page')
@@ -49,6 +58,7 @@ async def post(request):
     data = json.loads(data.decode('utf-8'))
     print('data post {}'.format(data))
     serverd.storage[name] = data[name]
+    await serverd.publish(name, data[name])
     return web.Response()
 
 app = web.Application()

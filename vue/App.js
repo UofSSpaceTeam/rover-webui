@@ -1,6 +1,6 @@
 var template =`
   <div>
-    <storage-text resource='TargetReached'></storage-text>
+    <storage-text resource='Autopilot'></storage-text>
     <data-visualization  resource1="SpeedData" resource2="FuelData"></data-visualization>
     <maps resource1="roverLat" resource2="roverLong" resource3="markerLat" resource4="markerLong" resource5="roverHeading"></maps>
     <gauge dataSource="Speed" minValue = "0" maxValue = "10" units="m/s"></gauge>
