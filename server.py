@@ -12,6 +12,7 @@ serverd.storage.roverLong = -110.791900
 serverd.storage.roverHeading = 90
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
+serverd.storage.current = 2.5
 
 # @serverd.every('1s')
 async def toggle():

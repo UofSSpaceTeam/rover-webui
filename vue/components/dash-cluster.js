@@ -1,22 +1,11 @@
 var template =`
 <div class="vis">
 
-    <!--
-    <div class="chart">
-    <h1>Data Visualization</h1>
-    <column-chart xtitle="Stats" :data="[[resource1,res1Value],[resource2,res2Value]]" :refresh="10000"></column-chart>
-    </div>
-
-    -->
-
-
-
     <div class="container">
         <div class="row">
             <div class="col-sm">
             <h3> Heading </h3>
                 <canvas id="heading"></canvas>
-                <button class="btn-primary" v-on:click="updateHeading()"> Heading </button>
             </div>
             <div class="col-sm">
             <h3> Current </h3>
@@ -33,28 +22,24 @@ var template =`
 
 `;
 
-Vue.component('data-visualization', {
+Vue.component('dash-cluster', {
     template: template,
-    props: ['resource1','resource2'],
+    props: ['resource1','resource2','resource3'],
     data: function() {
         return {
-            res1Value: 0,
-            res2Value: 0,
+            speedVal: 0,
+            currentVal: 0,
+            headingVal: 0,
             headingGauge: null,
             speedGauge: null,
             currentGauge: null
         }
     },
     created: function() {
-        this.getRes1Value();
-        // setInterval(this.getRes1Value, 10000);
-        this.getRes2Value();
-        // setInterval(this.getRes2Value, 10000);
+
     },
     methods: {
-
         initGauges : function(){
-
             this.headingGauge = new RadialGauge({
                 renderTo: 'heading', width: 300, height: 300, minValue: 0, maxValue: 360,
                 majorTicks: ["N","NE","E","SE","S","SW","W","NW","N"], minorTicks: 22, ticksAngle: 360, startAngle: 180,
@@ -64,16 +49,14 @@ Vue.component('data-visualization', {
                 colorNeedleCircleOuter: "#ccc", needleCircleSize: 15, needleCircleOuter: false, animationRule: "linear",
                 needleType: "line", needleStart: 75, needleEnd: 99, needleWidth: 3, borders: true,
                 borderInnerWidth: 0, borderMiddleWidth: 0, borderOuterWidth: 10, colorBorderOuter: "#ccc",
-                colorBorderOuterEnd: "#ccc", colorNeedleShadowDown: "#222", borderShadowWidth: 0, animationTarget: "plate",
+                colorBorderOuterEnd: "#ccc", colorNeedleShadowDown: "#222", borderShadowWidth: 0,
                 title: "Heading", fontTitleSize: 19, colorTitle: "#f5f5f5", animationDuration: 500
             }).draw();
-
 
             this.currentGauge = new RadialGauge({
                 renderTo: 'currentGauge', width: 300,height: 300, minValue: 0,maxValue: 5, value:4.5,
                 majorTicks: ["0","1","2","3","4","5"], units: "Amps"
             }).draw();
-
 
             this.speedGauge = new RadialGauge({
                 renderTo: 'speedGauge',
@@ -97,8 +80,9 @@ Vue.component('data-visualization', {
             var self = this;
             axios.get('/req/'+this.resource1)
             .then(function(response) {
-                console.log(response.data);
-                self.res1Value = response.data;
+                //console.log(response.data);
+                self.speedVal = response.data;
+                self.speedGauge.value = self.speedVal;
             }).catch(function() {
                 console.log("Failed to get value");
             });
@@ -109,20 +93,38 @@ Vue.component('data-visualization', {
             axios.get('/req/'+this.resource2)
             .then(function(response) {
                 //console.log(response.data);
-                self.res2Value = response.data;
+                self.currentVal = response.data;
+                self.currentGauge.value = self.currentVal;
             }).catch(function() {
                 console.log("Failed to get value");
             });
         },
 
-    updateHeading : function(){
-    this.headingGauge.value = (this.headingGauge.value + 10).toString();
-    }
+        getRes3Value: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.resource3)
+            .then(function(response) {
+                //console.log(response.data);
+                self.headingVal = response.data;
+                self.headingGauge.value = self.headingVal;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        },
+
 
    },
 
     mounted(){
         this.initGauges();
+
+         this.getRes1Value();
+        setInterval(this.getRes1Value, 10000);
+        this.getRes2Value();
+        setInterval(this.getRes2Value, 10000);
+        this.getRes3Value();
+        setInterval(this.getRes3Value, 10000);
     }
 
 
