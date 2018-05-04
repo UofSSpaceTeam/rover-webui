@@ -148,7 +148,7 @@ Vue.component('maps', {
                 this.layers.forEach((layer) => {
                     const markerFeatures = layer.features.filter(feature => feature.type === 'marker');
                     markerFeatures.forEach((feature) => {
-                        feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading, icon: this.icon}).bindPopup(feature.name);
+                        feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center", icon: this.icon}).bindPopup(feature.name);
                         });
 
 
@@ -194,7 +194,7 @@ Vue.component('maps', {
                 layer.features[0].leafletObject.removeFrom(this.map);
                 // Push JS Object and then convert to leaflet object
                 layer.features.push(newRover);
-                layer.features[0].leafletObject = L.marker(newRover.coords,{rotationAngle:this.roverHeading,icon:this.icon});
+                layer.features[0].leafletObject = L.marker(newRover.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center",icon:this.icon});
                 layer.features[0].leafletObject.addTo(this.map);
             }
         },
