@@ -24,6 +24,13 @@ def update_device(event, data):
     serverd.storage.roverLat = data[0]
     serverd.storage.roverLong = data[1]
 
+@serverd.every('100ms')
+async def get_position():
+    pos = await serverd.request('Navigation', 'RoverPosition')
+    serverd.storage.roverLat = pos[0]
+    serverd.storage.roverLong = pos[1]
+
+
 @serverd.on('*/roverHeading')
 async def update_heading(event, data):
     serverd.storage.roverHeading = data
