@@ -132,7 +132,12 @@ Vue.component('maps', {
         initMap: function() {
             this.map = L.map('map').setView([38.374105, -110.738415], 12);
             this.tileLayer = L.tileLayer(
-              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
+            // Choices for tiles; Change max Zoom and string reference under comments
+            // Online road maps from open steet maps : https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png
+            // offline Zoomed in tiles (not a large area, only over MDRS), maxzoom = 17 : /lib/tiles/closeUp/{z}/{x}/{y}.png
+            // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
+
+              '/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
                {
              maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
@@ -148,11 +153,13 @@ Vue.component('maps', {
                     const markerFeatures = layer.features.filter(feature => feature.type === 'marker');
                     markerFeatures.forEach((feature) => {
                         feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center", icon: this.icon}).bindPopup(feature.name);
+                        feature.leafletObject.addTo(this.map);
                         });
 
                     const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
                     markerFeatures2.forEach((feature) => {
                         feature.leafletObject = L.circleMarker(feature.coords).bindPopup("Waypoint "+String(feature.id));
+                        feature.leafletObject.addTo(this.map);
                         });
 
                 });

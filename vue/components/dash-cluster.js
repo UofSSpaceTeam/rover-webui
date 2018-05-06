@@ -60,12 +60,12 @@ Vue.component('dash-cluster', {
 
             this.speedGauge = new RadialGauge({
                 renderTo: 'speedGauge',
-                width: 300, height: 300, units: "Km/h", minValue: 0, maxValue: 40,
-                majorTicks: ["0","5","10","15","20","25","30","35","40"], minorTicks: 2, strokeTicks: true,
+                width: 300, height: 300, units: "Km/h", minValue: 0, maxValue: 20,
+                majorTicks: ["0","2","4","6","8","10","12","14","16","18","20"], minorTicks: 2, strokeTicks: true,
                 highlights: [
                     {
-                        "from": 30,
-                        "to": 40,
+                        "from": 16,
+                        "to": 20,
                         "color": "rgba(200, 50, 50, .75)"
                     }
                 ],
