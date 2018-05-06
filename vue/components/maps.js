@@ -2,11 +2,11 @@ var template =`
 <div>
     <h1>Navigation</h1>
     <div class="row">
-        <div class="col-md-9">
-            <div id="map" v-on:click="newWayPointClick($event,addOnClick)" class="map" style="height:400px;width:80%;"></div>
+        <div class="col-md-7">
+            <div id="map" v-on:click="newWayPointClick($event,addOnClick)" class="map" style="height:400px;"></div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div
                 class="form-check"
                 v-for="layer in layers"
@@ -53,8 +53,10 @@ var template =`
             <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
 
 
-        <div id= "waypointsOrganization">
-        <h2> Waypoints</h2>
+        <div id= "waypointsOrganization" class="drag">
+        <h2> Waypoints Draggable</h2>
+        <draggable  @end="updateWayPoint" class="dragArea">
+
         <div
             class="waypointsOrganize"
             v-for="wayPoint in layers[1].features"
@@ -63,15 +65,10 @@ var template =`
          <p>Waypoint {{wayPoint.id}}</p>
 
          <button class="btn-primary" v-on:click="deleteWaypoint(wayPoint.id)" > Delete </button>
+         <p> Lat. {{wayPoint.displayCoords[0]}} | Long. {{wayPoint.displayCoords[1]}}</p>
          </div>
 
-
-        <div class="drag">
-            <h2>Draggable</h2>
-            <draggable  @end="updateWayPoint" class="dragArea">
-                <div v-for="wayPoint in layers[1].features">{{wayPoint.id}}</div>
-             </draggable>
-         </div>
+         </draggable>
 
         </div>
 
@@ -108,6 +105,7 @@ Vue.component('maps', {
                 name: 'Current Rover Position',
                 type: 'marker',
                 coords: [38.406460, -110.791900],
+
                 }]
             },
                 {
@@ -117,6 +115,7 @@ Vue.component('maps', {
                 features: [{
                     type: 'circleMarker',
                     coords: [38.406460, -110.791900],
+                    displayCoords:[38.40646000, -110.79190000],
                     id: 0
                     }]
                 }
@@ -150,7 +149,6 @@ Vue.component('maps', {
                     markerFeatures.forEach((feature) => {
                         feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center", icon: this.icon}).bindPopup(feature.name);
                         });
-
 
                     const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
                     markerFeatures2.forEach((feature) => {
@@ -206,6 +204,7 @@ Vue.component('maps', {
             var newMarker = {
                         type: 'circleMarker',
                         coords: [markerLat, markerLong],
+                        displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
                         id: 0
                     };
             // Push JS Object and then convert to leaflet object
@@ -292,6 +291,7 @@ Vue.component('maps', {
                 var newMarker = {
                             type: 'circleMarker',
                             coords: [markerLat, markerLong],
+                            displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
                             id: 0
                         };
 
@@ -337,8 +337,8 @@ Vue.component('maps', {
                 var temp2 = [layer.features[oldInd]];
                 var temp3 = layer.features.slice(newInd,oldInd);
                 var temp4 = layer.features.slice(oldInd+1);
-
-
+                var newWaypoints = temp1.concat(temp2,temp3,temp4);
+                layer.features = newWaypoints;
             }
 
             else if (oldInd < newInd){
@@ -346,9 +346,10 @@ Vue.component('maps', {
                 var temp2 = layer.features.slice(oldInd+1,newInd+1);
                 var temp3 = [layer.features[oldInd]];
                 var temp4 = layer.features.slice(newInd+1);
+                var newWaypoints = temp1.concat(temp2,temp3,temp4);
+                layer.features = newWaypoints;
             }
-            var newWaypoints = temp1.concat(temp2,temp3,temp4);
-            layer.features = newWaypoints;
+
             for(i=0; i <layer.features.length; i++){
                    layer.features[i].id = i;
                    layer.features[i].leafletObject.bindPopup("Waypoint "+String(layer.features[i].id));
