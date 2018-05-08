@@ -4,7 +4,7 @@ from robocluster import Device
 
 routes = web.RouteTableDef()
 
-serverd = Device('webui', 'rover')
+serverd = Device('webui', 'rover', network='0.0.0.0/0')
 serverd.storage.TargetReached = False
 
 serverd.storage.roverLat = 38.406460
@@ -13,27 +13,15 @@ serverd.storage.roverHeading = 200
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
 
-# @serverd.every('1s')
-async def toggle():
-    serverd.storage.TargetReached = not\
-            serverd.storage.TargetReached
-
-@serverd.on('*/FilteredGPS')
-@serverd.on('*/GPSPosition')
-def update_device(event, data):
-    serverd.storage.roverLat = data[0]
-    serverd.storage.roverLong = data[1]
-
 @serverd.every('100ms')
-async def get_position():
+async def update_rover_model():
     pos = await serverd.request('Navigation', 'RoverPosition')
     serverd.storage.roverLat = pos[0]
     serverd.storage.roverLong = pos[1]
+    heading = await serverd.request('Navigation', 'RoverHeading')
+    serverd.storage.roverHeading = heading
+    print('ui updated')
 
-
-@serverd.on('*/roverHeading')
-async def update_heading(event, data):
-    serverd.storage.roverHeading = data
 
 @serverd.on('*/Autopilot')
 def update_autopilot_enabled(event, data):
@@ -68,6 +56,11 @@ async def post(request):
     name = request.match_info['name']
     data = await request.read()
     data = json.loads(data.decode('utf-8'))
+    # Convert strings to booleans
+    if data[name] in ['true', 'True']:
+        data[name] = True
+    elif data[name] in ['false', 'False']:
+        data[name] = False
     # print('data post {}'.format(data))
     serverd.storage[name] = data[name]
     await serverd.publish(name, data[name])
