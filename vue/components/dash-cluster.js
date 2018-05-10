@@ -120,11 +120,11 @@ Vue.component('dash-cluster', {
         this.initGauges();
 
          this.getRes1Value();
-        setInterval(this.getRes1Value, 10000);
+        setInterval(this.getRes1Value, 100);
         this.getRes2Value();
-        setInterval(this.getRes2Value, 10000);
+        setInterval(this.getRes2Value, 100);
         this.getRes3Value();
-        setInterval(this.getRes3Value, 10000);
+        setInterval(this.getRes3Value, 100);
     }
 
 
