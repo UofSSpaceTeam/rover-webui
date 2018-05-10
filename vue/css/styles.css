@@ -3,6 +3,23 @@ margin:10px;
 
 }
 
+#waypointsOrganization{
+    background-color:white;
+    color:black;
+    padding:30px;
+}
+
+#waypointsOrganization  p{
+    color:black;
+}
+
+
+#waypointsOrganization  p{
+    display: inline-block;
+}
+
+
+
 body{
     background:
 linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,

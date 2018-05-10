@@ -7,8 +7,12 @@ routes = web.RouteTableDef()
 serverd = Device('webui', 'rover')
 serverd.storage.TargetReached = False
 
-serverd.storage.roverLat = 52.132653
-serverd.storage.roverLong = -106.628012
+serverd.storage.roverLat = 38.406460
+serverd.storage.roverLong = -110.791900
+serverd.storage.roverHeading = 90
+serverd.storage.Speed = 3
+serverd.storage.Acceleration = 100
+serverd.storage.current = 2.5
 
 @serverd.on('*/GPSPosition')
 def update_gps_pos(event, data):
@@ -24,7 +28,7 @@ async def toggle():
 @routes.get('/')
 async def index(request):
     print('Home page')
-    return web.FileResponse('./views/index.html')
+    return web.FileResponse('./vue/index.html')
 
 @routes.get('/stats')
 async def stats(request):
