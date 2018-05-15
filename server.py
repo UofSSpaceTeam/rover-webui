@@ -9,9 +9,10 @@ serverd.storage.TargetReached = False
 
 serverd.storage.roverLat = 38.406460
 serverd.storage.roverLong = -110.791900
-serverd.storage.roverHeading = 200
+serverd.storage.roverHeading = 90
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
+serverd.storage.current = 2.5
 
 @serverd.every('100ms')
 async def update_rover_model():
