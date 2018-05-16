@@ -21,7 +21,7 @@ async def update_rover_model():
     serverd.storage.roverLong = pos[1]
     heading = await serverd.request('Navigation', 'RoverHeading')
     serverd.storage.roverHeading = heading
-    print('ui updated')
+    # print('ui updated')
 
 
 @serverd.on('*/Autopilot')
@@ -62,7 +62,7 @@ async def post(request):
         data[name] = True
     elif data[name] in ['false', 'False']:
         data[name] = False
-    # print('data post {}'.format(data))
+    print('data post {}'.format(data))
     serverd.storage[name] = data[name]
     await serverd.publish(name, data[name])
     return web.Response()

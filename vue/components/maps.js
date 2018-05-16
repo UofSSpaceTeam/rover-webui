@@ -137,7 +137,9 @@ Vue.component('maps', {
             // offline Zoomed in tiles (not a large area, only over MDRS), maxzoom = 17 : /lib/tiles/closeUp/{z}/{x}/{y}.png
             // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
 
-              '/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
+              //'/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
+              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
+              //'/lib/tiles/wideArea/{z}/{x}/{y}.jpg',
                {
              maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
@@ -225,8 +227,9 @@ Vue.component('maps', {
             if(layer.active){
                 layer.features[layer.features.length-1].leafletObject.addTo(this.map);
             }
-            this.setMarkerLat();
-            this.setMarkerLong();
+            //this.setMarkerLat();
+            //this.setMarkerLong();
+            this.sendWaypoint(markerLat, markerLong);
         },
 
         getRoverLat: function() {
@@ -287,6 +290,17 @@ Vue.component('maps', {
                 });
         },
 
+        sendWaypoint: function(lat, lon) {
+                var postdata = {};
+                postdata["NewWaypoint"] = [lat, lon];
+                axios.post('/submit/'+"NewWaypoint", postdata)
+                .then(function(response) {
+                    console.log("Succesfully changed data");
+                }).catch(function() {
+                    console.log("Failed to set value");
+                });
+        },
+
         newWayPointClick: function(event,checked){
             var latlng = this.map.mouseEventToLatLng(event);
             var markerLat = latlng.lat;
@@ -313,8 +327,9 @@ Vue.component('maps', {
                 if(layer.active){
                     layer.features[layer.features.length-1].leafletObject.addTo(this.map);
                 }
-                this.setMarkerLat();
-                this.setMarkerLong();
+                //this.setMarkerLat();
+                //this.setMarkerLong();
+                this.sendWaypoint(markerLat, markerLong);
            }
         },
 
