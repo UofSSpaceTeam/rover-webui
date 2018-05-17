@@ -82,7 +82,7 @@ var template =`
 
 Vue.component('maps', {
     template: template,
-    props: ['resource1','resource2','resource3','resource4','resource5'],
+    props: ['resource1','resource2','resource3','resource4','resource5','resource6'],
     data: function() {
         return{
         map: null,
@@ -219,7 +219,7 @@ Vue.component('maps', {
             }
             //this.setMarkerLat();
             //this.setMarkerLong();
-            this.sendWaypoint(markerLat, markerLong);
+            this.sendWaypoints();
         },
 
         getRoverLat: function() {
@@ -280,12 +280,15 @@ Vue.component('maps', {
             });
         },
 
-        sendWaypoint: function(lat, lon) {
+        sendWaypoints: function() {
+            var layer = this.layers.find(layer => layer.id === 1);
             var postdata = {};
-            postdata["NewWaypoint"] = [lat, lon];
-            axios.post('/submit/'+"NewWaypoint", postdata)
+            postdata[this.resource6] = layer.features;
+            console.log('/submit/'+this.resource6);
+            console.log(postdata)
+            axios.post('/submit/'+this.resource6, postdata)
             .then(function(response) {
-                console.log("Succesfully changed data");
+                console.log("Successfully changed data");
             }).catch(function() {
                 console.log("Failed to set value");
             });
@@ -316,7 +319,7 @@ Vue.component('maps', {
                 }
                 //this.setMarkerLat();
                 //this.setMarkerLong();
-                this.sendWaypoint(markerLat, markerLong);
+                this.sendWaypoints();
            }
         },
 
@@ -329,6 +332,8 @@ Vue.component('maps', {
                    layer.features[i].id -= 1;
                    layer.features[i].leafletObject.bindPopup("Waypoint "+String(layer.features[i].id));
             }
+
+            this.sendWaypoints();
 
         },
         updateWayPoint : function(evt){
@@ -357,6 +362,8 @@ Vue.component('maps', {
                    layer.features[i].id = i;
                    layer.features[i].leafletObject.bindPopup("Waypoint "+String(layer.features[i].id));
             }
+
+            this.sendWaypoints();
         }
 },
     mounted() {

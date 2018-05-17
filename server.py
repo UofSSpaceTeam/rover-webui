@@ -14,7 +14,7 @@ serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
 
-@serverd.every('100ms')
+#@serverd.every('100ms')
 async def update_rover_model():
     pos = await serverd.request('Navigation', 'RoverPosition')
     serverd.storage.roverLat = pos[0]
@@ -54,6 +54,7 @@ async def req(request):
 
 @routes.post('/submit/{name}')
 async def post(request):
+    print("post")
     name = request.match_info['name']
     data = await request.read()
     data = json.loads(data.decode('utf-8'))
