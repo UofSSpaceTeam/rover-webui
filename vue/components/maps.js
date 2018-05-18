@@ -198,30 +198,39 @@ Vue.component('maps', {
         },
 
         newWayPoint: function(markerLat,markerLong){
-            //Waypoints layer
-            var layer = this.layers.find(layer => layer.id === 1);
-            // Create new JS Object
-            var newMarker = {
-                        type: 'circleMarker',
-                        coords: [markerLat, markerLong],
-                        displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
-                        id: 0
-                    };
-            // Push JS Object and then convert to leaflet object
 
-            if(layer.features.length !=0){
-                newMarker.id = layer.features[layer.features.length-1].id + 1;
-            }
-            layer.features.push(newMarker);
-            this.wayPointCoords.push(newMarker.coords);
-            layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
+            markerLat = parseFloat(markerLat);
+            markerLong = parseFloat(markerLong);
 
-            if(layer.active){
-                layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            if (isNaN(markerLong) || isNaN(markerLat)) {
+                alert("Please enter integers")
             }
-            //this.setMarkerLat();
-            //this.setMarkerLong();
-            this.sendWaypoints();
+
+            else{
+                var layer = this.layers.find(layer => layer.id === 1);
+                // Create new JS Object
+                var newMarker = {
+                            type: 'circleMarker',
+                            coords: [markerLat, markerLong],
+                            displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
+                            id: 0
+                        };
+                // Push JS Object and then convert to leaflet object
+
+                if(layer.features.length !=0){
+                    newMarker.id = layer.features[layer.features.length-1].id + 1;
+                }
+                layer.features.push(newMarker);
+                this.wayPointCoords.push(newMarker.coords);
+                layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
+
+                if(layer.active){
+                    layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+                }
+                //this.setMarkerLat();
+                //this.setMarkerLong();
+                this.sendWaypoints();
+            }
         },
 
         getRoverLat: function() {
