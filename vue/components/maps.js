@@ -107,6 +107,7 @@ Vue.component('maps', {
 
                 }]
             },
+
                 {
                 id: 1,
                 name: 'Waypoints',
@@ -118,6 +119,7 @@ Vue.component('maps', {
                     id: 0
                     }]
                 }
+
             ]
         }
     },
@@ -155,8 +157,8 @@ Vue.component('maps', {
                 const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
                 markerFeatures2.forEach((feature) => {
                     feature.leafletObject = L.circleMarker(feature.coords).bindPopup("Waypoint "+String(feature.id));
-                    feature.leafletObject.addTo(this.map);
                 });
+                layer.features.pop();
             });
         },
         layerChanged: function(layerId, active) {
