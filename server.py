@@ -13,6 +13,7 @@ serverd.storage.roverHeading = 90
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
+serverd.storage.sendWaypoints = []
 
 #@serverd.every('100ms')
 async def update_rover_model():

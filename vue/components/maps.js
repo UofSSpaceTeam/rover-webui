@@ -284,14 +284,14 @@ Vue.component('maps', {
             var layer = this.layers.find(layer => layer.id === 1);
             var postdata = {};
             postdata[this.resource6] = layer.features;
-            console.log('/submit/'+this.resource6);
-            console.log(postdata)
+            console.log(this.resource6);
+            console.log(postdata);
             axios.post('/submit/'+this.resource6, postdata)
             .then(function(response) {
                 console.log("Successfully changed data");
-            }).catch(function() {
-                console.log("Failed to set value");
-            });
+            }).catch(error => {
+               console.log(error);
+                });
         },
 
         newWayPointClick: function(event,checked){
