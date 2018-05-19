@@ -137,7 +137,7 @@ Vue.component('maps', {
             // offline Zoomed in tiles (not a large area, only over MDRS), maxzoom = 17 : /lib/tiles/closeUp/{z}/{x}/{y}.png
             // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
 
-              '/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
+              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png', // Change this line for different tile set
                {
              maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',

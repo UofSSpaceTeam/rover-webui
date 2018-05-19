@@ -13,6 +13,7 @@ serverd.storage.roverHeading = 90
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
+serverd.storage.velocity = [[5,1],[3,2]]
 
 @serverd.on('*/GPSPosition')
 def update_gps_pos(event, data):
