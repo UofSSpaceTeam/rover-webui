@@ -112,12 +112,14 @@ Vue.component('maps', {
                 id: 1,
                 name: 'Waypoints',
                 active: true,
-                features: [{
+                features: [
+                /*{
                     type: 'circleMarker',
                     coords: [38.406460, -110.791900],
                     displayCoords:[38.40646000, -110.79190000],
                     id: 0
-                    }]
+                    }
+                   */ ]
                 }
 
             ]
@@ -158,19 +160,14 @@ Vue.component('maps', {
                 markerFeatures2.forEach((feature) => {
                     feature.leafletObject = L.circleMarker(feature.coords).bindPopup("Waypoint "+String(feature.id));
                 });
-                layer.features.pop();
+
             });
         },
         layerChanged: function(layerId, active) {
             const layer = this.layers.find(layer => layer.id === layerId);
             layer.features.forEach((feature) => {
                 if (active) {
-                    if (layerId === 0) {
-                        this.updateRoverCoord(this.roverLat,this.roverLong);
-                        setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
-                    } else {
-                        feature.leafletObject.addTo(this.map);
-                    }
+                    feature.leafletObject.addTo(this.map);
                 } else {
                     feature.leafletObject.removeFrom(this.map);
                 }
@@ -189,14 +186,15 @@ Vue.component('maps', {
                 type: 'marker',
                 coords: [this.roverLat, this.roverLong],
             };
-            if (layer.active) {
                 // Remove current rover marker from map
                 layer.features[0].leafletObject.removeFrom(this.map);
+                layer.features.pop();
                 // Push JS Object and then convert to leaflet object
                 layer.features.push(newRover);
                 layer.features[0].leafletObject = L.marker(newRover.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center",icon:this.icon});
-                layer.features[0].leafletObject.addTo(this.map);
-            }
+                if(layer.active){
+                    layer.features[0].leafletObject.addTo(this.map);
+                }
         },
 
         newWayPoint: function(markerLat,markerLong){
@@ -304,8 +302,6 @@ Vue.component('maps', {
                console.log("Failed to set data");
                console.log(error);
                 });
-
-             console.log(this.wayPointCoords);
         },
 
         newWayPointClick: function(event,checked){
@@ -401,6 +397,7 @@ Vue.component('maps', {
     mounted() {
         this.initMap();
         this.initLayers();
+        setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
         // this.getRoverLat();
         // setInterval(this.getRoverLat, 1000);
         // this.getRoverLong();
