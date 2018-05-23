@@ -43,6 +43,6 @@ Vue.component('line-plot', {
     },
 
     mounted(){
-        setInterval(this.getValue, 3000);
+        setInterval(this.getValue, 1000);
     }
 })
