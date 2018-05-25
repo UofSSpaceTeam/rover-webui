@@ -5,6 +5,7 @@ var template =`
     <maps resource1="roverLat" resource2="roverLong" resource3="markerLat" resource4="markerLong" resource5="roverHeading" resource6="sendWaypoints"></maps>
     <gauge dataSource="Speed" minValue = "0" maxValue = "10" units="m/s"></gauge>
     <gauge dataSource="Acceleration" minValue = "50" maxValue = "100" units="m/s/s"></gauge>
+    <line-plot dataSource="velocity" xlabel="time"></line-plot>
   </div>
 `;
 

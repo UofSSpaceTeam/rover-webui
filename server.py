@@ -13,6 +13,7 @@ serverd.storage.roverHeading = 90
 serverd.storage.Speed = 3
 serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
+serverd.storage.velocity = [[1,3],[3,2],[5,5],[6,6]]
 serverd.storage.sendWaypoints = []
 
 @serverd.every('100ms')
