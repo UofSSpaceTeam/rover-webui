@@ -52,7 +52,9 @@ var template =`
             <input v-model="markerLong" placeholder="Longitude">
             <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
 
-
+            <div id="add-rover-way">
+                <button class="btn-primary" v-on:click="currentRoverWaypoint()" > Add Current Rover Position As Waypoint </button>
+            </div>
         <div id= "waypointsOrganization" class="drag">
         <h2> Waypoints Draggable</h2>
         <draggable  @end="updateWayPoint" class="dragArea">
@@ -73,6 +75,7 @@ var template =`
         </div>
 
         </div>
+
 
 
 
@@ -392,6 +395,31 @@ Vue.component('maps', {
             }
 
             this.sendWaypoints();
+        },
+
+        currentRoverWaypoint: function(){
+            var markerLat = this.roverLat;
+            var markerLong = this.roverLong;
+            var layer = this.layers.find(layer => layer.id === 1);
+            // Create new JS Object
+            var newMarker = {
+                        type: 'circleMarker',
+                        coords: [markerLat, markerLong],
+                        displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
+                        id: 0
+                    };
+            if(layer.features.length !=0){
+            newMarker.id = layer.features[layer.features.length-1].id + 1;
+            }
+            // Push JS Object and then convert to leaflet object
+            layer.features.push(newMarker);
+            this.wayPointCoords.push(newMarker.coords);
+            layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
+            if(layer.active){
+                layer.features[layer.features.length-1].leafletObject.addTo(this.map);
+            }
+            this.sendWaypoints();
+
         }
 },
     mounted() {
