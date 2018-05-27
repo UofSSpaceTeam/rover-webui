@@ -140,7 +140,7 @@ Vue.component('maps', {
             // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
 
               //'/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
-              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
+              '/lib/tiles/closeUp/{z}/{x}/{y}.png',
               //'/lib/tiles/wideArea/{z}/{x}/{y}.jpg',
                {
              maxZoom: 17,

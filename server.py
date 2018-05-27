@@ -15,8 +15,9 @@ serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
 serverd.storage.velocity = [[1,3],[3,2],[5,5],[6,6]]
 serverd.storage.sendWaypoints = []
+serverd.storage.driving= True
 
-@serverd.every('100ms')
+#@serverd.every('100ms')
 async def update_rover_model():
     pos = await serverd.request('Navigation', 'RoverPosition')
     serverd.storage.roverLat = pos[0]
