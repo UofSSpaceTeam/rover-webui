@@ -132,16 +132,15 @@ Vue.component('maps', {
 // '/lib/tiles3/{z}/{x}/{y}.png'
     methods: {
         initMap: function() {
-            this.map = L.map('map').setView([38.374105, -110.738415], 12);
+           this.map = L.map('map').setView([38.374105, -110.738415], 12);
             this.tileLayer = L.tileLayer(
             // Choices for tiles; Change max Zoom and string reference under comments
             // Online road maps from open steet maps : https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png
             // offline Zoomed in tiles (not a large area, only over MDRS), maxzoom = 17 : /lib/tiles/closeUp/{z}/{x}/{y}.png
             // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
+            //offline Cainesille tiles , maz zoom =17: /lib/tiles/cainesville/{z}/{x}/{y}.png
 
-              //'/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
-              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
-              //'/lib/tiles/wideArea/{z}/{x}/{y}.jpg',
+              'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png', // Change this line for different tile set
                {
              maxZoom: 17,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
