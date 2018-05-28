@@ -10,6 +10,11 @@ serverd.storage.TargetReached = False
 serverd.storage.roverLat = 52.132653
 serverd.storage.roverLong = -106.628012
 
+serverd.storage.camera1 = "http://192.168.0.15:8888/"
+serverd.storage.camera2 = "http://192.168.0.15:8888/"
+serverd.storage.camera3 = "http://192.168.0.15:8888/"
+serverd.storage.camera4 = "http://192.168.0.15:8888/"
+
 # @serverd.every('1s')
 async def toggle():
     serverd.storage.TargetReached = not\

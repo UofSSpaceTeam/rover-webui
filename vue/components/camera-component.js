@@ -1,50 +1,134 @@
-var template = '
+var template =`
     <div class="streams">
-    <h1>Camera Component</h1>
-
-    <img src="http://192.168.0.15:8888/&t=" width='640' height='500'
-    onload='setTimeout(function()
-            {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, 1000)'
-    onerror='setTimeout(function()
-            {src = src.substring(0, (src.lastIndexOf("t=")+2))+(new Date()).getTime()}, 5000)' alt='' />
-
-    <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" width="640" height="500" data-setup="{}">
-         <source src="http://192.168.0.15:8888/" type='video/webm'>
-         <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-    </video>
-
-    <IFRAME src="http://192.168.0.15:8888/" WIDTH="320" Height="240"</IFRAME>
-    <OBJECT ID="AxisCamControl" CLASSID="CLSID:917623D1-D8E5-11D2-BE8B-00104B06BDE3" WIDTH="640" HEIGHT="500" CODEBASE="http://192.168.0.15:8888/activex/AxisCamControl.cab#Version=2,20,0,6">
-    <PARAM NAME=DisplaySoundPanel VALUE=0>
-    <PARAM NAME=URL VALUE="http://192.168.0.15:8888/axis-cgi/mjpg/video.cgi?camera=&resolution=704x480"></OBJECT>
-
-    <script>
-        window.setInterval("reloadIFrame();", 1000);
-        function reloadIFrame() {
-        document.frames["iframe"].location.reload();
-        }
-     </script>
-
-    <div id="Container"
-	    style="padding-bottom:56.25%; position:relative;
-	    display:block; width: 100%">
-            <iframe id="iframe" width="100%" height="100%"
+        <h1>Camera Component</h1>    
+        <script>
+            window.setInterval("reloadIFrame();", 1);
+            function reloadIFrame() {
+            document.frames["stream1"].location.reload();
+            }
+         </script>
+         <script>
+            window.setInterval("reloadIFrame();", 1);
+            function reloadIFrame() {
+            document.frames["stream2"].location.reload();
+            }
+         </script>
+         <script>
+            window.setInterval("reloadIFrame();", 1);
+            function reloadIFrame() {
+            document.frames["stream3"].location.reload();
+            }
+         </script>
+         <script>
+            window.setInterval("reloadIFrame();", 1);
+            function reloadIFrame() {
+            document.frames["stream4"].location.reload();
+            }
+         </script>     
+        <div id="Container1" 
+            style="padding-bottom:56.25%; position:relative;
+            display:block; width: 100%">
+            <iframe name="stream1" width="100%" height="100%" 
                 allowfullscreen webkitallowfullscreen
-                src="http://192.168.0.15:8888/"
+                src="res1Value" 
                 frameborder="0"
                 style="position:absolute; top:0; left: 0">
             </iframe>
+        </div>
+        <div id="Container2" 
+            style="padding-bottom:56.25%; position:relative;
+            display:block; width: 100%">
+            <iframe name="stream2" width="100%" height="100%" 
+                allowfullscreen webkitallowfullscreen
+                src="res2Value" 
+                frameborder="0"
+                style="position:absolute; top:0; left: 0">
+            </iframe>
+        </div>
+        <div id="Container3" 
+            style="padding-bottom:56.25%; position:relative;
+            display:block; width: 100%">
+            <iframe name="stream3" width="100%" height="100%" 
+                allowfullscreen webkitallowfullscreen
+                src="res3Value" 
+                frameborder="0"
+                style="position:absolute; top:0; left: 0">
+            </iframe>
+        </div>
+        <div id="Container4" 
+            style="padding-bottom:56.25%; position:relative;
+            display:block; width: 100%">
+            <iframe name="stream4" width="100%" height="100%" 
+                allowfullscreen webkitallowfullscreen
+                src="res4Value" 
+                frameborder="0"
+                style="position:absolute; top:0; left: 0">
+            </iframe>
+        </div>
     </div>
-    
-</div>
 `;
 
 Vue.component('camera-component', {
-    template: template
+    template: template,
+    props: ['resource1','resource2','resource3','resource4'],
+    data: function() {
+        return {
+            res1Value: "http://192.168.0.15:8888/",
+            res2Value: "http://192.168.0.15:8888/",
+            res3Value: "http://192.168.0.15:8888/",
+            res4Value: "http://192.168.0.15:8888/"
+        }
+    },
+    created: function() {
+        this.getRes1Value();
+        this.getRes2Value();
+        this.getRes3Value();
+        this.getRes4Value();
+    },
+    methods: {
+        getRes1Value: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.resource1)
+            .then(function(response) {
+                console.log(response.data);
+                self.res1Value = response.data;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        },
+         getRes2Value: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.resource2)
+            .then(function(response) {
+                console.log(response.data);
+                self.res2Value = response.data;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        },
+         getRes3Value: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.resource3)
+            .then(function(response) {
+                console.log(response.data);
+                self.res3Value = response.data;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        },
+         getRes4Value: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.resource4)
+            .then(function(response) {
+                console.log(response.data);
+                self.res4Value = response.data;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        }
     }
-)
-
-// http://foscam.us/forum/a-how-to-embed-any-foscam-ip-camera-in-webpage-using-1-line-t9113.html
-// https://www.npmjs.com/package/streamedian
-// http://www.cctvforum.com/viewtopic.php?t=7026
-// https://support.video.ibm.com/hc/en-us/articles/207851917-How-to-embed-a-stream-or-video-on-your-site
+})
