@@ -1,19 +1,11 @@
 var template =`
 <div class="row boolRow" >
-<div class="col-md-3">
-    <h3>{{resource}} : {{value}}</h3>
+    <div class="col-md-3">
+        <h3>{{resource}} : {{value}}</h3>
     </div>
     <div class="col-md-3">
-    <input
-                   type="checkbox"
-                   class="boolToggle"
-                   v-model="active"
-                   @change="setValue(active)"
-                />
+        <input type="checkbox" class="boolToggle" v-model="active" @change="setValue(active)"/>
     </div>
-
-
-
 </div>
 `;
 
@@ -28,16 +20,18 @@ Vue.component('boolean-switch', {
         }
     },
     created: function() {
+        // Call getter and set interval to call getter every 100 ms
         this.getValue();
         setInterval(this.getValue, 100);
     },
     methods: {
         getValue: function() {
+            // Getter function for component. Sends GET request to server to update data.
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource)
             .then(function(response) {
-                console.log(response.data);
+               // console.log(response.data);
                 self.value = response.data;
                 self.active = response.data;
             }).catch(function() {
@@ -45,6 +39,7 @@ Vue.component('boolean-switch', {
             });
         },
         setValue: function(newVal) {
+            // Setter function for component. Posts data to server if value is changed by the user.
             postdata = {};
             postdata[this.resource] = newVal;
             axios.post('/submit/'+this.resource, postdata)

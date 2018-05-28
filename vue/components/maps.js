@@ -1,86 +1,57 @@
 var template =`
-<div>
-    <h1>Navigation</h1>
-    <div class="row">
-        <div class="col-md-7">
-            <div id="map" v-on:click="newWayPointClick($event,addOnClick)" class="map" style="height:400px;"></div>
-        </div>
+    <div>
+        <h1>Navigation</h1>
 
-        <div class="col-md-5">
-            <div
-                class="form-check"
-                v-for="layer in layers"
-                :key="layer.id"
-                >
-                <label class="form-check-label">
-                <input
-                   class="form-check-input"
-                   id="toggle"
-                   type="checkbox"
-                   v-model="layer.active"
-                   @change="layerChanged(layer.id, layer.active)"
-                />
-                    {{ layer.name }}
-                </label>
-
-                 <input
-                   class="form-check-input"
-                   id="toggle"
-                   type="checkbox"
-                   v-model="layer.active"
-                   @change="layerChanged(layer.id, layer.active)"
-                />
-
-                </label>
-
-            </div>
-             <div
-                class="click-check">
-                <label class="form-check-label">
-            <input
-                   type="checkbox"
-                   v-model="addOnClick"
-                />
-                Add Waypoint On Click
-                </label>
+        <div class="row">
+            <div class="col-md-7">
+                <div id="map" v-on:click="newWayPointClick($event,addOnClick)" class="map" style="height:400px;"></div>
             </div>
 
-            <h5 id="addNew"> Add a new way point </h5>
-            <p>Latitude</p>
-            <input v-model="markerLat" placeholder="Latitude">
-            <p>Longitude</p>
-            <input v-model="markerLong" placeholder="Longitude">
-            <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
+            <div class="col-md-5">
+                <div class="form-check" v-for="layer in layers" :key="layer.id">
+                    <label class="form-check-label">
+                        <input class="form-check-input" id="toggle" type="checkbox" v-model="layer.active"
+                        @change="layerChanged(layer.id, layer.active)"/>
+                        {{ layer.name }}
+                    </label>
 
-            <div id="add-rover-way">
-                <button class="btn-primary" v-on:click="currentRoverWaypoint()" > Add Current Rover Position As Waypoint </button>
+                    <input class="form-check-input" id="toggle" type="checkbox" v-model="layer.active"
+                    @change="layerChanged(layer.id, layer.active)"/>
+                    </label>
+                 </div>
+
+                <div class="click-check">
+                    <label class="form-check-label">
+                    <input type="checkbox" v-model="addOnClick"/>
+                     Add Waypoint On Click
+                     </label>
+                </div>
+
+                <h5 id="addNew"> Add a new way point </h5>
+                <p>Latitude</p>
+                <input v-model="markerLat" placeholder="Latitude">
+                <p>Longitude</p>
+                <input v-model="markerLong" placeholder="Longitude">
+                <button class="btn-primary" v-on:click="newWayPoint(markerLat,markerLong)"> Enter New Waypoint </button>
+
+                <div id="add-rover-way">
+                    <button class="btn-primary" v-on:click="currentRoverWaypoint()" > Add Current Rover Position As Waypoint
+                    </button>
+                </div>
+
+                <div id= "waypointsOrganization" class="drag">
+                    <h2> Waypoints Draggable</h2>
+                    <draggable  @end="updateWayPoint" class="dragArea">
+                        <div class="waypointsOrganize" v-for="wayPoint in layers[1].features">
+                            <p> Waypoint {{wayPoint.id}}</p>
+                            <button class="btn-primary" v-on:click="deleteWaypoint(wayPoint.id)" > Delete </button>
+                            <p> Lat. {{wayPoint.displayCoords[0]}} | Long. {{wayPoint.displayCoords[1]}}</p>
+                        </div>
+                    </draggable>
+                </div>
             </div>
-        <div id= "waypointsOrganization" class="drag">
-        <h2> Waypoints Draggable</h2>
-        <draggable  @end="updateWayPoint" class="dragArea">
-
-        <div
-            class="waypointsOrganize"
-            v-for="wayPoint in layers[1].features"
-            >
-
-         <p>Waypoint {{wayPoint.id}}</p>
-
-         <button class="btn-primary" v-on:click="deleteWaypoint(wayPoint.id)" > Delete </button>
-         <p> Lat. {{wayPoint.displayCoords[0]}} | Long. {{wayPoint.displayCoords[1]}}</p>
-         </div>
-
-         </draggable>
-
         </div>
-
-        </div>
-
-
-
-
     </div>
-</div>
 `;
 
 Vue.component('maps', {
@@ -88,48 +59,44 @@ Vue.component('maps', {
     props: ['resource1','resource2','resource3','resource4','resource5','resource6'],
     data: function() {
         return{
-        map: null,
-        markerLat:1.0,
-        addOnClick: false,
-        icon:null,
-        markerLong:1.0,
-        roverLat: 1.0,
-        roverLong: 1.0,
-        roverHeading: 0,
-        tileLayer: 1.0,
-        wayPointCoords: [],
-        layers: [{
-            id: 0,
-            name: 'Rover',
-            active: true,
-            features: [{
+            map: null,
+            markerLat:1.0,
+            addOnClick: false,
+            icon:null,
+            markerLong:1.0,
+            roverLat: 1.0,
+            roverLong: 1.0,
+            roverHeading: 0,
+            tileLayer: 1.0,
+            wayPointCoords: [],
+            layers: [{
                 id: 0,
-                name: 'Current Rover Position',
-                type: 'marker',
-                coords: [38.406460, -110.791900],
-
-                }]
-            },
-
-                {
-                id: 1,
-                name: 'Waypoints',
+                name: 'Rover',
                 active: true,
-                features: [
-                /*{
-                    type: 'circleMarker',
+                features: [{
+                    id: 0,
+                    name: 'Current Rover Position',
+                    type: 'marker',
                     coords: [38.406460, -110.791900],
-                    displayCoords:[38.40646000, -110.79190000],
-                    id: 0
-                    }
-                   */ ]
+                    }]
+                },
+                {
+                    id: 1,
+                    name: 'Waypoints',
+                    active: true,
+                    features: [
+                    /*{
+                        type: 'circleMarker',
+                        coords: [38.406460, -110.791900],
+                        displayCoords:[38.40646000, -110.79190000],
+                        id: 0
+                        }
+                       */ ]
                 }
-
             ]
         }
     },
 
-// '/lib/tiles3/{z}/{x}/{y}.png'
     methods: {
         initMap: function() {
             this.map = L.map('map').setView([38.374105, -110.738415], 12);
@@ -153,20 +120,24 @@ Vue.component('maps', {
         },
 
         initLayers: function() {
+            // Initialize layers
             this.layers.forEach((layer) => {
                 const markerFeatures = layer.features.filter(feature => feature.type === 'marker');
                 markerFeatures.forEach((feature) => {
+                    // create new leaflet object for rover and add to map
                     feature.leafletObject = L.marker(feature.coords,{rotationAngle:this.roverHeading,rotationOrigin:"center", icon: this.icon}).bindPopup(feature.name);
                     feature.leafletObject.addTo(this.map);
                 });
                 const markerFeatures2 = layer.features.filter(feature => feature.type === 'circleMarker');
                 markerFeatures2.forEach((feature) => {
+                    //Create new leaflet object for waypoint and add to map
                     feature.leafletObject = L.circleMarker(feature.coords).bindPopup("Waypoint "+String(feature.id));
                 });
 
             });
         },
         layerChanged: function(layerId, active) {
+            // Function to add or remove layers from map if checkbox has changed for that layer
             const layer = this.layers.find(layer => layer.id === layerId);
             layer.features.forEach((feature) => {
                 if (active) {
@@ -177,9 +148,13 @@ Vue.component('maps', {
             });
         },
         updateRoverCoord: function(roverLat,roverLong){
+            // Function to update rovers position on the map
+
+            // Call getters for lat long and heading of the rover
             this.getRoverLat();
             this.getRoverLong();
             this.getRoverHeading();
+
             //Current Position layer
             var layer = this.layers.find(layer => layer.id === 0);
             // Create new JS Object
@@ -201,14 +176,15 @@ Vue.component('maps', {
         },
 
         newWayPoint: function(markerLat,markerLong){
+            // Function to add a new waypoint. Called when the user inputs coordinates into the text box and adds a new
+            // waypoint
 
+            // Convert to ints and check user input
             markerLat = parseFloat(markerLat);
             markerLong = parseFloat(markerLong);
-
             if (isNaN(markerLong) || isNaN(markerLat)) {
                 alert("Please enter integers")
             }
-
             else{
                 var layer = this.layers.find(layer => layer.id === 1);
                 // Create new JS Object
@@ -218,25 +194,23 @@ Vue.component('maps', {
                             displayCoords: [markerLat.toFixed(8), markerLong.toFixed(8)],
                             id: 0
                         };
-                // Push JS Object and then convert to leaflet object
 
+                // Push JS Object and then convert to leaflet object
                 if(layer.features.length !=0){
                     newMarker.id = layer.features[layer.features.length-1].id + 1;
                 }
                 layer.features.push(newMarker);
                 this.wayPointCoords.push(newMarker.coords);
                 layer.features[layer.features.length-1].leafletObject = L.circleMarker(newMarker.coords).bindPopup("Waypoint "+String(newMarker.id));
-
                 if(layer.active){
                     layer.features[layer.features.length-1].leafletObject.addTo(this.map);
                 }
-                //this.setMarkerLat();
-                //this.setMarkerLong();
                 this.sendWaypoints();
             }
         },
 
         getRoverLat: function() {
+        // Getter to request the new rover Lat from the server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource1)
@@ -249,6 +223,7 @@ Vue.component('maps', {
         },
 
         getRoverLong: function() {
+        // Getter to request the new rover Long from the server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource2)
@@ -261,6 +236,7 @@ Vue.component('maps', {
         },
 
         getRoverHeading: function() {
+        // Getter to request the new rover heading from the server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource5)
@@ -272,29 +248,8 @@ Vue.component('maps', {
             });
         },
 
-        setMarkerLat: function() {
-            var postdata = {};
-            postdata[this.resource3] = this.markerLat;
-            axios.post('/submit/'+this.resource3, postdata)
-            .then(function(response) {
-                console.log("Succesfully changed data");
-            }).catch(function() {
-                console.log("Failed to set value");
-            });
-        },
-
-        setMarkerLong: function() {
-            var postdata = {};
-            postdata[this.resource4] = this.markerLong;
-            axios.post('/submit/'+this.resource4, postdata)
-            .then(function(response) {
-                console.log("Succesfully changed data");
-            }).catch(function() {
-                console.log("Failed to set value");
-            });
-        },
-
         sendWaypoints: function() {
+        // Function to post the way points coordinate list to the server
             var layer = this.layers.find(layer => layer.id === 1);
             var postdata = {};
             postdata[this.resource6] = this.wayPointCoords;
@@ -308,10 +263,14 @@ Vue.component('maps', {
         },
 
         newWayPointClick: function(event,checked){
+            // Function that will create a new waypoint where the map was clicked
+
+            // Find the lat and long based on the mouse click
             var latlng = this.map.mouseEventToLatLng(event);
             var markerLat = latlng.lat;
             var markerLong = latlng.lng;
 
+            // Check if the checkbox was checked
             if(checked){
                 var layer = this.layers.find(layer => layer.id === 1);
                 // Create new JS Object
@@ -331,17 +290,20 @@ Vue.component('maps', {
                 if(layer.active){
                     layer.features[layer.features.length-1].leafletObject.addTo(this.map);
                 }
-                //this.setMarkerLat();
-                //this.setMarkerLong();
                 this.sendWaypoints();
            }
         },
 
         deleteWaypoint : function(id){
+            // Function that removes a waypoint from the list of waypoints
             var layer = this.layers.find(layer => layer.id === 1);
+            // Remove from map
             layer.features[id].leafletObject.removeFrom(this.map);
+            // Remove from waypoint object list and coordinate list
             layer.features.splice(id,1);
             this.wayPointCoords.splice(id,1);
+
+            // Reorder ids and popups with new id
             for(i=id; i <layer.features.length; i++){
                    layer.features[i].id -= 1;
                    layer.features[i].leafletObject.bindPopup("Waypoint "+String(layer.features[i].id));
@@ -351,9 +313,12 @@ Vue.component('maps', {
 
         },
         updateWayPoint : function(evt){
+        // Function to change the Waypoints list if the order was changed from the draggable list
             var layer = this.layers.find(layer => layer.id === 1);
             var oldInd = evt.oldIndex;
             var newInd = evt.newIndex;
+
+            // Slicing the array and putting it back together
             if (oldInd > newInd){
                 var temp1 = layer.features.slice(0,newInd);
                 var temp2 = [layer.features[oldInd]];
@@ -372,6 +337,7 @@ Vue.component('maps', {
 
             }
 
+            //Slicing the array and putting it back together
             else if (oldInd < newInd){
                 var temp1 = layer.features.slice(0,oldInd);
                 var temp2 = layer.features.slice(oldInd+1,newInd+1);
@@ -389,6 +355,7 @@ Vue.component('maps', {
                 this.wayPointCoords = newWaypointCoords;
             }
 
+            // Updating each id to be its index in the array again
             for(i=0; i <layer.features.length; i++){
                    layer.features[i].id = i;
                    layer.features[i].leafletObject.bindPopup("Waypoint "+String(layer.features[i].id));
@@ -398,6 +365,7 @@ Vue.component('maps', {
         },
 
         currentRoverWaypoint: function(){
+            // Function to set the current rover position as a waypoint
             var markerLat = this.roverLat;
             var markerLong = this.roverLong;
             var layer = this.layers.find(layer => layer.id === 1);
@@ -423,6 +391,7 @@ Vue.component('maps', {
         }
 },
     mounted() {
+        // Init map and layers and set interval to update the rover position. 
         this.initMap();
         this.initLayers();
         setInterval(this.updateRoverCoord, 100, this.roverLat, this.roverLong);
