@@ -1,10 +1,11 @@
 import json
 from aiohttp import web
 from robocluster import Device
+import time
 
 routes = web.RouteTableDef()
 
-serverd = Device('webui', 'rover', network='0.0.0.0/0')
+serverd = Device('webui', 'rover', network='10.0.0.0/24')
 serverd.storage.TargetReached = False
 
 serverd.storage.roverLat = 38.406460
@@ -15,8 +16,9 @@ serverd.storage.Acceleration = 100
 serverd.storage.current = 2.5
 serverd.storage.velocity = [[1,3],[3,2],[5,5],[6,6]]
 serverd.storage.sendWaypoints = []
+serverd.storage.spectrometer_data = []
 
-@serverd.every('100ms')
+# @serverd.every('100ms')
 async def update_rover_model():
     pos = await serverd.request('Navigation', 'RoverPosition')
     serverd.storage.roverLat = pos[0]
@@ -29,6 +31,10 @@ async def update_rover_model():
 @serverd.on('*/Autopilot')
 def update_autopilot_enabled(event, data):
     serverd.storage.Autopilot = data
+
+@serverd.on('*/spectrometer_data')
+def add_spec_point(event, data):
+    serverd.storage.spectrometer_data.append([time.time(), data])
 
 @routes.get('/')
 async def index(request):
