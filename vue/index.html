@@ -2,32 +2,47 @@
 <html>
   <head>
     <title>USST Web UI</title>
+
     <script src="/lib/vue.js"></script>
     <script src="/lib/axios.min.js"></script>
+
+    <!-- Chart Libraries -->
     <script src="/lib/Chart.bundle.min.js"></script>
     <script src="/lib/chartkick.js"></script>
+
+    <!-- Draggable list libraries -->
     <script src="/lib/Sortable.min.js"></script>
     <script src="/lib/vuedraggable.min.js"></script>
+
+    <!-- Gauge Libraries-->
     <script src="/lib/vue-chartkick.js"></script>
     <script src="/lib/gauge.min.js"></script>
 
+    <!-- Map Libraries-->
     <link rel="stylesheet" href="/lib/leaflet.css" crossorigin=""/>
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="/lib/leaflet.js" crossorigin=""></script>
+
+    <!-- Rotated Marker Library-->
+    <script src="/lib/leaflet.rotatedMarker.js"> </script>
+
+     <!-- Other Imports -->
     <link rel="stylesheet" href="/lib/bootstrap.min.css"  crossorigin="anonymous">
     <link rel="stylesheet" href="/vue/css/styles.css">
-    <script src="/lib/leaflet.rotatedMarker.js"></script>
     <link rel="icon" type="image/png" href="/lib/images/favicon.png" />
 
   </head>
   <body>
     <div id="app">
     </div>
+
+    <!-- Import all Components Scripts -->
     <script src="./vue/components/storage-text.js"></script>
     <script src="./vue/components/dash-cluster.js"></script>
     <script src="./vue/components/maps.js"></script>
     <script src="./vue/components/gauge.js"></script>
     <script src="./vue/components/line-plot.js"></script>
+    <script src="./vue/components/boolean-switch.js"></script>
     <script src="./vue/App.js"></script>
 
   </body>

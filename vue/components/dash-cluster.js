@@ -1,25 +1,20 @@
 var template =`
-<div class="vis">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
+<div class="vis container">
+    <div class="row">
+        <div class="col-sm">
             <h3> Heading </h3>
-                <canvas id="heading"></canvas>
-            </div>
-            <div class="col-sm">
+            <canvas id="heading"></canvas>
+        </div>
+        <div class="col-sm">
             <h3> Current </h3>
             <canvas id="currentGauge"></canvas>
-            </div>
-            <div class="col-sm">
+        </div>
+        <div class="col-sm">
             <h3> Speed </h3>
             <canvas id="speedGauge"></canvas>
-            </div>
         </div>
     </div>
 </div>
-
-
 `;
 
 Vue.component('dash-cluster', {
@@ -35,11 +30,9 @@ Vue.component('dash-cluster', {
             currentGauge: null
         }
     },
-    created: function() {
-
-    },
     methods: {
         initGauges : function(){
+            // Function to Initialize all the Gauge Objects
             this.headingGauge = new RadialGauge({
                 renderTo: 'heading', width: 300, height: 300, minValue: 0, maxValue: 360,
                 majorTicks: ["N","NE","E","SE","S","SW","W","NW","N"], minorTicks: 22, ticksAngle: 360, startAngle: 180,
@@ -62,19 +55,14 @@ Vue.component('dash-cluster', {
                 renderTo: 'speedGauge',
                 width: 300, height: 300, units: "Km/h", minValue: 0, maxValue: 20,
                 majorTicks: ["0","2","4","6","8","10","12","14","16","18","20"], minorTicks: 2, strokeTicks: true,
-                highlights: [
-                    {
-                        "from": 16,
-                        "to": 20,
-                        "color": "rgba(200, 50, 50, .75)"
-                    }
-                ],
+                highlights: [{"from": 16,"to": 20,"color": "rgba(200, 50, 50, .75)"}],
                 colorPlate: "#fff", borderShadowWidth: 0, borders: false, needleType: "arrow", needleWidth: 2,
                 needleCircleSize: 7, needleCircleOuter: true, needleCircleInner: false, animation:false
             }).draw();
         },
 
         getRes1Value: function() {
+            // Get resource 1 value from server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource1)
@@ -87,6 +75,7 @@ Vue.component('dash-cluster', {
             });
         },
          getRes2Value: function() {
+         // Get resource 2 value from server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource2)
@@ -100,6 +89,7 @@ Vue.component('dash-cluster', {
         },
 
         getRes3Value: function() {
+        // Get resource 3 value from server
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource3)
@@ -111,13 +101,11 @@ Vue.component('dash-cluster', {
                 console.log("Failed to get value");
             });
         },
-
-
    },
 
     mounted(){
+        // Initialize Gauges and set interval for each gauges getters to update data every 100ms
         this.initGauges();
-
          this.getRes1Value();
         setInterval(this.getRes1Value, 100);
         this.getRes2Value();
@@ -125,6 +113,4 @@ Vue.component('dash-cluster', {
         this.getRes3Value();
         setInterval(this.getRes3Value, 100);
     }
-
-
-    })
+})
