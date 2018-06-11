@@ -22,6 +22,7 @@ Vue.component('storage-text', {
     },
     methods: {
         getValue: function() {
+            // Getter
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.resource)
@@ -33,6 +34,7 @@ Vue.component('storage-text', {
             });
         },
         setValue: function() {
+            // Setter sends post request to update data on server
             postdata = {};
             postdata[this.resource] = this.new_value;
             axios.post('/submit/'+this.resource, postdata)
