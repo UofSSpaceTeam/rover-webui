@@ -11,8 +11,8 @@ var template =`
     <gauge dataSource="Speed" minValue = "0" maxValue = "10" units="m/s"></gauge>
     <gauge dataSource="Acceleration" minValue = "50" maxValue = "100" units="m/s/s"></gauge>
     <line-plot dataSource="spectrometer_data" xlabel="time"></line-plot>
-    <camera-component></camera-component>
-    <rdf-data></rdf-data>
+     
+    <rdf-data dataSource= "spectrometer_data" xlabel="time"></rdf-data>
 
   </div>
 `;
