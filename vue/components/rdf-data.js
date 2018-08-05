@@ -18,7 +18,8 @@ Vue.component('rdf-data', {
             bufferFull: false,
             // In seconds
             refreshRate: 0.2,
-            radarChart:null
+            radarChart:null,
+            radarData:[]
         }
     },
     methods: {
@@ -55,7 +56,7 @@ Vue.component('rdf-data', {
 
         initRadar:function(){
             var ctx = document.getElementById("radar");
-            this.myRadarChart = new Chart(ctx, {
+            this.radarChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100', '110', '120', '130', '140',
@@ -84,7 +85,10 @@ Vue.component('rdf-data', {
             });
         },
         updateRadar:function(){
-
+            for(let i = 0; i < 36; i++) {
+                this.radarChart.data.datasets[0].data[i]= Math.random() * 100;
+            }
+            this.radarChart.update();
 
         }
 
@@ -92,6 +96,7 @@ Vue.component('rdf-data', {
     mounted(){
         this.initRadar();
         setInterval(this.updateChart, this.refreshRate*1000);
+        setInterval(this.updateRadar,this.refreshRate*1000);
 
     }
 });
