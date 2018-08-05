@@ -7,6 +7,18 @@ margin:10px;
 background-color:white;
 }
 
+#radar{
+    background-color:white;
+    width:500px;
+    height:500px;
+}
+
+#radar-container{
+    width:500px;
+    height:500px;
+    padding-top:50px;
+
+}
 
 
 #waypointsOrganization{
