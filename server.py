@@ -5,7 +5,7 @@ import time
 
 routes = web.RouteTableDef()
 
-serverd = Device('webui', 'rover', network='10.0.0.0/24')
+serverd = Device('webui', 'rover', network='0.0.0.0/0')
 serverd.storage.TargetReached = False
 
 serverd.storage.roverLat = 38.406460
@@ -19,7 +19,7 @@ serverd.storage.sendWaypoints = []
 serverd.storage.spectrometer_data = []
 serverd.storage.driving= True
 
-@serverd.every('100ms')
+# @serverd.every('100ms')
 async def update_rover_model():
     pos = await serverd.request('Navigation', 'RoverPosition')
     serverd.storage.roverLat = pos[0]

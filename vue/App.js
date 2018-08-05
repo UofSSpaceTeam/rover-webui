@@ -1,7 +1,9 @@
 var template =`
   <div>
-    <storage-text resource='StartScience'></storage-text>
-    <storage-text resource='ContinueScience'></storage-text>
+    <storage-text resource='Stage1'></storage-text>
+    <storage-text resource='Stage2'></storage-text>
+    <storage-text resource='move_carousel'></storage-text>
+    <storage-text resource='run_emitter'></storage-text>
 
     <storage-text resource='Autopilot'></storage-text>
     <boolean-switch resource="driving"> </boolean-switch>
@@ -10,7 +12,7 @@ var template =`
 
     <gauge dataSource="Speed" minValue = "0" maxValue = "10" units="m/s"></gauge>
     <gauge dataSource="Acceleration" minValue = "50" maxValue = "100" units="m/s/s"></gauge>
-    <line-plot dataSource="spectrometer_data" xlabel="time"></line-plot>
+    <line-plot dataSource="Spectrometer_samples" xlabel="time"></line-plot>
     <camera-component></camera-component>
 
   </div>
