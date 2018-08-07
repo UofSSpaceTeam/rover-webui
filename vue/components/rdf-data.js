@@ -1,7 +1,7 @@
 var template =`
     <div class="container">
         <h3> RDF </h3>
-        <line-chart class="plot" :data="vals" :refresh="refreshRate" :xtitle="xlabel" :ytitle="dataSource" > </line-chart>
+        <line-chart class="plot" :data="vals" :refresh="refreshRate"  :ytitle="dataSource" > </line-chart>
         <div id="radar-container">
             <canvas id="radar" width="200" height="200"></canvas>
         </div>
@@ -10,7 +10,7 @@ var template =`
 
 Vue.component('rdf-data', {
     template: template,
-    props: ['dataSource','xlabel'],
+    props: ['dataSource'],
     data: function() {
         return {
             vals: new Array(),
@@ -19,12 +19,13 @@ Vue.component('rdf-data', {
             // In seconds
             refreshRate: 0.2,
             radarChart:null,
-            radarData:[]
+            radarData:[],
+            serverVal:null,
+
         }
     },
     methods: {
         getValue: function() {
-            // Getter to retrieve data from server. Data returned should be a 2d list of x,y pairs
             // store "this" in a new variable because js
             var self = this;
             axios.get('/req/'+this.dataSource)
@@ -39,12 +40,13 @@ Vue.component('rdf-data', {
 
         shiftBuffer: function(value){
             this.vals.shift();
-            this.vals.push([Date.now(),value]);
+            var d = new Date();
+            this.vals.push([this.getTime(),value]);
         },
         updateChart: function(){
             var val = this.dataGen();
             this.bufferFull = this.vals.length >= this.dataBuffer;
-            if (!this.bufferFull) this.vals.push([Date.now(),val]) ;
+            if (!this.bufferFull) this.vals.push([this.getTime(),val]) ;
             else{
                 this.shiftBuffer(val);
             }
@@ -52,6 +54,17 @@ Vue.component('rdf-data', {
         dataGen:function(){
             // Random num 0-99
             return Math.floor(Math.random() * 100);
+
+        },
+
+        getTime:function(){
+            var d = new Date();
+            var t ="";
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var ms = d.getMilliseconds();
+            t = t.concat(m,":",s,":",ms);
+            return t
         },
 
         initRadar:function(){
@@ -89,7 +102,6 @@ Vue.component('rdf-data', {
                 this.radarChart.data.datasets[0].data[i]= Math.random() * 100;
             }
             this.radarChart.update();
-
         }
 
     },
