@@ -3,6 +3,8 @@ var template =`
     <storage-text resource='StartScience'></storage-text>
     <storage-text resource='ContinueScience'></storage-text>
 
+    <storage-text resource='StepperRotation'></storage-text>
+
     <storage-text resource='Autopilot'></storage-text>
     <boolean-switch resource="driving"> </boolean-switch>
     <dash-cluster  resource1="Speed" resource2="current" resource3="roverHeading"></dash-cluster>
