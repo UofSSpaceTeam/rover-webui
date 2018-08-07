@@ -10,7 +10,8 @@ var template =`
 
 Vue.component('rdf-data', {
     template: template,
-    props: ['dataSource'],
+    // Source 1 is just yagi power,Source 2 is combined power and heading
+    props: ['dataSource1','dataSource2'],
     data: function() {
         return {
             vals: new Array(),
@@ -25,10 +26,10 @@ Vue.component('rdf-data', {
         }
     },
     methods: {
-        getValue: function() {
+        getPowerValue: function() {
             // store "this" in a new variable because js
             var self = this;
-            axios.get('/req/'+this.dataSource)
+            axios.get('/req/'+this.dataSource1)
             .then(function(response) {
                 //console.log(response.data);
                 return response.data;
@@ -37,14 +38,25 @@ Vue.component('rdf-data', {
                 console.log("Failed to get value");
             });
         },
+        getRadarValues: function() {
+            // store "this" in a new variable because js
+            var self = this;
+            axios.get('/req/'+this.dataSource2)
+            .then(function(response) {
+                //console.log(response.data);
+                this.radarData = response.data;
+            }).catch(function() {
+                console.log("Failed to get value");
+            });
+        },
 
         shiftBuffer: function(value){
             this.vals.shift();
-            var d = new Date();
             this.vals.push([this.getTime(),value]);
         },
         updateChart: function(){
-            var val = this.dataGen();
+            //var val = this.dataGen();
+            var val = this.getPowerValue();
             this.bufferFull = this.vals.length >= this.dataBuffer;
             if (!this.bufferFull) this.vals.push([this.getTime(),val]) ;
             else{
@@ -98,12 +110,15 @@ Vue.component('rdf-data', {
             });
         },
         updateRadar:function(){
+            /*
             for(let i = 0; i < 36; i++) {
                 this.radarChart.data.datasets[0].data[i]= Math.random() * 100;
-            }
+            } */
+            this.getRadarValues();
+            this.radarChart.data.datasets[0].data = this.radarData;
             this.radarChart.update();
-        }
 
+        }
     },
     mounted(){
         this.initRadar();
