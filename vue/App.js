@@ -13,6 +13,7 @@ var template =`
     <line-plot dataSource="spectrometer_data" xlabel="time"></line-plot>
      
     <rdf-data dataSource= "spectrometer_data"></rdf-data>
+    <display-value resource="strainGauge"></display-value>
 
   </div>
 `;
