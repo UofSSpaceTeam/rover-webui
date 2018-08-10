@@ -89,8 +89,9 @@ Vue.component('rdf-data', {
                         '250', '260', '270', '280', '290', '300', '310', '320', '330', '340',
                         '350'],
                     datasets: [{
-                        data: [null,null,null,null,-44,-38,-39,-35,-35,-30,-20,-15,-12,-10,-5,0,0,0,5,10,5,0,0,-5,-5,-5,
-                        -10,-11,-12,-20,-25,-55,-55,-55,-55,-55],
+                        data: [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+                        null,null,null,null],
                         fillColor: 'rgb(0, 0, 0)',
                     }],
                     fill:false,
