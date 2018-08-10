@@ -5,7 +5,8 @@ import time
 
 routes = web.RouteTableDef()
 
-serverd = Device('webui', 'rover', network='0.0.0.0/0')
+# serverd = Device('webui', 'rover', network='0.0.0.0/0')
+serverd = Device('webui', 'rover', network='10.0.0.0/24')
 serverd.storage.TargetReached = False
 
 serverd.storage.roverLat = 38.406460
@@ -39,11 +40,12 @@ def add_spec_point(event, data):
 
 @serverd.on('*/RDF_readings')
 def update_rdf_radar(event, data):
+    print('ui updated')
     serverd.storage.RDF_readings = data
 
 @serverd.on('*/YagiPower')
 def update_yagipower(event, data):
-    serverd.storage.yagipower = data
+    serverd.storage.YagiPower = data
 
 @routes.get('/')
 async def index(request):

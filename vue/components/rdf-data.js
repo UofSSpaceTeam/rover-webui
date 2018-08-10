@@ -1,7 +1,7 @@
 var template =`
     <div class="container">
         <h3> RDF </h3>
-        <line-chart class="plot" :data="vals" :refresh="refreshRate"  :ytitle="dataSource" > </line-chart>
+        <line-chart class="plot" :data="vals" :refresh="refreshRate" > </line-chart>
         <div id="radar-container">
             <canvas id="radar" width="200" height="200"></canvas>
         </div>
@@ -18,10 +18,11 @@ Vue.component('rdf-data', {
             dataBuffer: 25,
             bufferFull: false,
             // In seconds
-            refreshRate: 0.2,
+            refreshRate: 0.01,
             radarChart:null,
             radarData:[],
             serverVal:null,
+            yagiPower:null
 
         }
     },
@@ -31,8 +32,8 @@ Vue.component('rdf-data', {
             var self = this;
             axios.get('/req/'+this.dataSource1)
             .then(function(response) {
-                //console.log(response.data);
-                return response.data;
+                console.log(response.data);
+                self.yagiPower = response.data;
 
             }).catch(function() {
                 console.log("Failed to get value");
@@ -44,7 +45,7 @@ Vue.component('rdf-data', {
             axios.get('/req/'+this.dataSource2)
             .then(function(response) {
                 //console.log(response.data);
-                this.radarData = response.data;
+                self.radarData = response.data;
             }).catch(function() {
                 console.log("Failed to get value");
             });
@@ -55,8 +56,10 @@ Vue.component('rdf-data', {
             this.vals.push([this.getTime(),value]);
         },
         updateChart: function(){
-            //var val = this.dataGen();
-            var val = this.getPowerValue();
+            // var val = this.dataGen();
+            
+            this.getPowerValue();
+            var val = this.yagiPower;
             this.bufferFull = this.vals.length >= this.dataBuffer;
             if (!this.bufferFull) this.vals.push([this.getTime(),val]) ;
             else{

@@ -12,9 +12,8 @@ var template =`
 
     <gauge dataSource="Speed" minValue = "0" maxValue = "10" units="m/s"></gauge>
     <gauge dataSource="Acceleration" minValue = "50" maxValue = "100" units="m/s/s"></gauge>
-    <line-plot dataSource="spectrometer_data" xlabel="time"></line-plot>
      
-    <rdf-data dataSource= "spectrometer_data"></rdf-data>
+    <rdf-data dataSource1="YagiPower" dataSource2="RDF_readings"></rdf-data>
     <display-value resource="strainGauge"></display-value>
 
   </div>
