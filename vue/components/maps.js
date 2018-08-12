@@ -99,7 +99,7 @@ Vue.component('maps', {
 
     methods: {
         initMap: function() {
-            this.map = L.map('map').setView([38.374105, -110.738415], 12);
+            this.map = L.map('map').setView([51.422636, -112.641379], 17);
             this.tileLayer = L.tileLayer(
             // Choices for tiles; Change max Zoom and string reference under comments
             // Online road maps from open steet maps : https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png
@@ -107,10 +107,11 @@ Vue.component('maps', {
             // offline Wide area tiles with little zoom ,max zoom = 15 : /lib/tiles/wideArea/{z}/{x}/{y}.jpg
 
               //'https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png',
-              '/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
+              //'/lib/tiles/closeUp/{z}/{x}/{y}.png', // Change this line for different tile set
               //'/lib/tiles/wideArea/{z}/{x}/{y}.jpg',
+              '/lib/tiles/rosedaleHD/{z}/{x}/{y}.png',
                {
-             maxZoom: 17,
+             maxZoom: 22,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
             }
             );
