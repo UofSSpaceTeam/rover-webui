@@ -1,11 +1,16 @@
 var template =`
   <div>
-    <storage-text resource='StartScience'></storage-text>
-    <storage-text resource='ContinueScience'></storage-text>
+
+  <!--  <storage-text resource='StartScience'></storage-text> -->
+   <!-- <storage-text resource='ContinueScience'></storage-text> -->
 
     <storage-text resource='StepperRotation'></storage-text>
+    <storage-text resource='clearRadar'></storage-text>
+    <display-value resource='TimeDifference'></display-value>
 
-    <storage-text resource='Autopilot'></storage-text>
+
+     <!-- <storage-text resource='Autopilot'></storage-text> -->
+
     <boolean-switch resource="driving"> </boolean-switch>
     <dash-cluster  resource1="Speed" resource2="current" resource3="roverHeading"></dash-cluster>
     <maps resource1="roverLat" resource2="roverLong" resource3="markerLat" resource4="markerLong" resource5="roverHeading" resource6="sendWaypoints"></maps>
