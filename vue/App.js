@@ -6,7 +6,8 @@ var template =`
 
     <storage-text resource='StepperRotation'></storage-text>
     <storage-text resource='clearRadar'></storage-text>
-    <display-value resource='TimeDifference'></display-value>
+    <display-value resource='Frequency'></display-value>
+    <storage-text resource='load_cell_weight'></storage-text>
 
 
      <!-- <storage-text resource='Autopilot'></storage-text> -->
